@@ -2,4 +2,21 @@ body{
     background-image: url(https://img.freepik.com/vector-gratis/fondo-onda-blanca-suave_52683-55288.jpg?w=1380&t=st=1664309227~exp=1664309827~hmac=8bc24d4fd27c7dd1b775ad0a55b16ab55a94d79940063f8f4ebbb963f8702a7e);
     background-attachment: fixed;
     background-repeat: round;
+    }
+#BannerSup{
+    background-image: url(../media/Italy-flag.svg);
+    background-size: cover;
+}
+
+#carrusel{
+    filter: brightness(0.5)!important;
+    }
+#letra{
+    font-size: 7.5rem!important;
+}
+.card-img-top{
+    height: 200px;
+}
+.card-text{
+    text-align-last: center;
 }
