@@ -12,3 +12,4 @@ def login(request):
         request,
         'vista/inicio.html'
     )
+
