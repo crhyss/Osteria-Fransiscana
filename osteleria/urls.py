@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
 from .views import paginaprincipal , login
 
 
 urlpatterns = [
-    path('', paginaprincipal,name="loby"),
-    path('login/', login,name="login"),
+    path('', paginaprincipal, name="loby"),
+    path('login/', login, name="login"),
+    path('productos/', include('apps.productos.urls'), name="producto"),
+    path('map/', include('apps.map.urls'), name='map')
+
 ]

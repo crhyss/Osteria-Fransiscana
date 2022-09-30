@@ -12,8 +12,9 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../static/base/css/style.css">
+    <title>Osteria Franciscana</title>
     {% include "base/css.html" %}
     {% include "base/js.html" %}
     <!-- Css Aditional -->
@@ -28,15 +29,38 @@
     {% block initscript %}
     {% endblock initscript %}
 </head>
-<body>
-        {% block header %}
+    <body>
+      <nav class="navbar navbar-dark bg-dark " id="BannerSup">
+        <div class="container-fluid ">
+          <a class="navbar-brand position-relative top-50 start-50 translate-middle-x text-dark" href="{% url 'loby'%}">
+            <img src={% static 'media/logo.png' %} alt="Logo" width="100" height="100"
+              class="d-inline-block align-text-center ">
+          </a>
+        </div>
+      </nav>
+      <!-- As a link -->
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="/map">
+          <button class="btn btn btn-outline-warning me-md-2" type="submit">Mapa</button>
+        </a>
+        <a href="{% url 'agregarp'%}">
+            <button class="btn btn btn-outline-success me-md-2" type="submit">Agregar Producto <img src={% static 'media/plus.svg' %}
+                alt="ingresar"></button>
+          </a>
+        <a href="{% url 'login'%}">
+          <button class="btn btn-outline-danger me-md-2" type="submit">Ingresar <img src={% static 'media/log-in.svg' %}
+              alt="ingresar"></button>
+        </a>
+      </div>
             {% include 'vista/header.html' %}
-        {% endblock header %}
+            {% include 'web/vista/loby.html' %}
     </header>
     <main>
         {% block content %}
-        <a href="login/">login</a>
+        <a href="login/">login</a>        
         {% endblock content %}
+        {% block content1 %}
+        {% endblock content1 %}
     </main>
     <footer>
         {% block footer %}

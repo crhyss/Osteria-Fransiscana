@@ -1,0 +1,26 @@
+{% extends 'vista/Principal.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="../../static/css/mapa.css">
+{% endblock css %}
+
+{% block initscript %}
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
+{% endblock initscript %}
+
+{% block content %}
+<div id="map">
+    <script>
+        mapboxgl.accessToken = '{{mapbox_access_token}}';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-70.65, -33.45],
+            zoom: 10.9
+        });
+        var marker = new mapboxgl.Marker()
+        .setLngLat([-225.5, -25.1])
+        .addTo(map);
+    </script>
+</div>
+{% endblock content %}
