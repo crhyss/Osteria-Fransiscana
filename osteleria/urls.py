@@ -22,4 +22,5 @@ from .views import paginaprincipal , login
 urlpatterns = [
     path('', paginaprincipal,name="loby"),
     path('login/', login,name="login"),
+    path('productos/', include('productos.urls'),name="producto"),
 ]
