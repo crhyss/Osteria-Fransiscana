@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Producto, Categoria_prod
 from .forms import ProductoForm
+from django.core.paginator import Paginator
 def agregarp(request):
     lista = Categoria_prod.objects.all()
     formulario = None
@@ -60,3 +61,4 @@ def eliminarProducto(request, id_producto):
     productoEliminado = Producto.objects.get(pk=id_producto)
     productoEliminado.delete()
     return redirect('/productos/listar/')
+

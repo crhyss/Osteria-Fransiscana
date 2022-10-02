@@ -13,5 +13,9 @@ class Producto(models.Model):
     prod_descri = models.CharField(max_length=200, blank=False)
     prod_precio_ba = models.IntegerField(blank=False)
     prod_precio_of = models.IntegerField(blank=False)
-    prod_imagen    = models.FileField(upload_to='media/%Y/%m/%d/', default=None)
+    prod_imagen    = models.FileField(upload_to='productos/', default=None)
     prod_categoria = models.ForeignKey(Categoria_prod, on_delete=models.CASCADE, default=None)
+    def delete(self, *args, **kwargs):
+        if self.prod_imagen:
+            self.prod_imagen.delete()
+        super().delete(*args, **kwargs)

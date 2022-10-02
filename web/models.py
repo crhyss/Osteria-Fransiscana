@@ -14,9 +14,9 @@ class Comuna(models.Model):
     comuna_nombre = models.CharField(max_length = 40, blank = False)
     comuna_region = models.ForeignKey(Region, on_delete=models.CASCADE, default=None)
 
-class Direccion(models.Mododel):
-    codigo_postal = models.IntegerField(primary_key = True)
-    dir_calle = models.CharField(max_lenght = 50, blank = False)
+class Direccion(models.Model):
+    codigo_postal = models.IntegerField(primary_key = True,blank=True,null=False)
+    dir_calle = models.CharField(max_length = 50, blank = False)
     dir_nro = models.IntegerField(blank = False)
     dir_depto = models.BooleanField(default = False)
     dir_depto_nro = models.IntegerField(blank = False)

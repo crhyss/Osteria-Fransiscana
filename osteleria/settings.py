@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'web',
     'productos',
+    'map',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = join(BASE_DIR,'static','static_root')
 STATICFILES_DIRS = [join(BASE_DIR,"static")]
 
-MEDIA_URL = '/imagenes/'
-MEDIA_ROOT = join(BASE_DIR,'imagenes')
+MEDIA_URL = 'static\producto/'
+MEDIA_ROOT = join(BASE_DIR,'static/')
 
