@@ -2,6 +2,10 @@
 
 {% block initscript %}
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
+<link
+href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css"
+rel="stylesheet"
+/>
 {% endblock initscript %}
 
 {% block content %}
@@ -11,12 +15,42 @@
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [-70.65, -33.45],
-            zoom: 10.9
+            center: [-70.70447896746107,-33.592399939493966],
+            zoom: 12
         });
-        var marker = new mapboxgl.Marker()
-        .setLngLat([-225.5, -25.1])
-        .addTo(map);
+        var geojson={
+            type:'Restaurantes',
+                feacture:[{
+                    type:'Restaurant',
+                    ubicacion:{
+                        type: 'Point',
+                        coordenadas:[-70.70447896746107,-33.592399939493966]
+                    },
+                    propietario:{
+                        title:'mapbox',
+                        descripcion:'Osteria Fransciscana'
+                    }
+                },
+                {
+                    type:'Restaurant2',
+                    ubicacion:{
+                        type: 'Point',
+                        coordenadas:[-70.70623849299018,-33.59525973732504]
+                    },
+                    propietario:{
+                        title:'mapbox',
+                        descripcion:'Osteria Fransciscana'
+                    }
+                }]
+        }
+        for (const feature of geojson.features) {
+            // create a HTML element for each feature
+            const el = document.createElement('div');
+            el.className = 'marker';
+          
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates).addTo(map);
+          }
     </script>
 </div>
 {% endblock content %}

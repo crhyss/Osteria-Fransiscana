@@ -20,7 +20,7 @@ def agregarp(request):
     }
     return render(
         request,
-        'crudProducto/agregarp.html',
+        'web/crudProducto/agregarp.html',
         context
     )
 def listarProducto(request):
@@ -33,7 +33,7 @@ def listarProducto(request):
     }
     return render(
         request,
-        'crudProducto/listarMenu.html',
+        'web/crudProducto/listarMenu.html',
         context
     )
 def modificarProducto(request, id_producto):
@@ -54,7 +54,7 @@ def modificarProducto(request, id_producto):
     }
     return render(
         request,
-        'crudProducto/modificar.html',
+        'web/crudProducto/modificar.html',
         context
     )
 def eliminarProducto(request, id_producto):
