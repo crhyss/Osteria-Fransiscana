@@ -22,3 +22,9 @@ def login(request):
         'vista/inicio.html'
     )
 
+def ordenes(request):
+    return render(
+        request, 
+        'vista/ordenes.html'
+    )
+

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from .views import paginaprincipal , login
+from .views import paginaprincipal , login, ordenes
 
 
 urlpatterns = [
@@ -24,4 +24,5 @@ urlpatterns = [
     path('login/', login,name="login"),
     path('productos/', include('productos.urls'),name="producto"),
     path('map/', include('map.urls'),name="mapa"),
+    path('ordenes/', ordenes, name='ordenes')
 ]
