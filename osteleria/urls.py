@@ -16,13 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from .views import paginaprincipal , login, ordenes
+from .views import paginaprincipal , ordenes,perfil
 
 
 urlpatterns = [
     path('', paginaprincipal,name="loby"),
-    path('login/', login,name="login"),
+    path('logeo/', include('cliente.urls'),name="login"),
     path('productos/', include('productos.urls'),name="producto"),
     path('map/', include('map.urls'),name="mapa"),
-    path('ordenes/', ordenes, name='ordenes')
+    path('ordenes/', ordenes, name='ordenes'),
+    path('accounts/', include('django.contrib.auth.urls'),name="login"),
+    path('accounts/profile/',perfil,name='perfil')
 ]

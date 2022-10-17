@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'web',
     'productos',
     'map',
+    'social_django',
+    'cliente',
+    'administrador',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'osteleria.urls'
@@ -67,7 +71,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.media'
+                'django.template.context_processors.media',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
             ],
         },
     },
@@ -133,4 +140,12 @@ STATICFILES_DIRS = [join(BASE_DIR,"static")]
 
 MEDIA_URL = 'static\producto/'
 MEDIA_ROOT = join(BASE_DIR,'static/')
+
+SOCIAL_AUTH_FACEBOOK_KEY = '2779822452237843'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'a39654914ead729d015e217c91e614e9'
+
+AUTHENTICATION_BACKENDS = [
+'social_core.backends.facebook.FacebookOAuth2',
+'django.contrib.auth.backends.ModelBackend',
+]
 

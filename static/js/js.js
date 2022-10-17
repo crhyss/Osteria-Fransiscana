@@ -41,3 +41,5 @@ for (const feature of geojson.features) {
     // make a marker for each feature and add to the map
     new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates).addTo(map);
   }
+
+  

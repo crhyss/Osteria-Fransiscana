@@ -16,11 +16,6 @@ def paginaprincipal(request):
         context
     )
 
-def login(request):
-    return render(
-        request,
-        'vista/inicio.html'
-    )
 
 def ordenes(request):
     return render(
@@ -28,3 +23,8 @@ def ordenes(request):
         'vista/ordenes.html'
     )
 
+def perfil(request):
+    return render(
+        request, 
+        'vista/Principal.html'
+    )
