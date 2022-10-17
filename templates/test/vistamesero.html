@@ -1,0 +1,87 @@
+{% extends 'vista/Principal.html' %} {% load static %} {% block content %}
+<body>
+    <div class="conteiner">
+        <div class="card">
+            <div class="carrito">
+                <i class="fa-solid fa-cart-plus"></i>
+            </div>
+            <section class="pregunta">
+                <label style="margin-left: 35%;">Numero de Orden: </label>
+                <br><br>
+                <form>
+                    <label style="margin-left:35%;">N° de mesas</label>
+                    <form>
+                        <select class="select">
+                            <option> 1 </option>
+                            <option> 2 </option>
+                            <option> 3 </option>
+                            <option> 4 </option>
+                            <option> 5 </option>
+                        </select>
+                    </form>
+                </form>
+                <br>
+                <form>
+                    <label style="margin-left:35%;">N° de personas</label>
+                    <form>
+                        <input type="persona">
+                    </form>
+                </form>
+                <br>
+                <form>
+                    <label style="margin-left:35%;">Entrada</label>
+                    <form>
+                        <select class="select">
+                            <option> Risotto </option>
+                            <option> 2 </option>
+                            <option> 3 </option>
+                            <option> 4 </option>
+                            <option> 5 </option>
+                        </select>
+                    </form>
+                </form>
+                <br>
+                <form>
+                    <label style="margin-left:35%;">Plato Principal</label>
+                    <form>
+                        <select class="select">
+                            <option> Spaghetti </option>
+                            <option> 2 </option>
+                            <option> 3 </option>
+                            <option> 4 </option>
+                            <option> 5 </option>
+                        </select>
+                    </form>
+                </form>
+                <br>
+                <form>
+                    <label style="margin-left:35%;">Postre</label>
+                    <form>
+                        <select class="select">
+                            <option> Si </option>
+                            <option> No </option>
+                        </select>
+                    </form>
+                </form>
+                <br>
+                <form>
+                    <label style="margin-left:35%;">Bebidas</label>
+                    <form>
+                        <select class="select">
+                            <option> Coca-Cola </option>
+                            <option> No </option>
+                        </select>
+                    </form>
+                </form>
+                <br>
+                <div class="btn">
+                <button>Enviar</button>
+                </div>
+                <br> 
+            </section>
+            </section>
+        </div>
+    </div>
+    </div>
+</body>
+{% endblock content %}

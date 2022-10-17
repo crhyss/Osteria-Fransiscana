@@ -27,3 +27,6 @@ def salir(request):
 
 def carrito(request):
     return render(request, 'carrito/carrito.html')
+
+def mesero(request):
+    return render(request, 'test/vistamesero.html')
