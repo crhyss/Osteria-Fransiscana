@@ -1,29 +1,36 @@
-body{
+body {
     background-image: url(https://img.freepik.com/vector-gratis/fondo-onda-blanca-suave_52683-55288.jpg?w=1380&t=st=1664309227~exp=1664309827~hmac=8bc24d4fd27c7dd1b775ad0a55b16ab55a94d79940063f8f4ebbb963f8702a7e);
     background-attachment: fixed;
     background-repeat: round;
-    }
-#BannerSup{
+}
+
+#BannerSup {
     background-image: url(../media/Italy-flag.svg);
     background-size: cover;
 }
-#BannerInf{
+
+#BannerInf {
     padding-top: 5px;
     padding-bottom: 5px;
 }
-#carrusel{
+
+#carrusel {
     filter: brightness(0.5)!important;
-    }
-#letra{
+}
+
+#letra {
     font-size: 7.5rem!important;
 }
-.card-img-top{
+
+.card-img-top {
     height: 200px;
 }
-.card-text{
+
+.card-text {
     text-align-last: center;
 }
-#map{
+
+#map {
     height: 80vh;
     padding: 15px;
 }
@@ -35,17 +42,76 @@ body{
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
-  }
+}
 
-  .ordenes{
+.ordenes {
     display: flex;
     flex-direction: column;
     height: 80vh;
     justify-content: center;
     align-items: center;
     width: 100%;
-  }
+}
 
-  .ordenes table{
+.ordenes table {
     width: 80%;
-  }
+}
+
+
+/*---------------------*/
+
+.item {
+    border: 2px solid #000;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.item-title {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+}
+
+.item-image {
+    height: 300px;
+    width: 100%;
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0px 15px;
+}
+
+.item-details>.item-price {
+    margin: 0;
+}
+
+
+/* ? SHOPPING CART */
+
+.shopping-cart-items {
+    padding: 20px 0px;
+}
+
+.shopping-cart-header {
+    border-bottom: 1px solid #ccc;
+}
+
+.shopping-cart-image {
+    max-width: 80px;
+    border-radius: 20px;
+}
+
+.shopping-cart-quantity-input {
+    max-width: 45px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #eee;
+    padding: 5px;
+}
+
+.shopping-cart-total {
+    min-height: 96px;
+}

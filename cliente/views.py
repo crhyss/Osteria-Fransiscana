@@ -24,3 +24,6 @@ def registro(request):
 def salir(request):
     logout(request)
     return redirect(to='loby')
+
+def carrito(request):
+    return render(request, 'carrito/carrito.html')
