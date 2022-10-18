@@ -122,12 +122,7 @@ body {
     margin: 5%;
     margin-left: 40%;
 }
-.card{
-    width: 100%;
-    margin: 160px;
-    border-radius: 10px;
-    background: #ffffff;
-}
+
 
 .pregunta{
     font-size: 15px;
@@ -136,10 +131,6 @@ body {
 
 .select{
     width: 100px;
-}
-
-.btn{
-    margin-left: 32%;
 }
 
 .cuadrodetxt{
