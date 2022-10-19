@@ -13,7 +13,6 @@ class map(models.Model):
     def save(self, *args, **kwargs):
         g = geocoder.mapbox(self.address, key=mapbox_access_token)
         g = g.latlng # [lat + long]
-        
         self.lat = g[0]
         self.long = g[1]
         return super(map, self).save(*args, **kwargs)
