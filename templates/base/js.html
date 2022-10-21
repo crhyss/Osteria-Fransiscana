@@ -1,1 +1,24 @@
+{% load static %}
 <script type="text/javascript" src="/static/js/js.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/es.min.js" integrity="sha512-xntXNPHoIOoLxuqmYhDB6MA67yimB0HxKb20FTgBcAO7RUk2jwctNYIkencPjG4hdxde8ee6FHqACJqGYYSiSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var $select1=$('#select1'),
+        $select2=$('#select2'),
+        $options=$select2.find('option');
+        $select1.on('change',function(){
+            $select2.html($options.filter('[value="'+this.value+'"]'));
+            }).trigger('change');
+    })
+</script>
+<script>
+    $(document).ready(function(){
+        $("#select1").select2({
+
+        });
+        $("#select2").select2({
+
+});
+    })
+</script>

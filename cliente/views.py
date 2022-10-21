@@ -1,28 +1,42 @@
+from multiprocessing import context
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from cliente.forms import inicioForm, direccionForm
-from cliente.models import Direccion
+from cliente.forms import inicioForm,direccionForm
+from cliente.models import Direccion, Region, Comuna
 from django.contrib.auth.forms import AuthenticationForm
 import json
 
 
 def registro(request):
-    data = {
-        'formulario': inicioForm()
-    }
     if request.method == 'POST':
-        formulario = inicioForm(data=request.POST)
-        if formulario.is_valid():
+        formulario = inicioForm(request.POST, request.FILES)
+        formulario2= direccionForm(request.POST, request.FILES)
+        comuna = Comuna.objects.all()
+        region = Region.objects.all()
+        if formulario2.is_valid():
+            print(formulario2)
+            print('holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            formulario2.save()
+            formularioRegistrado = formulario.save(commit=False)   
+            formularioRegistrado.usr_direccion = formulario2.codigo_postal
             formulario.save()
-            user = authenticate(
-                username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            print("Felicidades")
-            messages.success(request, "registrado")
-            return redirect(to='loby')
-        data["formulario"] = formulario
-    return render(request, 'registration/registro.html', data)
+            return redirect('/productos/listar/')
+    else:
+        formulario = inicioForm()
+        formulario2 = direccionForm()
+        comuna = Comuna.objects.all()
+        region = Region.objects.all()
+    context = {
+        'titulo': 'Agregar Producto',
+        'formulario': formulario,
+        'formulario2': formulario2,
+        'comuna':comuna,
+        'region': region,
+    }
+    return render(request, 'registration/registro.html', context)
+
+
 
 
 def salir(request):
@@ -49,3 +63,4 @@ def reclamos(request):
             json.dump(data, file)
             file.close()
         return render(request, 'web/vista/reclamos.html')
+

@@ -26,5 +26,6 @@ urlpatterns = [
     path('map/', include('map.urls'),name="mapa"),
     path('ordenes/', ordenes, name='ordenes'),
     path('accounts/', include('django.contrib.auth.urls'),name="login"),
-    path('accounts/profile/',perfil,name='perfil')
+    path('accounts/profile/',perfil,name='perfil'),
+    path('', include('administrador.urls'),name="admin"),
 ]

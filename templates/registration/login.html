@@ -22,7 +22,7 @@
 						{% csrf_token %}
 						{{form}}
 						 <br>
-						<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesion">
+						<input class="btn btn-primary" type="submit" href="{% url 'admin'%}" value="Iniciar Sesion">
 					</div>
 					<div class="my-3">
 						<span>No poseo una cuenta. <a href="{% url 'registro'%}">Registrate</a></span> <br>

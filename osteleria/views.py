@@ -26,5 +26,5 @@ def ordenes(request):
 def perfil(request):
     return render(
         request, 
-        'vista/Principal.html'
+        'administrador/principal.html'
     )
