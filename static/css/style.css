@@ -139,3 +139,173 @@ body {
     font-size: 20px;
     height: auto;
 }
+
+.colMS{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+/* .botones.col-md-3.text-end{
+    display: flex;
+    justify-content: space-evenly;
+    padding-right: 0px;
+    padding-left: 0px;
+    max-width: 140px;
+}
+
+.btn-ingreso{
+    padding-left: 72px;
+} */
+
+.container-register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.card-register{
+    width: 50%;
+}
+
+.card-header{
+    display: flex;
+    justify-content: center;
+}
+
+.row.login{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* NAV */
+
+.navbar.navbar-expand-lg{
+    background-image: url('../media/Italy-flag.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.navbar{
+    padding: 1.5 !important;
+    --bs-navbar-toggler-padding-y: 0.12rem !important;
+    --bs-navbar-toggler-padding-x: 0rem !important;   
+}
+
+.mb-4{
+    margin-bottom: 0 !important;
+}
+
+.container-fluid{
+    --bs-gutter-x: 0rem !important;
+}
+
+.navbar-toggler{
+    border: none;
+}
+
+#btnDropper{
+    color: black;
+}
+
+.collapse.navbar-collapse{
+    justify-content: center;
+}
+
+#tabs{
+    width: 80%;
+    justify-content: center;
+    padding-left: 230px;
+}
+
+#logo{
+    width: 10%;
+    justify-content: flex-start;
+    margin-right: 90px;
+}
+
+.col-md-3.text-end {
+    display: flex;
+    justify-content: flex-end;
+    width: 18% !important;
+}
+
+@media (max-width: 1302px){
+    #tabs{
+        padding-left: 165px !important;
+    }
+}
+
+@media (max-width: 1052px){
+    #tabs{
+        padding-left: 110px !important;
+    }
+}
+
+@media (max-width: 992px){
+    #tabs{
+        padding-left: 5px !important;
+    }
+    .col-md-3.text-end {
+        flex-basis: fit-content;
+        /* display: block; */
+    }
+
+    .col-md-3{
+        padding-left: 0px !important;
+    }
+
+    .navbar-nav.mb-2.mb-lg-0.logo{
+        display: none !important;
+    }
+}
+
+@media (min-width: 992px){
+
+    .col-md-3.text-end {
+        width: 25% !important;
+    }
+
+    .col-md-3{
+        padding-left: 0px !important;
+    }
+
+    .navbar{
+        --bs-navbar-toggler-padding-y: 0.12rem !important;
+    }
+
+    .navbar-expand-lg .navbar-nav {
+        flex-direction: row !important;
+    }
+
+    
+}
+
+@media (max-width: 770px){
+.collapse.navbar-collapse{
+    justify-content: space-around;
+    width: 80%;
+    }
+}
+
+@media (max-width: 768px){
+
+    .navbar{
+        padding: 1.5 !important;
+        --bs-navbar-padding-y: 0.3rem;
+    }
+}
+
+@media (max-width: 210px){
+    .col-md-3.text-end{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}

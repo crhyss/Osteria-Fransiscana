@@ -2,18 +2,25 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <form method="POST">
-            <div class="d-grid">
-                {% csrf_token %}
-                {{formulario}}      
-                    <br>
-                <input class="btn btn-primary" type="submit" value="registrar">
+<div class="container-register">
+    <div class="card card-register">
+        <div class="card-header">
+            <i class='bx bxs-home-circle' style="font-size: 150px"></i>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <form method="POST">
+                    <div class="d-grid">
+                        {% csrf_token %}
+                        {{formulario}}      
+                            <br>
+                        <input class="btn btn-success" type="submit" value="registrar">
+                    </div>
+                    <div class="my-3">
+                    </div>
+                </form>
             </div>
-            <div class="my-3">
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 {% endblock content %}
