@@ -1,0 +1,154 @@
+{% extends 'vista/Principal.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+<title>Sitio administrativo | Sitio de administración de Django</title>
+<link rel="stylesheet" href="/static/admin/css/base.css">
+  
+<script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" href="/static/admin/css/dashboard.css">
+
+
+</head>
+
+<body class=" dashboard"
+  data-admin-utc-offset="-10800">
+
+<div id="container">
+    <div class="main" id="main">
+      <div class="content">
+        <div id="content" class="colMS">
+          
+          <h1>Sitio administrativo</h1>
+            
+<div id="content-main">
+    <div class="app-auth module">
+      <table>
+        <caption>
+          <a href="/admin/auth/" class="section" title="Modelos en la aplicación Autenticación y autorización">Autenticación y autorización</a>
+        </caption>
+          <tr class="model-group">
+              <th scope="row"><a href="/admin/auth/group/">Grupos</a></th>
+              <td><a href="/admin/auth/group/add/" class="addlink">Añadir</a></td>
+                <td><a href="/admin/auth/group/" class="changelink">Modificar</a></td>            
+          </tr>
+        
+          <tr class="model-user">
+            
+              <th scope="row"><a href="/admin/auth/user/">Usuarios</a></th>
+            
+
+            
+              <td><a href="/admin/auth/user/add/" class="addlink">Añadir</a></td>
+            
+
+            
+              
+                <td><a href="/admin/auth/user/" class="changelink">Modificar</a></td>
+              
+            
+          </tr>
+        
+      </table>
+    </div>
+  
+    <div class="app-social_django module">
+      <table>
+        <caption>
+          <a href="/admin/social_django/" class="section" title="Modelos en la aplicación Python Social Auth">Python Social Auth</a>
+        </caption>
+        
+          <tr class="model-association">
+            
+              <th scope="row"><a href="/admin/social_django/association/">Associations</a></th>
+            
+
+            
+              <td><a href="/admin/social_django/association/add/" class="addlink">Añadir</a></td>
+            
+
+            
+              
+                <td><a href="/admin/social_django/association/" class="changelink">Modificar</a></td>
+              
+            
+          </tr>
+        
+          <tr class="model-nonce">
+            
+              <th scope="row"><a href="/admin/social_django/nonce/">Nonces</a></th>
+            
+
+            
+              <td><a href="/admin/social_django/nonce/add/" class="addlink">Añadir</a></td>
+            
+
+            
+              
+                <td><a href="/admin/social_django/nonce/" class="changelink">Modificar</a></td>
+              
+            
+          </tr>
+        
+          <tr class="model-usersocialauth">
+            
+              <th scope="row"><a href="/admin/social_django/usersocialauth/">User social auths</a></th>
+            
+
+            
+              <td><a href="/admin/social_django/usersocialauth/add/" class="addlink">Añadir</a></td>
+            
+
+            
+              
+                <td><a href="/admin/social_django/usersocialauth/" class="changelink">Modificar</a></td>
+              
+            
+          </tr>
+        
+      </table>
+    </div>
+  
+
+
+</div>
+
+          
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>Acciones recientes</h2>
+        <h3>Mis acciones</h3>
+            
+            
+            
+            <ul class="actionlist">
+            
+            <li class="changelink">
+                
+                    <a href="/admin/auth/group/2/change/">cliente</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Grupo</span>
+                
+            </li>
+            
+            </ul>
+            
+    </div>
+</div>
+
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>
+
+{% endblock content %}

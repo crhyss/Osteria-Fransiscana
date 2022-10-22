@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from productos.models import Producto, Categoria_prod
-
+from django.contrib.auth import models
+from django.contrib.admin import ModelAdmin 
 def paginaprincipal(request):
     productos = Producto.objects.all()
     lista = Categoria_prod.objects.all()
@@ -24,7 +25,13 @@ def ordenes(request):
     )
 
 def perfil(request):
-    return render(
-        request, 
-        'vista/Principal.html'
-    )
+    usuarios = models.User.objects.all()
+    grupos = models.Group.objects.all()
+    permisos = models.Permission.objects.all()
+    context = {
+        'titulo': 'Usuario',
+        'usuarios': usuarios,
+        'grupos':grupos,
+        'permisos':permisos,
+    }
+    return render(request, 'registration/perfilAdmin.html',context)
