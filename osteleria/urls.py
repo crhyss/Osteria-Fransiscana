@@ -26,5 +26,9 @@ urlpatterns = [
     path('map/', include('map.urls'),name="mapa"),
     path('ordenes/', ordenes, name='ordenes'),
     path('accounts/', include('django.contrib.auth.urls'),name="login"),
-    path('accounts/profile/',perfil,name='perfil')
+    path('accounts/profile/',perfil,name='perfil'),
+    path('', include('administrador.urls'),name="administrador"),
+    path('jet/', include('jet.urls','jet')),
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+    path('admin/', admin.site.urls),
 ]

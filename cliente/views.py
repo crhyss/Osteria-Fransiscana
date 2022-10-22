@@ -20,7 +20,7 @@ def registro(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             print("Felicidades")
             messages.success(request, "registrado")
-            return redirect(to='loby')
+            return redirect(to='perfil')
         data["formulario"] = formulario
     return render(request, 'registration/registro.html', data)
 
@@ -48,4 +48,4 @@ def reclamos(request):
             file.seek(0)
             json.dump(data, file)
             file.close()
-        return render(request, 'web/vista/reclamos.html')
+    return render(request, 'web/vista/reclamos.html')
