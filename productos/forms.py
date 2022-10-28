@@ -4,6 +4,7 @@ from .models import Producto, Categoria_prod
 def agregarClaseFormControl(elementos):
     for campo in elementos:
         campo.field.widget.attrs['class'] = 'form-control'
+        
 class ProductoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductoForm,self).__init__(*args, **kwargs)

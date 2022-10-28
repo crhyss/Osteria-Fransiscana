@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 # Create your models here.
@@ -14,6 +15,8 @@ class Producto(models.Model):
     prod_precio_ba = models.IntegerField(blank=False)
     prod_precio_of = models.IntegerField(blank=False)
     prod_imagen    = models.FileField(upload_to='productos/', default=None)
+    prod_disponible = models.BooleanField(default = True)
+    prod_recomendado = models.BooleanField(default=False)
     prod_categoria = models.ForeignKey(Categoria_prod, on_delete=models.CASCADE, default=None)
     def delete(self, *args, **kwargs):
         if self.prod_imagen:
