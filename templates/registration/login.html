@@ -12,8 +12,8 @@
 <body>
 	<div class="container">
 		<div class="row login">
-			<div class="col imagen">
-				<img src={% static 'productos/margherita_wikipedia.jpg' %} width="330px" height="250px">
+			<div class="col">
+				<img src={% static 'productos/margherita_wikipedia.jpg' %}>
 			</div>
 			<div class="col">
 				<h2 class="fw-bold text-center py-5">Bienvenido</h2>
@@ -24,7 +24,7 @@
 						 <br>
 						<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesion">
 					</div>
-					<div class="my-3 text-center">
+					<div class="my-3">
 						<span>No poseo una cuenta. <a href="{% url 'registro'%}">Registrate</a></span> <br>
 						<span><a href="#">Recuperar Contraseña</a></span>
 					</div>

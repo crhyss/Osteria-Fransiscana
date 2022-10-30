@@ -1,9 +1,9 @@
 {% extends 'vista/Principal.html' %}
 {% load static %}
 {% block content %}
-<div class="row reclamos">
+<div class="row">
     <div class="card col-sm-12 col-md-6 mx-auto mt-5">
-        <form class="row g-3 needs-validation form-form-control" novalidate id="comentarios" method="POST">
+        <form class="row g-3 needs-validation " novalidate id="comentarios" method="POST">
             {% csrf_token %}
             <div class="col-md-4">
                 <label for="validationCustom01" class="form-label">Nombre</label>
