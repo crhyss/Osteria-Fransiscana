@@ -12,9 +12,15 @@
                 <form method="POST">
                     <div class="d-grid">
                         {% csrf_token %}
-                        {{formulario}}
-                        <label for="confPass">Confirmar Contraseña</label>
-                        <input type="password" name="confPass">      
+                        <label for="region">Región</label>
+                        <select name="region">
+                        <option disabled selected value> --- Seleccione una Región --- </option>
+                        {% for region in regiones %}
+                            <option value="{{ region.id_region }}">{{ region.region_nombre }}</option>
+                        {% endfor %}
+                        
+                        </select>
+                        {{formulario}}  
                             <br>
                         <input class="btn btn-success" type="submit" value="registrar">
                     </div>
