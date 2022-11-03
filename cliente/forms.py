@@ -1,11 +1,12 @@
 
+from datetime import datetime
 from importlib.metadata import requires
 from tkinter import Widget
 from django import forms
-from .models import Usuario, Direccion, Region
+from .models import Usuario, Direccion, Region, Reclamo
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-
+import datetime
 def agregarClaseFormControl(elementos):
     for campo in elementos:
         campo.field.widget.attrs['class'] = 'form-control'
@@ -40,6 +41,21 @@ class direccionForm(ModelForm):
             'dir_depto_nro' : forms.IntegerField(required=False)
         }
 
+class reclamoForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(reclamoForm,self).__init__(*args, **kwargs)
+        agregarClaseFormControl(self.visible_fields())
+        self.fields['reclamo_fecha'].widget.attrs['disabled'] = 'disabled' 
+        self.fields['reclamo_fecha'].widget.format = '%d/%m/%Y %H:%M'
+    class Meta:
+        model = Reclamo
+        fields = ['nombre','apellido','reclamo_fecha', 'reclamo_descrip']
+        widgets = {
+            
+            'reclamo_fecha': forms.DateTimeInput(attrs={'class': 'form-control'}),
+            
+        }
+        
 
     
 

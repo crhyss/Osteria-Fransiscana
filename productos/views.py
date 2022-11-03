@@ -5,6 +5,8 @@ from .forms import ProductoForm
 from django.core.paginator import Paginator
 def agregarp(request):
     lista = Categoria_prod.objects.all()
+    productos = Producto.objects.all()
+    lista2 = Categoria_prod.objects.all()
     formulario = None
     if request.method == 'POST':
         formulario = ProductoForm(request.POST, request.FILES)
@@ -17,6 +19,8 @@ def agregarp(request):
         'titulo': 'Agregar Producto',
         'formulario': formulario,
         'lista': lista,
+        'productos': productos,
+        'lista2': lista2,
     }
     return render(
         request,

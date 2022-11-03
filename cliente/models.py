@@ -2,7 +2,7 @@ from email.policy import default
 from pickle import TRUE
 from unittest.util import _MAX_LENGTH
 from django.db import models
-
+import datetime
 class Region(models.Model):
     id_region = models.AutoField(primary_key = True)
     region_nombre = models.CharField(max_length = 40, blank = False)
@@ -52,3 +52,11 @@ class Usuario(models.Model):
     usr_activo = models.BooleanField(default=True)
     usr_tipo = models.ForeignKey(Tipo_usuario, on_delete=models.CASCADE, default=2)
     usr_direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE, null=True)
+    def __str__(self):
+        return self.usr_nombre
+class Reclamo(models.Model):
+    id_reclamos = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=40, blank=False,null=True)
+    apellido = models.CharField(max_length=40, blank=False,null=True)
+    reclamo_fecha = models.DateTimeField(blank=True, null=True, default=(datetime.datetime.now()))
+    reclamo_descrip = models.TextField(max_length=255, blank=False)

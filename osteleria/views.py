@@ -34,4 +34,4 @@ def perfil(request):
         'grupos':grupos,
         'permisos':permisos,
     }
-    return render(request, 'registration/perfilAdmin.html',context)
+    return render(request, 'vista/Principal.html',context)

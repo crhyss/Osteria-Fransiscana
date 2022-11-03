@@ -87,11 +87,18 @@
         </ul>
         </div>
         <div class="col-md-3 text-end">
-            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
             <a href="{% url 'salir'%}">
                 <button type="button" class="btn btn-warning me-2">Salir</button>
             </a>
-            <a href="/accounts/profile/">
+            <a href="/admin">
+                <button type="button" class="btn btn-success me-2">Perfil</button>
+            </a>
+            {% elif user.is_authenticated%}
+            <a href="{% url 'salir'%}">
+                <button type="button" class="btn btn-warning me-2">Salir</button>
+            </a>
+            <a href="/perfil">
                 <button type="button" class="btn btn-success me-2">Perfil</button>
             </a>
             {% else %}

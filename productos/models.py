@@ -12,9 +12,9 @@ class Producto(models.Model):
     id_producto = models.AutoField(primary_key=True)
     prod_nombre = models.CharField(max_length=100, blank=False)
     prod_descri = models.CharField(max_length=200, blank=False)
-    prod_precio_ba = models.IntegerField(blank=False)
-    prod_precio_of = models.IntegerField(blank=False)
-    prod_imagen    = models.FileField(upload_to='productos/', default=None)
+    prod_precio_ba = models.PositiveIntegerField(blank=False)
+    prod_precio_of = models.PositiveIntegerField(blank=False)
+    prod_imagen    = models.FileField( default=None)
     prod_disponible = models.BooleanField(default = True)
     prod_recomendado = models.BooleanField(default=False)
     prod_categoria = models.ForeignKey(Categoria_prod, on_delete=models.CASCADE, default=None)
@@ -22,3 +22,6 @@ class Producto(models.Model):
         if self.prod_imagen:
             self.prod_imagen.delete()
         super().delete(*args, **kwargs)
+    def __str__(self):
+        texto = "{0} {1}"
+        return texto.format(self.prod_nombre,self.prod_descri)

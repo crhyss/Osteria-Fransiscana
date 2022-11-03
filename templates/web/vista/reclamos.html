@@ -1,36 +1,20 @@
 {% extends 'vista/Principal.html' %}
 {% load static %}
 {% block content %}
+<section class="card col-sm-12 col-md-6 mx-auto mt-5">
 <div class="row reclamos">
     <div class="card col-sm-12 col-md-6 mx-auto mt-5">
-        <form class="row g-3 needs-validation form-form-control" novalidate id="comentarios" method="POST">
+        <form action="" method = "POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="col-md-4">
-                <label for="validationCustom01" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="validationCustom01" required name="Nombre">
-                <div class="invalid-feedback">
-                    ingrese su nombre
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label for="validationCustom02" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="validationCustom02" required name="Apellido">
-                <div class="invalid-feedback">
-                    ingrese su apellido
-                </div>
-            </div>
-            <div class="form-floating col-md-6">
-                <label for="validationCustom05" class="form-label">Comentario</label><br><br>
-                <textarea type="text" class="form-control" id="validationCustom05" name="Comentario"
-                    required></textarea>
-                <div class="invalid-feedback">
-                    ingrese un comentario
-                </div>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Enviar</button>
-            </div>
+            <article class="card-body">
+                {{ formulario.as_p }}
+            </article>
+            <article class="card-footer" style="display: flex; justify-content: center;">
+                <button class="btn btn-success my-2 my-sm-0" type="submit" style="width: 50%">Enviar
+            </button>
+            </article>
         </form>
     </div>
 </div>
+</section>
 {% endblock content %}

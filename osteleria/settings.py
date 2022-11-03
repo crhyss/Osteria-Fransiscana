@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'social_django',
     'cliente',
     'administrador',
-    
 ]
 
 MIDDLEWARE = [
@@ -143,7 +142,7 @@ STATIC_ROOT = join(BASE_DIR,'static','static_root')
 STATICFILES_DIRS = [join(BASE_DIR,"static")]
 
 MEDIA_URL = 'static\producto/'
-MEDIA_ROOT = join(BASE_DIR,'static/')
+MEDIA_ROOT = join(BASE_DIR,'static/producto')
 
 SOCIAL_AUTH_FACEBOOK_KEY = '2779822452237843'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'a39654914ead729d015e217c91e614e9'
@@ -152,5 +151,63 @@ AUTHENTICATION_BACKENDS = [
 'social_core.backends.facebook.FacebookOAuth2',
 'django.contrib.auth.backends.ModelBackend',
 ]
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+JET_THEMES = [
+    {
+        'theme': 'default', # theme folder name
+        'color': '#47bac1', # color of the theme's button in user menu
+        'title': 'Default' # theme title
+    },
+    {
+        'theme': 'green',
+        'color': '#44b78b',
+        'title': 'Green'
+    },
+    {
+        'theme': 'light-green',
+        'color': '#2faa60',
+        'title': 'Light Green'
+    },
+    {
+        'theme': 'light-violet',
+        'color': '#a464c4',
+        'title': 'Light Violet'
+    },
+    {
+        'theme': 'light-blue',
+        'color': '#5EADDE',
+        'title': 'Light Blue'
+    },
+    {
+        'theme': 'light-gray',
+        'color': '#222',
+        'title': 'Light Gray'
+    }
+]
+JET_DEFAULT_THEME = 'light-gray'
+JET_SIDE_MENU_COMPACT = True
 
-site_header = "Administracion de Osteleria Fransciscana"    
+JET_SIDE_MENU_ITEMS = [
+    {'app_label': 'auth', 'items': [
+        {'name': 'group'},
+        {'name': 'user'},
+    ]},
+    {'app_label': 'social_django', 'items': [
+        {'name': 'association'},
+        {'name': 'nonce'},
+        {'name': 'usersocialauth'},
+    ]},
+    {'label': 'Gestion', 'app_label': 'Productos', 'items': [
+        {'label': 'Añadir productos',
+        'url': '/productos/agregarp'},
+        {'label': 'Visualizar Ordenes',
+        'url': '/ordenes/'},
+        {'label': 'Reclamos',
+        'url': '/logeo/reclamo/lista/'},
+        
+    ]}
+]
+JET_MODULE_GOOGLE_ANALYTICS_CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secrets.json')
+JET_CHANGE_FORM_SIBLING_LINKS = True
+JET_INDEX_DASHBOARD= 'dashboard.CustomIndexDashboard'
+

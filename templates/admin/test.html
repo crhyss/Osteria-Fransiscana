@@ -1,0 +1,567 @@
+{% block test%}
+<html lang="es-cl" class=" touchevents"><head>
+    <title>Bienvenidos al portal de administración | Portal de inventarios</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+    
+    <link rel="stylesheet" type="text/css" href="/static/jet/css/vendor.css?v=1.0.7">
+    <link rel="stylesheet" type="text/css" href="/static/jet/css/icons/style.css?v=1.0.7">
+    <link rel="stylesheet" type="text/css" href="/static/jet/css/themes/light-gray/base.css?v=1.0.7" class="base-stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/jet/css/themes/light-gray/select2.theme.css?v=1.0.7" class="select2-stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/jet/css/themes/light-gray/jquery-ui.theme.css?v=1.0.7" class="jquery-ui-stylesheet">
+    
+    
+        
+        <link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css">
+    
+        
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" charset="utf-8">
+        var DATE_FORMAT = "%d/%m/%Y";
+        var TIME_FORMAT = "%H:%M:%S";
+        var DATETIME_FORMAT = "%d/%m/%Y %H:%M:%S";
+    </script>
+    <script type="text/javascript" src="/jet/jsi18n/"></script>
+    <script src="/static/jet/js/build/bundle.min.js?v=1.0.7"></script>
+    
+    
+    
+        <script src="/static/jet/js/i18n/jquery-ui/datepicker-es.js?v=1.0.7"></script>
+    
+        <script src="/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-es.js?v=1.0.7"></script>
+    
+        <script src="/static/jet/js/i18n/select2/es.js?v=1.0.7"></script>
+    
+    
+    
+        
+    
+        
+    
+    <meta name="robots" content="NONE,NOARCHIVE">
+    </head>
+    
+    
+    <body class="menu-pinned  dashboard jet initialized" data-admin-utc-offset="-10800">
+    
+    <!-- Container -->
+    <div id="container"><span class="sidebar-container-toggle sidebar-header-menu-icon icon-menu sidebar-toggle"></span>
+    
+        
+        <!-- Header -->
+        <div id="header">
+            
+            
+            
+            <div id="user-tools" class="user-tools initialized"><ul class="sidebar-dependent"><li class="user-tools-welcome-msg">admin</li><li class="user-tools-contrast-block theme-chooser initialized">
+                <div class="user-tools-contrast-block-title">tema actual</div>
+                <div class="user-tools-theme-link-container">
+                    <a href="#" class="user-tools-theme-link choose-theme" data-theme="default" data-base-stylesheet="/static/jet/css/themes/default/base.css?v=1.0.7" data-select2-stylesheet="/static/jet/css/themes/default/select2.theme.css?v=1.0.7" data-jquery-ui-stylesheet="/static/jet/css/themes/default/jquery-ui.theme.css?v=1.0.7" title="Default" style="background-color: #47bac1;"></a><a href="#" class="user-tools-theme-link choose-theme" data-theme="green" data-base-stylesheet="/static/jet/css/themes/green/base.css?v=1.0.7" data-select2-stylesheet="/static/jet/css/themes/green/select2.theme.css?v=1.0.7" data-jquery-ui-stylesheet="/static/jet/css/themes/green/jquery-ui.theme.css?v=1.0.7" title="Green" style="background-color: #44b78b;"></a><a href="#" class="user-tools-theme-link choose-theme" data-theme="light-green" data-base-stylesheet="/static/jet/css/themes/light-green/base.css?v=1.0.7" data-select2-stylesheet="/static/jet/css/themes/light-green/select2.theme.css?v=1.0.7" data-jquery-ui-stylesheet="/static/jet/css/themes/light-green/jquery-ui.theme.css?v=1.0.7" title="Light Green" style="background-color: #2faa60;"></a><a href="#" class="user-tools-theme-link choose-theme" data-theme="light-violet" data-base-stylesheet="/static/jet/css/themes/light-violet/base.css?v=1.0.7" data-select2-stylesheet="/static/jet/css/themes/light-violet/select2.theme.css?v=1.0.7" data-jquery-ui-stylesheet="/static/jet/css/themes/light-violet/jquery-ui.theme.css?v=1.0.7" title="Light Violet" style="background-color: #a464c4;"></a><a href="#" class="user-tools-theme-link choose-theme" data-theme="light-blue" data-base-stylesheet="/static/jet/css/themes/light-blue/base.css?v=1.0.7" data-select2-stylesheet="/static/jet/css/themes/light-blue/select2.theme.css?v=1.0.7" data-jquery-ui-stylesheet="/static/jet/css/themes/light-blue/jquery-ui.theme.css?v=1.0.7" title="Light Blue" style="background-color: #5EADDE;"></a><a href="#" class="user-tools-theme-link choose-theme selected" data-theme="light-gray" data-base-stylesheet="/static/jet/css/themes/light-gray/base.css?v=1.0.7" data-select2-stylesheet="/static/jet/css/themes/light-gray/select2.theme.css?v=1.0.7" data-jquery-ui-stylesheet="/static/jet/css/themes/light-gray/jquery-ui.theme.css?v=1.0.7" title="Light Gray" style="background-color: #222;"></a>
+                </div>
+            </li><li class="user-tools-link"><a href="/">Ver sitio</a></li><li class="user-tools-link"><a href="/admin/password_change/">Cambiar contraseña</a></li><li class="user-tools-link"><a href="/admin/logout/">Cerrar sesión</a></li></ul></div>
+            
+            
+        </div>
+        <!-- END Header -->
+    
+        
+        
+            <div class="breadcrumbs initialized"></div>
+        
+    
+        
+    
+    <div class="dashboard-tools-toggle-container">
+        <a href="#" class="dashboard-tools-toggle button">
+            <span class="dashboard-tools-toggle-icon icon-settings"></span>
+        </a>
+    </div>
+    <div class="dashboard-tools">
+        <form action="/jet/dashboard/add_user_dashboard_module/" method="POST" id="add-dashboard-module-form">
+            <input type="hidden" name="csrfmiddlewaretoken" value="uYdcAESQJo6KZ176QWTHtNVVUwH7qguvv8k7PAiZ8HKpFB3WWynjctOMRcLtvY1A">
+            <select class="add-dashboard select2-hidden-accessible" name="module" tabindex="-1" aria-hidden="true">
+                <option>artilugios</option>
+                <optgroup label="habilitado">
+                    
+                        <option value="0" data-type="available_children">Enlaces</option>
+                    
+                </optgroup>
+                <optgroup label="iniciales">
+                    
+                        <option value="0" data-type="children">Aplicacion</option>
+                    
+                        <option value="1" data-type="children">Gestion</option>
+                    
+                </optgroup>
+            </select><span class="select2 select2-container select2-container--jet" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-module-0z-container"><span class="select2-selection__rendered" id="select2-module-0z-container" title="artilugios">artilugios</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><a href="#" class="button add-dashboard-link" title="Añadir"><span class="add-dashboard-link-icon icon-add"></span><span class="add-dashboard-link-label">Añadir</span></a>
+            <input type="hidden" name="app_label" value="">
+            <input type="hidden" name="type" value="">
+            <a href="#" class="button transparent reset-dashboard-link" title="Reiniciar artilugios"><span class="reset-dashboard-link-icon icon-reset"></span><span class="reset-dashboard-link-label">Reiniciar artilugios</span></a>
+        </form>
+        <form action="/jet/dashboard/reset_dashboard/" method="POST" id="reset-dashboard-form">
+            <input type="hidden" name="csrfmiddlewaretoken" value="uYdcAESQJo6KZ176QWTHtNVVUwH7qguvv8k7PAiZ8HKpFB3WWynjctOMRcLtvY1A">
+            <input type="hidden" name="app_label" value="">
+        </form>
+        <div class="dialog-confirm" id="reset-dashboard-dialog" title="Reiniciar artilugios">
+            <p>Está seguro de que quiere reiniciar este artilugio?</p>
+        </div>
+    </div>
+    
+    
+    
+        
+    
+        
+            
+        
+    
+        <!-- Content -->
+        <div id="content" class="colM">
+            
+            <h1>Bienvenidos al portal de administración</h1>
+            
+        
+    
+    <div class="dashboard-container columns_3 cf">
+        
+            <div class="dashboard-column-wrapper">
+                <div class="dashboard-column first ui-droppable ui-sortable">
+                    
+                        
+                            
+    
+    <div class="dashboard-item collapsible deletable draggable" data-module-id="24">
+        <div class="dashboard-item-header ui-sortable-handle">
+            
+                <span class="dashboard-item-header-drag icon-grid"></span>
+            
+            <span class="dashboard-item-header-buttons">
+                <a href="/jet/dashboard/module/24/" title="Cambiar"><span class="icon-edit"></span></a>
+    
+                
+                    <a href="#" title="Eliminar" class="dashboard-item-remove"><span class="icon-cross"></span></a>
+                
+            </span>
+            <span class="dashboard-item-header-title">
+                
+                    <a href="#" class="dashboard-item-collapse"><span class="dashboard-item-header-collapse-button icon-arrow-down"></span></a>
+                    <a href="#" class="dashboard-item-collapse"><span class="dashboard-item-header-collapse-button icon-arrow-up"></span></a>
+                
+    
+                
+                    Aplicacion
+                
+            </span>
+            <div class="cf"></div>
+        </div>
+    
+        <div class="dashboard-item-content">
+            
+            
+                
+    
+    <ul>
+        
+            <li class="contrast">
+                
+                    <a href="/admin/auth/" title="Modelos en la aplicación Autenticación y autorización">Autenticación y autorización</a>
+                
+            </li>
+    
+            
+                <li>
+                    <span class="float-right">
+                        
+                            <a href="/admin/auth/group/add/" class="addlink" title="Añadir"></a>
+                        
+    
+                        
+                            <a href="/admin/auth/group/" class="changelink" title="Cambiar"></a>
+                        
+                    </span>
+    
+                    
+                        <a href="/admin/auth/group/">Grupos</a>
+                    
+                </li>
+            
+                <li>
+                    <span class="float-right">
+                        
+                            <a href="/admin/auth/user/add/" class="addlink" title="Añadir"></a>
+                        
+    
+                        
+                            <a href="/admin/auth/user/" class="changelink" title="Cambiar"></a>
+                        
+                    </span>
+    
+                    
+                        <a href="/admin/auth/user/">Usuarios</a>
+                    
+                </li>
+            
+        
+    </ul>
+    
+            
+            
+        </div>
+    </div>
+                        
+                    
+                        
+                    
+                </div>
+            </div>
+        
+            <div class="dashboard-column-wrapper">
+                <div class="dashboard-column ui-droppable ui-sortable">
+                    
+                        
+                    
+                        
+                            
+    
+    <div class="dashboard-item collapsible deletable draggable" data-module-id="25">
+        <div class="dashboard-item-header ui-sortable-handle">
+            
+                <span class="dashboard-item-header-drag icon-grid"></span>
+            
+            <span class="dashboard-item-header-buttons">
+                <a href="/jet/dashboard/module/25/" title="Cambiar"><span class="icon-edit"></span></a>
+    
+                
+                    <a href="#" title="Eliminar" class="dashboard-item-remove"><span class="icon-cross"></span></a>
+                
+            </span>
+            <span class="dashboard-item-header-title">
+                
+                    <a href="#" class="dashboard-item-collapse"><span class="dashboard-item-header-collapse-button icon-arrow-down"></span></a>
+                    <a href="#" class="dashboard-item-collapse"><span class="dashboard-item-header-collapse-button icon-arrow-up"></span></a>
+                
+    
+                
+                    Gestion
+                
+            </span>
+            <div class="cf"></div>
+        </div>
+    
+        <div class="dashboard-item-content">
+            
+            
+                
+    
+    
+        
+            <ul>
+                
+                    <li>
+                        <a href="/productos/agregarp">Productos</a>
+                    </li>
+                
+                    <li>
+                        <a href="/ordenes/">Visualizar Ordenes</a>
+                    </li>
+                
+                    <li>
+                        <a href="/logeo/reclamo/lista/">Reclamos</a>
+                    </li>
+                
+            </ul>
+        
+    
+    
+            
+            
+        </div>
+    </div>
+                        
+                    
+                </div>
+            </div>
+        
+            <div class="dashboard-column-wrapper">
+                <div class="dashboard-column ui-droppable ui-sortable">
+                    
+                        
+                    
+                        
+                    
+                </div>
+            </div>
+        
+    </div>
+    
+    <div class="dialog-confirm" id="module-remove-dialog" title="Eliminar Artilugio">
+        <p>¿Está seguro de que desea eliminar este artilugio?</p>
+    </div>
+    
+    <form action="/jet/dashboard/update_dashboard_modules/" method="POST" id="update-dashboard-modules-form">
+        <input type="hidden" name="csrfmiddlewaretoken" value="dPak7TBa4iOSvS8clzB5sH66as0lEHIKeZhfmP1jtBsxbs42rb5HbnZX784HJpfP">
+        <input type="hidden" name="app_label" value="">
+        <input type="hidden" name="modules">
+    </form>
+    
+    <form action="/jet/dashboard/update_dashboard_module_collapse/" method="POST" id="update-dashboard-module-collapse-form">
+        <input type="hidden" name="csrfmiddlewaretoken" value="dPak7TBa4iOSvS8clzB5sH66as0lEHIKeZhfmP1jtBsxbs42rb5HbnZX784HJpfP">
+        <input type="hidden" name="id">
+        <input type="hidden" name="collapsed">
+    </form>
+    
+    <form action="/jet/dashboard/remove_dashboard_module/" method="POST" id="remove-dashboard-module-form">
+        <input type="hidden" name="csrfmiddlewaretoken" value="dPak7TBa4iOSvS8clzB5sH66as0lEHIKeZhfmP1jtBsxbs42rb5HbnZX784HJpfP">
+        <input type="hidden" name="id">
+    </form>
+    
+    
+    
+            
+            <br class="clear">
+        </div>
+        <!-- END Content -->
+    
+        <div id="footer"></div>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+            <div class="related-popup-container scrollable">
+                <a href="#" class="related-popup-back">
+                    <span class="related-popup-back-icon icon-arrow-left"></span>
+                    <span class="related-popup-back-label">volver</span>
+                </a>
+                <span class="icon-refresh loading-indicator"></span>
+            </div>
+    
+            <div class="sidebar-header-wrapper sidebar-dependent">
+                <div class="sidebar-header sidebar-dependent">
+                    <a href="#" class="sidebar-header-menu sidebar-toggle">
+                        <span class="sidebar-header-menu-icon icon-menu"></span>
+                        <span class="sidebar-header-menu-icon icon-cross"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar sidebar-dependent initialized">
+                <div class="sidebar-wrapper scrollable"><div id="branding" class="initialized" style="height: 84px;">
+                <span id="branding-menu" class="sidebar-header-menu-icon icon-menu sidebar-toggle"></span>
+                <span id="branding-pin" class="sidebar-link-icon icon-pin sidebar-pin"></span>
+                
+    <h1 id="site-name"><a href="/admin/">Administracion Osteleria Fransciscana</a></h1>
+    
+            </div>
+                    <div class="sidebar-section">
+                        
+                            <a href="/admin/" class="sidebar-link icon">
+                                <span class="sidebar-link-label">
+                                    <span class="sidebar-link-icon icon-data"></span>
+                                    Inicio
+                                </span>
+                            </a>
+                        
+                        
+                            <a href="/" class="sidebar-link icon">
+                                <span class="sidebar-link-label">
+                                    <span class="sidebar-link-icon icon-open-external"></span>
+                                    Ver sitio
+                                </span>
+                            </a>
+                        
+                        
+                        
+                        
+                    </div>
+    
+                    
+                        
+                        
+                            
+                                
+                                    <div class="sidebar-section">
+                                        <div class="sidebar-title">
+                                            <a href="/admin/auth/" class="sidebar-title-link">
+                                                Autenticación y autorización
+                                            </a>
+                                        </div>
+                                        
+                                            
+                                                <div>
+                                                    <a href="/admin/auth/group/" class="sidebar-link">
+                                                        <span class="sidebar-right">
+                                                            <span class="sidebar-right-arrow icon-arrow-right"></span>
+                                                        </span>
+                                                        <span class="sidebar-link-label">Grupos</span>
+                                                    </a>
+                                                </div>
+                                            
+                                        
+                                            
+                                                <div>
+                                                    <a href="/admin/auth/user/" class="sidebar-link">
+                                                        <span class="sidebar-right">
+                                                            <span class="sidebar-right-arrow icon-arrow-right"></span>
+                                                        </span>
+                                                        <span class="sidebar-link-label">Usuarios</span>
+                                                    </a>
+                                                </div>
+                                            
+                                        
+                                    </div>
+                                
+                            
+                                
+                                    <div class="sidebar-section">
+                                        <div class="sidebar-title">
+                                            <a href="/admin/social_django/" class="sidebar-title-link">
+                                                Python Social Auth
+                                            </a>
+                                        </div>
+                                        
+                                            
+                                                <div>
+                                                    <a href="/admin/social_django/association/" class="sidebar-link">
+                                                        <span class="sidebar-right">
+                                                            <span class="sidebar-right-arrow icon-arrow-right"></span>
+                                                        </span>
+                                                        <span class="sidebar-link-label">Associations</span>
+                                                    </a>
+                                                </div>
+                                            
+                                        
+                                            
+                                                <div>
+                                                    <a href="/admin/social_django/nonce/" class="sidebar-link">
+                                                        <span class="sidebar-right">
+                                                            <span class="sidebar-right-arrow icon-arrow-right"></span>
+                                                        </span>
+                                                        <span class="sidebar-link-label">Nonces</span>
+                                                    </a>
+                                                </div>
+                                            
+                                        
+                                            
+                                                <div>
+                                                    <a href="/admin/social_django/usersocialauth/" class="sidebar-link">
+                                                        <span class="sidebar-right">
+                                                            <span class="sidebar-right-arrow icon-arrow-right"></span>
+                                                        </span>
+                                                        <span class="sidebar-link-label">User social auths</span>
+                                                    </a>
+                                                </div>
+                                            
+                                        
+                                    </div>
+                                
+                            
+                                
+                                    <div class="sidebar-section">
+                                        <div class="sidebar-title">
+                                            <a class="sidebar-title-link">
+                                                Gestion
+                                            </a>
+                                        </div>
+                                        
+                                            
+                                                <div>
+                                                    <a href="/productos/agregarp" class="sidebar-link">
+                                                        <span class="sidebar-right">
+                                                            <span class="sidebar-right-arrow icon-arrow-right"></span>
+                                                        </span>
+                                                        <span class="sidebar-link-label">Añadir productos</span>
+                                                    </a>
+                                                </div>
+                                            
+                                        
+                                            
+                                                <div>
+                                                    <a href="/ordenes/" class="sidebar-link">
+                                                        <span class="sidebar-right">
+                                                            <span class="sidebar-right-arrow icon-arrow-right"></span>
+                                                        </span>
+                                                        <span class="sidebar-link-label">Visualizar Ordenes</span>
+                                                    </a>
+                                                </div>
+                                            
+                                        
+                                            
+                                                <div>
+                                                    <a href="/logeo/reclamo/lista/" class="sidebar-link">
+                                                        <span class="sidebar-right">
+                                                            <span class="sidebar-right-arrow icon-arrow-right"></span>
+                                                        </span>
+                                                        <span class="sidebar-link-label">Reclamos</span>
+                                                    </a>
+                                                </div>
+                                            
+                                        
+                                    </div>
+                                
+                            
+                        
+    
+                        <div class="sidebar-section last">
+                            <div class="dialog-confirm" id="bookmarks-add-dialog" title="Añadir marcadores">
+                                <form action="/jet/add_bookmark/" method="POST" id="bookmarks-add-form">
+                                    <input type="hidden" name="csrfmiddlewaretoken" value="V1OwaymfvSXMklj0GIxNmkCYXDQhH290WbVrpuMoUbBr0VfQMk1p50vPUjUDMKG5">
+                                    <p>Título:</p>
+                                    <input type="text" name="title" class="fill_width">
+                                    <p>URL:</p>
+                                    <input type="text" name="url" class="fill_width">
+                                </form>
+                            </div>
+                            <form action="/jet/remove_bookmark/" method="POST" id="bookmarks-remove-form">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="V1OwaymfvSXMklj0GIxNmkCYXDQhH290WbVrpuMoUbBr0VfQMk1p50vPUjUDMKG5">
+                                <input type="hidden" name="id">
+                            </form>
+                            <div class="dialog-confirm" id="bookmarks-remove-dialog" title="Eliminar marcadores">
+                                <p>Está seguro de que quiere eliminar este marcador?</p>
+                            </div>
+    
+                            <div class="sidebar-title">
+                                <span class="sidebar-right">
+                                    <a href="#" class="sidebar-right-plus bookmarks-add" title="Añadir marcadores" data-title="Bienvenidos al portal de administración"><span class="icon-add"></span></a>
+                                </span>
+                                marcadores
+                            </div>
+    
+                            <div class="bookmarks-list">
+                                
+                                
+                                <a class="sidebar-link bookmark-item clone">
+                                    <span class="sidebar-right collapsible">
+                                        <span class="sidebar-right-remove bookmarks-remove">Remover</span>
+                                    </span>
+                                    <span class="sidebar-link-label"></span>
+                                </a>
+                            </div>
+                        </div>
+                    
+                </div>
+    
+                
+            </div>
+        
+    
+        
+        
+            
+        
+    </div>
+    <!-- END Container -->
+    
+    
+    
+    </body></html>
+    {% endblock test %}
