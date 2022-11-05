@@ -1,0 +1,50 @@
+{% extends 'vista/Principal.html' %}
+
+{% block content %}
+<div class="ordenes">
+    <h1>Ordenes</h1>
+    {% if pedidos %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Detalle</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pedido in pedidos %}
+                <tr id="{{pedido.id_pedido}}" style="max-height: 63px;">
+                    <td>{{pedido.id_pedido}}</td>
+                    <td>{{pedido.pedido_modif}}</td>
+                    <td>{{pedido.pedido_listo}}</td>
+                    <td>
+                        <a href="/productos/pedidos/visualizar/{{pedido.id_pedido}}">
+                            <button class="btn btn btn-outline-primary me-md-2" type="submit">V</button>
+                        </a>
+                    </td>
+                    {% if pedido.pedido_listo == 1 %}
+                    <td>
+                        <button class="btn btn btn-outline-disabled me-md-2" type="submit" disabled>L</button>
+                    </td>
+                    {% else %}
+                    <td>
+                        <a href="/productos/pedidos/terminar/{{pedido.id_pedido}}">
+                            <button class="btn btn btn-outline-success me-md-2" type="submit">L</button>
+                        </a>
+                    </td>
+                    {% endif %}
+                    <td>
+                        <a href="/productos/cancelar/{{pedido.id_pedido}}">
+                            <button class="btn btn btn-outline-danger me-md-2" type="submit">C</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+    {% else %}
+        <p>Sin ordenes disponibles</p>
+    {% endif %}
+</div>
+{% endblock content %}

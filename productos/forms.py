@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Producto, Categoria_prod
+from .models import Producto, Categoria_prod, Pedido
 
 def agregarClaseFormControl(elementos):
     for campo in elementos:
@@ -29,3 +29,28 @@ class CategoriaForm(ModelForm):
     class Meta:
         model = Categoria_prod
         fields = ['categoria_prod']
+
+class PedidoForm_V(ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(PedidoForm_V,self).__init__(*args, **kwargs)
+      agregarClaseFormControl(self.visible_fields())
+      self.fields['pedido_modif'].widget.attrs['disabled'] = 'disabled'
+
+    class Meta:
+        model = Pedido
+        fields = ['pedido_modif']
+        labels = {
+            'pedido_modif' : 'Detalle'
+        }
+
+class PedidoForm(ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ['id_pedido', 'pedido_modif', 'pedido_listo', 'pedido_producto']
+
+        labels={
+            'id_pedido':'ID',
+            'pedido_modif': 'Detalle',
+            'pedido_listo' : 'Estado',
+            'pedido_producto' : 'Producto'
+        }

@@ -1,0 +1,24 @@
+{% extends 'vista/Principal.html' %}
+
+{% block content %}
+<div class="row">
+    <section class="card col-sm-12 col-md-6 mx-auto mt-5">
+        <article class="card-header">
+            <h2 class="card-tittle">Visualizar orden
+            </h2>
+        </article>
+        <form action="" method = "POST">
+            {% csrf_token %}
+            <article class="card-body">
+                {{ formulario }}
+            </article>
+            <article class="card-footer" style="display: flex; justify-content: center;">
+                <a href="/productos/pedidos">
+                    <button class="btn btn-outline-primary">Volver
+                </a>
+            </button>
+            </article>
+        </form>
+    </section>
+</div>
+{% endblock content %}

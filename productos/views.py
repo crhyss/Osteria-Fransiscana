@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Producto, Categoria_prod
-from .forms import ProductoForm
+from .models import Producto, Categoria_prod, Pedido
+from .forms import ProductoForm, PedidoForm, PedidoForm_V
 from django.core.paginator import Paginator
 def agregarp(request):
     lista = Categoria_prod.objects.all()
@@ -62,3 +62,43 @@ def eliminarProducto(request, id_producto):
     productoEliminado.delete()
     return redirect('/productos/listar/')
 
+def pedidos(request):
+    data = {
+        'pedidos' : Pedido.objects.all()
+    }
+    return render(
+        request, 
+        'vista/pedidos.html',
+        data
+    )
+
+def cancelarPedido(request, id_pedido):
+    pedidoCancelado = Pedido.objects.get(pk=id_pedido)
+    pedidoCancelado.delete()
+    return redirect('/productos/pedidos/')
+
+def visualizarPedido(request, id_pedido):
+    pedidoVisualizado = Pedido.objects.get(pk=id_pedido)
+    formularioPedido = None
+    if request.method == 'POST':
+        formularioPedido = PedidoForm_V(request.POST, instance=pedidoVisualizado)
+        if formularioPedido.is_valid():
+            formularioPedido.save()
+            return redirect('/productos/pedidos/')
+    else:
+        formularioPedido = PedidoForm_V(instance=pedidoVisualizado)
+    context = {
+        'titulo': 'Visualizar Pedido',
+        'formulario': formularioPedido
+    }
+    return render(
+        request,
+        'vista/visualizarPedido.html',
+        context
+    )
+
+def terminarPedido(request, id_pedido):
+    pedidoTerminado = Pedido.objects.get(pk=id_pedido) 
+    pedidoTerminado.pedido_listo = 1
+    pedidoTerminado.save()
+    return redirect('/productos/pedidos')

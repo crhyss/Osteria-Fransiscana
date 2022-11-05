@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from cliente.forms import direccionForm, userForm
+from cliente.forms import direccionForm, userForm, profileForm
 #, direccionForm
-from cliente.models import Direccion, Region
+from cliente.models import Direccion, Region, Usuario
 from django.contrib.auth.forms import AuthenticationForm
 import json
 
@@ -71,3 +71,53 @@ def reclamos(request):
             json.dump(data, file)
             file.close()
     return render(request, 'web/vista/reclamos.html')
+
+def perfil(request, id_usuario):
+    perfilUsuario = profileForm.objects.get(pk=id_usuario) 
+    formularioPerfil = None
+    if request.method == 'POST':
+        formularioPerfil = profileForm(request.POST, instance=perfilUsuario)
+        if formularioPerfil.is_valid():
+            formularioPerfil.save()
+            return redirect('/logeo/perfil/')
+    else:
+        formularioPerfil = profileForm(instance=perfilUsuario)
+    context = {
+        'titulo' : 'Perfil Usuario',
+        'formulario perfil' : formularioPerfil
+    }
+    return render(
+        request,
+        'registration/perfilCliente.html', 
+        context
+    )
+
+def perfilCliente(request):
+    usuario = Usuario.objects.all()
+    context = {
+        'titulo' : 'perfil',
+        'usuarios' : usuario
+    }
+    return render (request,
+    'registration/perfilCliente.html',
+    context)
+
+def modificarPerfil(request, id_usuario):
+    perfilModificado = Usuario.objects.get(pk=id_usuario)
+    formularioPerfil = None
+    if request.method == 'POST':
+        formularioPerfil = profileForm(request.POST, instance=perfilModificado)
+        if formularioPerfil.is_valid():
+            formularioPerfil.save()
+            return redirect('/logeo/perfil/')
+    else:
+        formularioPerfil = profileForm(instance=perfilModificado)
+    context = {
+        'titulo': 'Modificar Perfil',
+        'formulario': formularioPerfil
+    }
+    return render(
+        request,
+        'registration/modificarPerfil.html',
+        context
+    )

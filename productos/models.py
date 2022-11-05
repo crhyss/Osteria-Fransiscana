@@ -22,3 +22,9 @@ class Producto(models.Model):
         if self.prod_imagen:
             self.prod_imagen.delete()
         super().delete(*args, **kwargs)
+
+class Pedido(models.Model):
+    id_pedido = models.AutoField(primary_key=True)
+    pedido_modif = models.CharField(max_length=200, blank=False)
+    pedido_listo = models.BooleanField(default=False)
+    pedido_producto = models.ForeignKey(Producto, on_delete=models.CASCADE, default=None)

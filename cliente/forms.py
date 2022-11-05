@@ -13,6 +13,24 @@ def agregarClaseFormControl(elementos):
 class inicioForm(UserCreationForm):
     pass
 
+class profileForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(profileForm,self).__init__(*args, **kwargs)
+        agregarClaseFormControl(self.visible_fields())
+    class Meta:
+        model = Usuario
+        fields = ['usr_nombre', 'usr_apellido_pat', 'usr_apellido_mat',
+                  'usr_pass', 'usr_correo', 'usr_direccion']
+
+        labels = {
+            'usr_nombre' : 'Nombre',
+            'usr_apellido_pat' : 'Apellido Paterno',
+            'usr_apellido_mat' : 'Apellido Materno',
+            'usr_pass' : 'Contraseña',
+            'usr_correo' : 'Correo',
+            'usr_direccion' : 'Direccion'
+        }
+
 class userForm(forms.ModelForm):
 
     class Meta:
