@@ -64,7 +64,7 @@ def eliminarProducto(request, id_producto):
 
 def pedidos(request):
     data = {
-        'pedidos' : Pedido.objects.all()
+        'pedidos' : Pedido.objects.filter(pedido_listo = 0)
     }
     return render(
         request, 
@@ -72,10 +72,26 @@ def pedidos(request):
         data
     )
 
+def historialPedido(request):
+    data = {
+        'pedidos' : Pedido.objects.filter(pedido_listo = 1)
+    }
+    return render(
+        request, 
+        'vista/historialPedidos.html',
+        data
+    )
+
 def cancelarPedido(request, id_pedido):
     pedidoCancelado = Pedido.objects.get(pk=id_pedido)
-    pedidoCancelado.delete()
+    pedidoCancelado.pedido_listo = 1
+    pedidoCancelado.save()
     return redirect('/productos/pedidos/')
+
+def eliminarPedido(request, id_pedido):
+    pedidoCancelado = Pedido.objects.get(pk=id_pedido)
+    pedidoCancelado.delete()
+    return redirect('/productos/pedidos/historial')
 
 def visualizarPedido(request, id_pedido):
     pedidoVisualizado = Pedido.objects.get(pk=id_pedido)
