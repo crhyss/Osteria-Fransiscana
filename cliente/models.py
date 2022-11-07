@@ -60,3 +60,20 @@ class Reclamo(models.Model):
     apellido = models.CharField(max_length=40, blank=False,null=True)
     reclamo_fecha = models.DateTimeField(blank=True, null=True, default=(datetime.datetime.now()))
     reclamo_descrip = models.TextField(max_length=255, blank=False)
+
+class EstadoMesa(models.Model):
+    id_estado_mesa = models.AutoField(primary_key=True)
+    estado_mesa = models.BooleanField(default=True)
+
+class Mesa(models.Model):
+    id_mesa = models.AutoField(primary_key=True)
+    mesa_nro = models.IntegerField(max_length=2, blank=False)
+    mesa_sillas = models.IntegerField(max_length=2, blank=False)
+    mesa_estado = models.ForeignKey(EstadoMesa, on_delete=models.CASCADE, default=None)
+
+class Reserva(models.Model):
+    id_reserva = models.AutoField(primary_key=True)
+    fecha_reserva = models.DateField(max_length=40, blank=False)
+    reserva_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=None)
+    reserva_mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, default=None)
+

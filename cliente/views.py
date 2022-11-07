@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from cliente.forms import direccionForm, userForm,reclamoForm
+from cliente.forms import direccionForm, userForm,reclamoForm, reservaForm,profileForm
 #, direccionForm
-from cliente.models import Direccion, Region, Reclamo
+from cliente.models import Direccion, Region, Reclamo , Usuario, Reserva
 from django.contrib.auth.forms import AuthenticationForm
 import json
 
@@ -84,3 +84,73 @@ def listarReclamos(request):
         context
     )
 
+def perfil(request, id_usuario):
+    perfilUsuario = profileForm.objects.get(pk=id_usuario) 
+    formularioPerfil = None
+    if request.method == 'POST':
+        formularioPerfil = profileForm(request.POST, instance=perfilUsuario)
+        if formularioPerfil.is_valid():
+            formularioPerfil.save()
+            return redirect('/logeo/perfil/')
+    else:
+        formularioPerfil = profileForm(instance=perfilUsuario)
+    context = {
+        'titulo' : 'Perfil Usuario',
+        'formulario perfil' : formularioPerfil
+    }
+    return render(
+        request,
+        'registration/perfilCliente.html', 
+        context
+    )
+
+def perfilCliente(request):
+    usuario = Usuario.objects.all()
+    context = {
+        'titulo' : 'perfil',
+        'usuarios' : usuario
+    }
+    return render (request,
+    'registration/perfilCliente.html',
+    context)
+
+def modificarPerfil(request, id_usuario):
+    perfilModificado = Usuario.objects.get(pk=id_usuario)
+    formularioPerfil = None
+    if request.method == 'POST':
+        formularioPerfil = profileForm(request.POST, instance=perfilModificado)
+        if formularioPerfil.is_valid():
+            formularioPerfil.save()
+            return redirect('/logeo/perfil/')
+    else:
+        formularioPerfil = profileForm(instance=perfilModificado)
+    context = {
+        'titulo': 'Modificar Perfil',
+        'formulario': formularioPerfil
+    }
+    return render(
+        request,
+        'registration/modificarPerfil.html',
+        context
+    )
+
+def reserva(request):
+    lista = Reserva.objects.all()
+    formulario = None
+    if request.method == 'POST':
+        formulario = reservaForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('/logeo/perfil')
+    else:
+        formulario = reservaForm()
+    context = {
+        'titulo' : 'Reservar Mesa',
+        'formulario' : formulario,
+        'lista' : lista
+    }
+    return render(
+        request, 
+        'vista/reserva.html', 
+        context
+    )
