@@ -45,7 +45,7 @@
   <section id = "catalogoProductos" class="card-group col-sm-12 col-md-6 mx-auto mt-5" style="display: flex; min-width: 100%; margin: 0 !important; justify-content: center;">
     {% for producto in productos %}
     <div class="card " style="max-width: 250px; margin: 10px" id="{{producto.id_producto}}">
-      <img src="static/{{producto.prod_imagen}}" style=" width: 300px; height: 200px;" class="img-thumbnail" alt="{{producto.prod_nombre}}">
+      <img src="static/producto/{{producto.prod_imagen}}" style=" width: 300px; height: 200px;" class="img-thumbnail" alt="{{producto.prod_nombre}}">
       <div class="card-body">
 
           <h5 class="card-title"> {{producto.prod_nombre}}</h5>
@@ -55,7 +55,7 @@
       
       <footer class="card-footer" id = "card-footer-moda">
         <div class="btn-group" role="group" aria-label="Basic example"></div>
-        <a href="/productos/{{producto.id}}" class="card-link btn btn-primary" style="margin: 5px;">Visualizar</a><br>
+        <a href="/producto/{{producto.id}}" class="card-link btn btn-primary" style="margin: 5px;">Visualizar</a><br>
         
         </div>
     </footer>
