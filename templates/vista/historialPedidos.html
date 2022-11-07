@@ -22,7 +22,9 @@
                 <tr id="{{pedido.id_pedido}}" style="max-height: 63px;">
                     <td>{{pedido.id_pedido}}</td>
                     <td>{{pedido.pedido_modif}}</td>
-                    <td>{{pedido.pedido_listo}}</td>
+                    {% if pedido.pedido_listo == 1%}
+                        <td>Terminado</td>
+                    {% endif %}
                     <td>
                         <a href="/productos/pedidos/visualizar/{{pedido.id_pedido}}">
                             <button class="btn btn btn-outline-primary me-md-2" type="submit">V</button>

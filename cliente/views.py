@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from cliente.forms import direccionForm, userForm, profileForm
+from cliente.forms import direccionForm, userForm, profileForm, reservaForm
 #, direccionForm
-from cliente.models import Direccion, Region, Usuario
+from cliente.models import Direccion, Region, Usuario, Reserva
 from django.contrib.auth.forms import AuthenticationForm
 import json
 
@@ -121,3 +121,25 @@ def modificarPerfil(request, id_usuario):
         'registration/modificarPerfil.html',
         context
     )
+
+def reserva(request):
+    lista = Reserva.objects.all()
+    formulario = None
+    if request.method == 'POST':
+        formulario = reservaForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('/logeo/perfil')
+    else:
+        formulario = reservaForm()
+    context = {
+        'titulo' : 'Reservar Mesa',
+        'formulario' : formulario,
+        'lista' : lista
+    }
+    return render(
+        request, 
+        'vista/reserva.html', 
+        context
+    )
+    

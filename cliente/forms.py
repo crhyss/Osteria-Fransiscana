@@ -2,7 +2,7 @@
 from importlib.metadata import requires
 from tkinter import Widget
 from django import forms
-from .models import Usuario, Direccion, Region
+from .models import Usuario, Direccion, Region, Reserva
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 
@@ -20,7 +20,7 @@ class profileForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['usr_nombre', 'usr_apellido_pat', 'usr_apellido_mat',
-                  'usr_pass', 'usr_correo', 'usr_direccion']
+                  'usr_pass', 'usr_correo']
 
         labels = {
             'usr_nombre' : 'Nombre',
@@ -28,7 +28,6 @@ class profileForm(ModelForm):
             'usr_apellido_mat' : 'Apellido Materno',
             'usr_pass' : 'Contraseña',
             'usr_correo' : 'Correo',
-            'usr_direccion' : 'Direccion'
         }
 
 class userForm(forms.ModelForm):
@@ -58,6 +57,18 @@ class direccionForm(ModelForm):
             'dir_depto_nro' : forms.IntegerField(required=False)
         }
 
+class reservaForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(reservaForm,self).__init__(*args, **kwargs)
+        agregarClaseFormControl(self.visible_fields())
+    class Meta:
+        model = Reserva
+        fields = ['id_reserva', 'fecha_reserva', 'reserva_usuario', 'reserva_mesa']
+        labels = {
+            'id_reserva': 'ID' ,
+            'fecha_reserva' : 'Reserva',
+            'reserva_usuario' : 'Usuario',
+            'reserva_mesa' : 'Mesa'
+        }
 
-    
 

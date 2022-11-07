@@ -52,3 +52,20 @@ class Usuario(models.Model):
     usr_activo = models.BooleanField(default=True)
     usr_tipo = models.ForeignKey(Tipo_usuario, on_delete=models.CASCADE, default=2)
     usr_direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE, null=True)
+
+class EstadoMesa(models.Model):
+    id_estado_mesa = models.AutoField(primary_key=True)
+    estado_mesa = models.BooleanField(default=True)
+
+class Mesa(models.Model):
+    id_mesa = models.AutoField(primary_key=True)
+    mesa_nro = models.IntegerField(max_length=2, blank=False)
+    mesa_sillas = models.IntegerField(max_length=2, blank=False)
+    mesa_estado = models.ForeignKey(EstadoMesa, on_delete=models.CASCADE, default=None)
+
+class Reserva(models.Model):
+    id_reserva = models.AutoField(primary_key=True)
+    fecha_reserva = models.DateField(max_length=40, blank=False)
+    reserva_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=None)
+    reserva_mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, default=None)
+
