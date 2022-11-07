@@ -1,35 +1,20 @@
 {% extends 'vista/Principal.html' %}
 {% load static %}
 {% block content %}
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+        </div>
+        <div>
+            {{form2}}
+            {{form}}
 
-<div class="container">
-    <div class="row">
-        <form method="POST">
-            <div class="">
-                {% csrf_token %}
-                {{formulario2.dir_calle }}
-                {{formulario2.dir_nro }}
-                {{formulario2.dir_depto }}
-                {{formulario2.dir_depto_nro}}
-                {{formulario2.dir_comuna}}
-                <select id="select1">
-                    <option selected disabled="true">Seleccione una region</option>
-                    {%for regions in region%}
-                    <option value="{{regions.id_region}}">{{regions.region_nombre}}</option>
-                    {%endfor%}
-                </select>
-                <select id="select2">
-                    <option selected disabled="true"></option>
-                    {%for comunas in comuna%}
-                    <option value="{{comunas.comuna_region_id}}">{{comunas.comuna_nombre}}</option>
-                    {%endfor%}
-                </select>
-                    <br>
-                <input class="btn btn-primary" type="submit" value="registrar">
-            </div>
-            <div class="my-3">
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
+        <div>
+
+        </div>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
 {% endblock content %}

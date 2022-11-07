@@ -2,37 +2,40 @@ from multiprocessing import context
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from cliente.forms import inicioForm,direccionForm
+from cliente.forms import inicioForm,direccionForm,RegionForm,ComunaForm, CalleForm,CalleComForm,CalleRegForm
 from cliente.models import Direccion, Region, Comuna
 from django.contrib.auth.forms import AuthenticationForm
 import json
 
 
 def registro(request):
+    a = request.POST
+    form = CalleComForm()
+    form2= CalleRegForm()
     if request.method == 'POST':
-        formulario = inicioForm(request.POST, request.FILES)
+        form = CalleComForm(request.POST)
+        form2 = CalleRegForm(request.POST)
         formulario2= direccionForm(request.POST, request.FILES)
         comuna = Comuna.objects.all()
         region = Region.objects.all()
+        print(a)
         if formulario2.is_valid():
-            print(formulario2)
             print('holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
             formulario2.save()
-            formularioRegistrado = formulario.save(commit=False)   
-            formularioRegistrado.usr_direccion = formulario2.codigo_postal
-            formulario.save()
-            return redirect('/productos/listar/')
+        return redirect('/logeo/registro')
     else:
         formulario = inicioForm()
         formulario2 = direccionForm()
         comuna = Comuna.objects.all()
         region = Region.objects.all()
+
     context = {
         'titulo': 'Agregar Producto',
-        'formulario': formulario,
         'formulario2': formulario2,
         'comuna':comuna,
         'region': region,
+        'form':form,
+        'form2':form2,
     }
     return render(request, 'registration/registro.html', context)
 

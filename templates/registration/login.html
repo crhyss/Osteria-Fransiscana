@@ -11,9 +11,9 @@
 
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col">
-				<img src={% static 'productos/margherita_wikipedia.jpg' %}>
+		<div class="row login">
+			<div class="col imagen">
+				<img src={% static 'productos/margherita_wikipedia.jpg' %} width="330px" height="250px">
 			</div>
 			<div class="col">
 				<h2 class="fw-bold text-center py-5">Bienvenido</h2>
@@ -22,9 +22,9 @@
 						{% csrf_token %}
 						{{form}}
 						 <br>
-						<input class="btn btn-primary" type="submit" href="{% url 'admin'%}" value="Iniciar Sesion">
+						<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesion">
 					</div>
-					<div class="my-3">
+					<div class="my-3 text-center">
 						<span>No poseo una cuenta. <a href="{% url 'registro'%}">Registrate</a></span> <br>
 						<span><a href="#">Recuperar Contraseña</a></span>
 					</div>

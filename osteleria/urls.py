@@ -28,4 +28,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls'),name="login"),
     path('accounts/profile/',perfil,name='perfil'),
     path('', include('administrador.urls'),name="admin"),
+    path('chaining/', include('smart_selects.urls')),
+    
 ]
