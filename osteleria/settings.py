@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'mi9ak)xv-261@r&al*&xv=m*-k-g#17ci3hr%le5#hu^r2#t-5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://osteleria-fransiscana.herokuapp.com','127.0.0.1']
 
 
 # Application definition
