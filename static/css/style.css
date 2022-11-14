@@ -138,6 +138,15 @@ body {
     width: 100px;
 }
 
+.order{
+    margin-left: 35%;
+    width: 100%;
+    text-align: auto;
+    font-size: large;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #9e9e9e;
+}
+
 .cuadrodetxt{
     /*margin-left: 100%;*/
     width: 100%;
