@@ -1,12 +1,7 @@
 {% extends 'vista/Principal.html' %} {% load static %} {% block content %}
 <body>
     <div class="conteiner">
-        <div class="card" style="
-            width: 100%;
-            margin: 160px;
-            border-radius: 10px;
-            background: #ffffff;
-        ">
+        <div class="card">
             <div class="carrito">
                 <i class="fa-solid fa-cart-plus"></i>
             </div>
@@ -16,12 +11,12 @@
                 <form>
                     <label style="margin-left:35%;">N° de mesas</label>
                     <form>
-                        <select class="select">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                            <option> 4 </option>
-                            <option> 5 </option>
+                        <select id="Mesas" class="select" onchange="AñadirMesa()">
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
                         </select>
                     </form>
                 </form>
@@ -29,14 +24,14 @@
                 <form>
                     <label style="margin-left:35%;">N° de personas</label>
                     <form>
-                        <input type="persona">
+                        <input id="PersonasN" style="margin-left:35%;" type="persona" onchange="AñadirPersona()">
                     </form>
                 </form>
                 <br>
                 <form>
                     <label style="margin-left:35%;">Entrada</label>
                     <form>
-                        <select class="select">
+                        <select id="Entrada" class="select" multiple onchange="PlatoEntrada()">
                             <option> Risotto </option>
                             <option> 2 </option>
                             <option> 3 </option>
@@ -49,7 +44,7 @@
                 <form>
                     <label style="margin-left:35%;">Plato Principal</label>
                     <form>
-                        <select class="select">
+                        <select id="Principal" class="select" multiple onchange="PlatoPrincipal()">
                             <option> Spaghetti </option>
                             <option> 2 </option>
                             <option> 3 </option>
@@ -62,7 +57,7 @@
                 <form>
                     <label style="margin-left:35%;">Postre</label>
                     <form>
-                        <select class="select">
+                        <select id="Postre" class="select" onchange="EleccionPostre()">
                             <option> Si </option>
                             <option> No </option>
                         </select>
@@ -72,21 +67,129 @@
                 <form>
                     <label style="margin-left:35%;">Bebidas</label>
                     <form>
-                        <select class="select">
+                        <select id="Bebidas" class="select" multiple onchange="EleccionBebidas()">
                             <option> Coca-Cola </option>
-                            <option> No </option>
+                            <option> Sprite </option>
                         </select>
                     </form>
                 </form>
                 <br>
-                <div class="btn">
-                <button>Enviar</button>
+                <h5 style="margin-left:35%;">Instrucciones del Cliente</h5>
+                <input type="text" class="resizedTextbox" />
+                <br><br>
+                <div id="order" class="order">
+                    <table>
+                        <tr>
+                            <th>Pedido Realizado</th>
+                        </tr>
+                        <tr>
+                            <td>N° de mesas</td>
+                            <td id="MesaSeleccionada"></td>
+                        </tr>
+                        <tr>
+                            <td>N° de personas</td>
+                            <td id="PersonaSeleccionada"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Entrada</td>
+                            <td id="EntradaSeleccionada"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Plato Principal</td>
+                            <td id="PrincipalSeleccionado"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Postre</td>
+                            <td id="PostreSeleccionado"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Bebidas</td>
+                            <td id="BebidaSeleccionada"></td>
+                        </tr>
+                    </table>
                 </div>
-                <br> 
+                <div id="btn" class="btn">
+                    <button>Enviar</button>
+                </div>
+                <br>
             </section>
             </section>
+
         </div>
     </div>
     </div>
+
 </body>
+
+<script>
+    $(document).ready(function () {
+        $("#Entrada").select2();
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#Principal").select2();
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#Bebidas").select2();
+    });
+</script>
+
+
+
+<script>
+    function AñadirMesa() {
+      var mylist = document.getElementById("Mesas").value;
+      document.getElementById("MesaSeleccionada").innerHTML = mylist;
+      document.getElementById("MesaSeleccionada").value = mylist;
+    }
+</script>
+
+<script>
+    function AñadirPersona() {
+      var mylist = document.getElementById("PersonasN").value;
+      document.getElementById("PersonaSeleccionada").innerHTML = mylist;
+      document.getElementById("PersonaSeleccionada").value = mylist;
+    }
+</script>
+
+<script>
+    function PlatoEntrada() {
+      var mylist = document.getElementById("Entrada").value;
+      document.getElementById("EntradaSeleccionada").innerHTML = mylist;
+      document.getElementById("EntradaSeleccionada").value = mylist;
+    }
+</script>
+
+<script>
+    function PlatoPrincipal() {
+      var mylist = document.getElementById("Principal").value;
+      document.getElementById("PrincipalSeleccionado").innerHTML = mylist;
+      document.getElementById("PrincipalSeleccionado").value = mylist;
+    }
+</script>
+
+<script>
+    function EleccionPostre() {
+      var mylist = document.getElementById("Postre").value;
+      document.getElementById("PostreSeleccionado").innerHTML = mylist;
+      document.getElementById("PostreSeleccionado").value = mylist;
+    }
+</script>
+
+<script>
+    function EleccionBebidas() {
+      var mylist = document.getElementById("Bebidas").value;
+      document.getElementById("BebidaSeleccionada").innerHTML = mylist;
+      document.getElementById("BebidaSeleccionada").value = mylist;
+    }
+</script>
 {% endblock content %}
