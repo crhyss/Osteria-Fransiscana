@@ -53,7 +53,10 @@ def salir(request):
 
 
 def carrito(request):
-    return render(request, 'carrito/carrito.html')
+    return render(request, 'carrito/carta.html')
+
+def pedido(request):
+    return render(request, 'carrito/pedido.html')
 
 
 def mesero(request):
