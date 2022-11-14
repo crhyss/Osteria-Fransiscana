@@ -13,9 +13,7 @@ from django.contrib import admin
 from pathlib import Path
 from os.path import join
 import os
-import environ
-env = environ.Env()
-environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'mi9ak)xv-261@r&al*&xv=m*-k-g#17ci3hr%le5#hu^r2#t-5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -42,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django_extensions',
+    'werkzeug_debugger_runserver',
     'django.contrib.staticfiles',
     'web',
     'productos',
@@ -95,22 +96,13 @@ WSGI_APPLICATION = 'osteleria.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-#DATABASES = {
-
-#    'default': {
-#    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#    'NAME': env('DATABASE_NAME'),
-#    'USER': env('DATABASE_USER'),
-#    'PASSWORD': env('DATABASE_PASS'),
-#    }
-#}
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -221,4 +213,4 @@ JET_SIDE_MENU_ITEMS = [
 JET_MODULE_GOOGLE_ANALYTICS_CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secrets.json')
 JET_CHANGE_FORM_SIBLING_LINKS = True
 JET_INDEX_DASHBOARD= 'dashboard.CustomIndexDashboard'
-
+DISABLE_COLLECTSTATIC=1
