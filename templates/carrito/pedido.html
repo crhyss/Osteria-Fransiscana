@@ -1,0 +1,56 @@
+ {% extends 'vista/Principal.html' %} {% block content %}
+<link rel="stylesheet" href="/static/css/style-cart.css">
+<link rel="stylesheet" href="/static/css/font-awesome.css">
+<link rel="stylesheet" href="/static/css/style-ped.css">
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/static/js/main.js"></script>
+
+<body>
+    <div class="contenedor">
+        <header>
+            <div class="container">
+                <h1 class="text-center">MI PEDIDO</h1>
+                <hr>
+            </div>
+        </header>
+        <main>
+            <nav>
+                <a class="banner" data-pushbar-target="pushbar-productos"></a>
+            </nav>
+            <div class="wrap">
+                <ul class="tabs">
+                    <li><a href="#tab1"><span class="fa fa-motorcycle"></span><span class="tab-text">Delivery</span></a></li>
+                    <li><a href="#tab2"><span class="fa fa-home"></span><span class="tab-text">Para Retiro</span></a></li>
+                </ul>
+
+                <div class="secciones">
+                    <article id="tab1">
+                        <div id="login-content" class="form">
+                            <form>
+                                <input class="margenes" type="text" placeholder="Dirección de entrega" name="tipo_de_dato">
+                                <span class="margenes">Ej: Santiago 123</span>
+                                <input class="margenes" type="text" placeholder="Indicaciones de entrega" name="tipo_de_dato">
+                                <span class="margenes">Ej: Número de Depto / Casa</span>
+                                <input class="margenes" class="cent" type="submit" id="submit" value="Pagar">
+                                <span class="margenes">*Se le aplicara un costo de $3500 por envio.</span>
+                            </form>
+                        </div>
+                    </article>
+                    <article id="tab2">
+                        <div id="retiro-content" class="form">
+                            <form>
+                                <div>
+                                    <label class="margenes">Elige un local</label>
+                                    <select>
+                                            <option value="Mall ">Mall Plaza Sur</option>
+                                            <option value="Duoc ">Duoc Uc</option>  
+                                    </div>
+                                    <input class="form margenes" type="submit" id="submit" value="Pagar">
+                                </form>
+            </article>
+        </div>
+    </div>
+</main>
+</body>
+{% endblock content %}
