@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from .models import Producto, Categoria_prod, Pedido
-
+from django.views.generic import ListView
 def agregarClaseFormControl(elementos):
     for campo in elementos:
         campo.field.widget.attrs['class'] = 'form-control'
@@ -12,7 +12,6 @@ class ProductoForm(ModelForm):
     class Meta:
         model = Producto
         fields = ['prod_nombre','prod_descri','prod_precio_ba','prod_precio_of','prod_imagen','prod_categoria','prod_disponible','prod_recomendado']
-
         labels={
             'prod_nombre':'Nombre',
             'prod_descri':'Descripción',
@@ -56,3 +55,7 @@ class PedidoForm(ModelForm):
             'pedido_listo' : 'Estado',
             'pedido_producto' : 'Producto'
         }
+
+class ContactListView(ListView):
+    paginate_by = 4
+    model = Producto

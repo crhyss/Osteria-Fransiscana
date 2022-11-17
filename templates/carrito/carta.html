@@ -1,4 +1,6 @@
-{% extends 'vista/Principal.html' %} {% block content %}
+{% extends 'vista/Principal.html' %} 
+{% load static %}
+{% block content %}
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/style-cart.css">
 
@@ -11,15 +13,42 @@
             </div>
         </header>
         <main>
-            <nav>
-                <a class="banner" data-pushbar-target="pushbar-productos"></a>
-                <button class="btn-menu" href="#" data-pushbar-target="pushbar-carrito"><span class="fa fa-shopping-basket"></span></button>
-            </nav>
-            <section class="productos">
+        <nav>
+            <a class="banner" data-pushbar-target="pushbar-productos"></a>
+            <button class="btn-menu" href="#" data-pushbar-target="pushbar-carrito"><span class="fa fa-shopping-basket"></span></button>
+        </nav>
+        <form method="GET" action="."class="d-flex" role="search">
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <div class="col">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name='buscar'>
+
+                </div>
+                
+                    <div class="col ">
+                        <div class="form-group ">
+                            <select id="Categoria" class="form-select" name="categoria">
+                              <option selected>Categoria</option>
+                              {% for cat in lista %}
+                              <option value="{{ cat.id_categoria }}">{{ cat.categoria_prod }}</option>
+                              {% endfor %}
+                            </select>
+                            
+                          </div>
+                    </div>
+                    <div class="col d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+
+
+            </form>
+                </div>
+            </div>
+            <section class="productos d-flex flex-wrap" >
                 {% for producto in productos %}
                 <div class="col-12 col-md-6">
                     <div class="item shadow mb-4">
-                        <h3 class="item-title">{{producto.prod_nombre}}</h3>
+                        <h3 class="item-title">{{producto.prod_nombre|upper}}</h3>
                         <img class="item-image" src="/static/producto/{{producto.prod_imagen}}">
                         <figcaption>
                             <div class="item-details">
@@ -29,9 +58,33 @@
                     </div>
                 </div>
                 {% endfor %}
+
+
+                
             </section>
+            <div class="row pagination" style="display: flex; margin: 10px;">
+
+                <div class="col-md-16 col-lg-12 col-sm-12 col-xs-12">
+                  <div class="col-md-6 float-left">
+                    {% if productos.has_previous %}
+                      <div class="clearfix">
+                        <a  href="?{{ request.GET.urlencode }}&page={{productos.previous_page_number}}" class="btn btn-primary float-left">Anterior</a>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                  <div class="col-md-12 float-left">
+                    {% if productos.has_next %}
+                      <div class="clearfix">
+                        <a href="?{{ request.GET.urlencode }}&page={{productos.next_page_number}}" class="btn btn-primary float-right">Siguiente</a>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>            
         </main>
 
+        
         <!-- Carrito de Compras -->
         <div data-pushbar-id="pushbar-carrito" class="pushbar-carrito" data-pushbar-direction="right">
             <div class="btn-cerrar izquierda">

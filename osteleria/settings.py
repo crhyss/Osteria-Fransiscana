@@ -29,8 +29,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['52.1.165.86','ec2-52-1-165-86.compute-1.amazonaws.com']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['127.0.0.1','127.0.0.1:8000','52.1.165.86','ec2-52-1-165-86.compute-1.amazonaws.com']
 
 # Application definition
 

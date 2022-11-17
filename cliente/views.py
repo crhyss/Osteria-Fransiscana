@@ -2,11 +2,10 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from cliente.forms import direccionForm, userForm,reclamoForm, reservaForm,profileForm
-#, direccionForm
 from cliente.models import Direccion, Region, Reclamo , Usuario, Reserva
 from django.contrib.auth.forms import AuthenticationForm
 from productos.models import Producto, Categoria_prod
-import json
+from django.core.paginator import Paginator
 
 
 def registro(request):
@@ -52,14 +51,26 @@ def salir(request):
     logout(request)
     return redirect(to='loby')
 
-
+def is_valid_queryparam(param):
+    return param != '' and param is not None
 def carrito(request):
     productos = Producto.objects.all()
+    qr = Producto.objects.all()
+    buscar = request.GET.get('buscar')
     lista = Categoria_prod.objects.all()
+    br= request.GET.get('categoria')
+    if is_valid_queryparam(buscar):
+        productos = productos.filter(prod_nombre__icontains=buscar)
+    if is_valid_queryparam(br) and br != 'Categoria':
+        productos = productos.filter(prod_categoria__in = br)
+    paginator = Paginator(productos, 6)
+    page = request.GET.get('page')
+    productos = paginator.get_page(page)
     context = {
         'productos': productos,
         'lista': lista,
     }
+
     return render(request, 'carrito/carta.html',context)
 
 def pedido(request):
