@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from .views import paginaprincipal , ordenes, perfil
-from jet.dashboard.dashboard_modules import google_analytics_views
+
 
 urlpatterns = [
     path('', paginaprincipal,name="loby"),
