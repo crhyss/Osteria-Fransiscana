@@ -16,84 +16,21 @@
                 <button class="btn-menu" href="#" data-pushbar-target="pushbar-carrito"><span class="fa fa-shopping-basket"></span></button>
             </nav>
             <section class="productos">
+                {% for producto in productos %}
                 <div class="col-12 col-md-6">
                     <div class="item shadow mb-4">
-                        <h3 class="item-title">Pizza</h3>
-                        <img class="item-image" src="\static\media\img/pizza.jpg">
+                        <h3 class="item-title">{{producto.prod_nombre}}</h3>
+                        <img class="item-image" src="/static/producto/{{producto.prod_imagen}}">
                         <figcaption>
                             <div class="item-details">
-                                <h4 class="item-price">$9.990</h4>
+                                <h4 class="item-price">${{producto.prod_precio_ba}}</h4>
                                 <button class="item-button btn btn-primary addToCart" href="#" data-pushbar-target="pushbar-carrito">AÑADIR AL CARRO</button>
                             </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="item shadow mb-4">
-                        <h3 class="item-title">Fetuccini al pesto</h3>
-                        <img class="item-image" src="\static\media\img/fetuccini.jpg">
-                        <figcaption>
-                            <div class="item-details">
-                                <h4 class="item-price">$10.800</h4>
-                                <button class="item-button btn btn-primary addToCart" href="#" data-pushbar-target="pushbar-carrito">AÑADIR AL CARRO</button>
-                            </div>
-                    </div>
-                </div>
-            </section>
-            <section class="productos">
-                <div class="col-12 col-md-6">
-                    <div class="item shadow mb-4">
-                        <h3 class="item-title">Lasagna bolognesa</h3>
-
-                        <img class="item-image" src="\static\media\img/lasagna.jpg">
-                        <figcaption>
-                            <div class="item-details">
-                                <h4 class="item-price">$10.300</h4>
-                                <button class="item-button btn btn-primary addToCart" href="#" data-pushbar-target="pushbar-carrito">AÑADIR AL CARRO</button>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="item shadow mb-4">
-                        <h3 class="item-title">Gnocchi a la boloñesa</h3>
-
-                        <img class="item-image" src="\static\media\img/ñoquis.jpg">
-                        <figcaption>
-                            <div class="item-details">
-                                <h4 class="item-price">$11.800</h4>
-                                <button class="item-button btn btn-primary addToCart" href="#" data-pushbar-target="pushbar-carrito">AÑADIR AL CARRO</button>
-                            </div>
-                    </div>
-                </div>
-            </section>
-            <section class="productos">
-                <div class="col-12 col-md-6">
-                    <div class="item shadow mb-4">
-                        <h3 class="item-title">Carpaccio</h3>
-
-                        <img class="item-image" src="\static\media\img\carpaccio.jpg">
-                        <figcaption>
-                            <div class="item-details">
-                                <h4 class="item-price">$10.900</h4>
-                                <button class="item-button btn btn-primary addToCart" href="#" data-pushbar-target="pushbar-carrito">AÑADIR AL CARRO</button>
-                            </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6">
-                    <div class="item shadow mb-4">
-                        <h3 class="item-title">Tiramisu classico</h3>
-
-                        <img class="item-image" src="\static\media\img/TiramisuClassico.jpg">
-                        <figcaption>
-                            <div class="item-details">
-                                <h4 class="item-price">$5.900</h4>
-                                <button class="item-button btn btn-primary addToCart" href="#" data-pushbar-target="pushbar-carrito">AÑADIR AL CARRO</button>
-                            </div>
-                    </div>
-                </div>
+                {% endfor %}
             </section>
         </main>
-
 
         <!-- Carrito de Compras -->
         <div data-pushbar-id="pushbar-carrito" class="pushbar-carrito" data-pushbar-direction="right">
@@ -136,9 +73,7 @@
                                     <div class="toast-header">
                                         <span>✅</span>
                                         <strong class="mr-auto ml-1 text-secondary">El producto ya esta en el carro</strong>
-                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                     </div>
                                     <div class="toast-body text-white">
                                         El producto aumento correctamente

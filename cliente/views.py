@@ -5,6 +5,7 @@ from cliente.forms import direccionForm, userForm,reclamoForm, reservaForm,profi
 #, direccionForm
 from cliente.models import Direccion, Region, Reclamo , Usuario, Reserva
 from django.contrib.auth.forms import AuthenticationForm
+from productos.models import Producto, Categoria_prod
 import json
 
 
@@ -53,7 +54,13 @@ def salir(request):
 
 
 def carrito(request):
-    return render(request, 'carrito/carta.html')
+    productos = Producto.objects.all()
+    lista = Categoria_prod.objects.all()
+    context = {
+        'productos': productos,
+        'lista': lista,
+    }
+    return render(request, 'carrito/carta.html',context)
 
 def pedido(request):
     return render(request, 'carrito/pedido.html')

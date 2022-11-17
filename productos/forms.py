@@ -11,7 +11,7 @@ class ProductoForm(ModelForm):
         agregarClaseFormControl(self.visible_fields())  
     class Meta:
         model = Producto
-        fields = ['prod_nombre','prod_descri','prod_precio_ba','prod_precio_of','prod_imagen','prod_categoria']
+        fields = ['prod_nombre','prod_descri','prod_precio_ba','prod_precio_of','prod_imagen','prod_categoria','prod_disponible','prod_recomendado']
 
         labels={
             'prod_nombre':'Nombre',
@@ -19,7 +19,9 @@ class ProductoForm(ModelForm):
             'prod_precio_ba':'Precio Base',
             'prod_precio_of':'Precio Oferta',
             'prod_imagen':'Imagen',
-            'prod_categoria':'Categoria'
+            'prod_categoria':'Categoria',
+            'prod_disponible':'Disponible',
+            'prod_recomendado':'Recomendado'
         }
 
 class CategoriaForm(ModelForm):
