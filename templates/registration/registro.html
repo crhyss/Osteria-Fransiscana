@@ -12,10 +12,8 @@
                 <form method="POST">
                     <div class="d-grid">
                         {% csrf_token %}
-                        {{formulario}}
-                        <label for="confPass">Confirmar Contraseña</label>
-                        <input type="password" name="confPass">      
-                            <br>
+                        {{formulario}}                   
+                        <br>
                         <input class="btn btn-success" type="submit" value="registrar">
                     </div>
                     <div class="my-3">

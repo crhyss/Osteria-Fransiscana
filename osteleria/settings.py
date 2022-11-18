@@ -160,6 +160,8 @@ MEDIA_ROOT = join(BASE_DIR,'static/producto')
 SOCIAL_AUTH_FACEBOOK_KEY = '2779822452237843'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'a39654914ead729d015e217c91e614e9'
 
+AUTH_USER_MODEL = 'cliente.User'
+
 AUTHENTICATION_BACKENDS = [
 'social_core.backends.facebook.FacebookOAuth2',
 'django.contrib.auth.backends.ModelBackend',

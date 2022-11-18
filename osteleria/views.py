@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from productos.models import Producto, Categoria_prod
+from cliente.models import User
 from django.contrib.auth import models
 from django.contrib.admin import ModelAdmin 
 
@@ -26,7 +27,7 @@ def ordenes(request):
     )
 
 def perfil(request):
-    usuarios = models.User.objects.all()
+    usuarios = User.objects.all()
     grupos = models.Group.objects.all()
     permisos = models.Permission.objects.all()
     context = {

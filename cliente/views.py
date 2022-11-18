@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from cliente.forms import direccionForm, userForm,reclamoForm, reservaForm,profileForm
-from cliente.models import Direccion, Region, Reclamo , Usuario, Reserva
+from cliente.models import Direccion, Region, Reclamo , User, Reserva, Comuna
 from django.contrib.auth.forms import AuthenticationForm
 from productos.models import Producto, Categoria_prod
 from django.core.paginator import Paginator
@@ -13,39 +13,51 @@ def registro(request):
         'formulario': userForm()
     }
     if request.method == 'POST':
-        
         formulario = userForm(data=request.POST)
         if formulario.is_valid():
-            if request.POST["usr_pass"] and request.POST["confPass"]:
-                formulario.save()
-                print("Felicidades")
-                messages.success(request, "registrado")
-                return redirect(to='perfil')
+            if request.POST["password1"] and request.POST["password2"]:
+                formulario.Meta.model.objects.create_user(
+                    formulario.cleaned_data["user_correo"],
+                    formulario.cleaned_data["user_nombre"],
+                    formulario.cleaned_data["user_apellidos"],
+                    request.POST["password1"]
+                )
+                mesage = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
+                messages.success(request, mesage)
+                return redirect(to='login')
             else:
-                print("malulo")
-        """
-
-            formulario.save()
-            user = authenticate(
-                username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            
-            
-        data["formulario"] = formulario"""
+                messages.error(request, "las contraseñas no coinciden")
     return render(request, 'registration/registro.html', data)
 
 def addDirec(request):
     data = {
-        'formulario':direccionForm,
-        'regiones': Region.objects.all()
+        'formulario': direccionForm,
+        'regiones': Region.objects.all(),
+        'comunas': Comuna.objects.all()
     }
     if request.method == 'POST':
         formulario = direccionForm(data=request.POST)
         if formulario.is_valid():
-            print(request.POST["region"])
+            datos = formulario.save(commit=False)
+            datos.dir_comuna = Comuna.objects.get(id_comuna = request.POST["comuna"])
+            datos.dir_calle = request.POST["dir_calle"].upper()
+            if request.POST["dir_depto_nro"] != "":
+                datos.dir_depto = True
+            datos.save()
             
     return render(request, 'registration/registroDir.html', data)
 
+def entrar(request):
+    if request.method == 'POST':
+        #user = User.objects.get(user_correo = request.POST["correo"])
+        
+        user = authenticate(request, username = request.POST["correo"], password = request.POST["pass"])
+        print(user)
+        if user is not None:
+            login(request, user)
+            return redirect(to= "loby")
+        else:
+            return redirect(to="registro")
 
 def salir(request):
     logout(request)
@@ -53,6 +65,7 @@ def salir(request):
 
 def is_valid_queryparam(param):
     return param != '' and param is not None
+
 def carrito(request):
     productos = Producto.objects.all()
     qr = Producto.objects.all()
@@ -126,7 +139,7 @@ def perfil(request, id_usuario):
     )
 
 def perfilCliente(request):
-    usuario = Usuario.objects.all()
+    usuario = User.objects.all()
     context = {
         'titulo' : 'perfil',
         'usuarios' : usuario
@@ -136,7 +149,7 @@ def perfilCliente(request):
     context)
 
 def modificarPerfil(request, id_usuario):
-    perfilModificado = Usuario.objects.get(pk=id_usuario)
+    perfilModificado = User.objects.get(pk=id_usuario)
     formularioPerfil = None
     if request.method == 'POST':
         formularioPerfil = profileForm(request.POST, instance=perfilModificado)

@@ -20,12 +20,16 @@
 				<form method="POST">
 					<div class="d-grid">
 						{% csrf_token %}
-						{{form}}
+						{{formulario}}
+						<label for="correo">Ingrese su Correo</label>
+						<input name="correo" type="text">
+						<label for="pass">Ingrese su Contraseña</label>
+						<input name="pass" type="password">
 						 <br>
 						<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesion">
 					</div>
 					<div class="my-3 text-center">
-						<span>No tienes una cuenta? <a href="{% url 'registro'%}">Registrate</a></span> <br>
+						<span>No poseo una cuenta. <a href="{% url 'registro'%}">Registrate</a></span> <br>
 						<span><a href="#">Recuperar Contraseña</a></span>
 					</div>
 				</form>
