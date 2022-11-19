@@ -24,7 +24,7 @@ def registro(request):
                 )
                 mesage = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
                 messages.success(request, mesage)
-                return redirect(to='login')
+                return redirect(to='entrar')
             else:
                 messages.error(request, "las contraseñas no coinciden")
     return render(request, 'registration/registro.html', data)
@@ -57,7 +57,8 @@ def entrar(request):
             login(request, user)
             return redirect(to= "loby")
         else:
-            return redirect(to="registro")
+            messages.error(request, "El usuario o contraseña invalidos")
+    return render(request, 'registration/login.html')
 
 def salir(request):
     logout(request)
