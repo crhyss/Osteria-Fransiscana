@@ -75,6 +75,7 @@
             </div>
             <div class="col-md-3 text-end">
                 {% if user.is_superuser %}
+<<<<<<< HEAD
                     <a href="{% url 'salir'%}">
                         <button type="button" class="btn btn-warning me-2">Salir</button>
                     </a>
@@ -92,6 +93,25 @@
                     <a href="/logeo/entrar/" class="btn-ingreso">
                         <button type="button" class="btn btn-primary me-2">Ingresar</button>
                     </a>
+=======
+                <a href="{% url 'salir'%}">
+                    <button type="button" class="btn btn-warning me-2">Salir</button>
+                </a>
+                <a href="/admin">
+                    <button type="button" class="btn btn-success me-2">Perfil</button>
+                </a>
+                {% elif user.is_authenticated%}
+                <a href="{% url 'salir'%}">
+                    <button type="button" class="btn btn-warning me-2">Salir</button>
+                </a>
+                <a href="/perfil">
+                    <button type="button" class="btn btn-success me-2">Perfil</button>
+                </a>
+                {% else %}
+                <a href="/logeo/entrar" class="btn-ingreso">
+                    <button type="button" class="btn btn-primary me-2">Ingresar</button>
+                </a>
+>>>>>>> 8ccb81ee085a8b6a29f135189026ceba08f3917d
                 {% endif %}
             </div>
         </div>
