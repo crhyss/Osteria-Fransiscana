@@ -92,10 +92,10 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     objects = UserManager()
 
-    def has_perm(self):
+    def has_perm(self, perm, obj = None):
         return True
 
-    def has_module_perms(self):
+    def has_module_perms(self, app_label):
         return True
 
     USERNAME_FIELD = "user_correo"
@@ -118,10 +118,19 @@ class Mesa(models.Model):
     mesa_nro = models.IntegerField(max_length=2, blank=False)
     mesa_sillas = models.IntegerField(max_length=2, blank=False)
     mesa_estado = models.ForeignKey(EstadoMesa, on_delete=models.CASCADE, default=None)
+    def __str__(self):
+        return str(self.id_mesa)
 
 class Reserva(models.Model):
     id_reserva = models.AutoField(primary_key=True)
     fecha_reserva = models.DateField(max_length=40, blank=False)
-    reserva_usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    hora_reserva = models.TimeField(blank=True, null=True)
     reserva_mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, default=None)
+    reserva_usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    def __str__ (self):
+        return self.reserva_mesa
+
+    
+
+   
 

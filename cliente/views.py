@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, hashers
 from cliente.forms import direccionForm, userForm,reclamoForm, reservaForm,profileForm
 from cliente.models import Direccion, Region, Reclamo , User, Reserva, Comuna
 from django.contrib.auth.forms import AuthenticationForm
@@ -22,11 +22,11 @@ def registro(request):
                     formulario.cleaned_data["user_apellidos"],
                     request.POST["password1"]
                 )
-                mesage = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
-                messages.success(request, mesage)
-                return redirect(to='login')
+                message = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
+                messages.add_message(request, level=messages.SUCCESS , message="¡Usuario registrado correctamente!")
+                return redirect(to='entrar')
             else:
-                messages.error(request, "las contraseñas no coinciden")
+                messages.add_message(request, level=messages.WARNING , message="¡Las contraseñas ingresadas no coinciden!")
     return render(request, 'registration/registro.html', data)
 
 def addDirec(request):
@@ -50,17 +50,19 @@ def addDirec(request):
 def entrar(request):
     if request.method == 'POST':
         #user = User.objects.get(user_correo = request.POST["correo"])
-        
         user = authenticate(request, username = request.POST["correo"], password = request.POST["pass"])
-        print(user)
         if user is not None:
             login(request, user)
+            messages.add_message(request, level=messages.SUCCESS , message="¡Sesión iniciada correctamente!")
             return redirect(to= "loby")
         else:
+            messages.add_message(request, level=messages.WARNING , message="¡Usuario ingresado, no Existe!")
             return redirect(to="registro")
+    return render(request, 'registration/login.html')
 
 def salir(request):
     logout(request)
+    messages.add_message(request, level=messages.SUCCESS, message="¡Sesión cerrada correctamente!")
     return redirect(to='loby')
 
 def is_valid_queryparam(param):
@@ -101,6 +103,7 @@ def reclamos(request):
     if request.method == 'POST':
         formulario = reclamoForm(data=request.POST)
         if formulario.is_valid():
+            messages.add_message(request, level=messages.SUCCESS, message="¡Reclamo Ingresado correctamente!")
             formulario.save()
         else:
             formulario = reclamoForm()
@@ -152,10 +155,14 @@ def modificarPerfil(request, id_usuario):
     perfilModificado = User.objects.get(pk=id_usuario)
     formularioPerfil = None
     if request.method == 'POST':
-        formularioPerfil = profileForm(request.POST, instance=perfilModificado)
-        if formularioPerfil.is_valid():
-            formularioPerfil.save()
-            return redirect('/logeo/perfil/')
+        try:
+            formularioPerfil = profileForm(request.POST, instance=perfilModificado)
+            if formularioPerfil.is_valid():
+                formularioPerfil.save()
+                messages.add_message(request, level=messages.SUCCESS, message="¡Perfil modificado exitosamente!")
+                return redirect('/logeo/perfil/')
+        except:
+            messages.add_message(request, level=messages.ERROR, message="¡Error, al modificar los datos!")
     else:
         formularioPerfil = profileForm(instance=perfilModificado)
     context = {
@@ -168,23 +175,49 @@ def modificarPerfil(request, id_usuario):
         context
     )
 
-def reserva(request):
-    lista = Reserva.objects.all()
-    formulario = None
+def reserva(request, id_usuario):
+    usuario = User.objects.get(pk=id_usuario) 
     if request.method == 'POST':
-        formulario = reservaForm(request.POST, request.FILES)
+        formulario = reservaForm(request.POST, instance=usuario)
         if formulario.is_valid():
+            print(formulario)
+            print(usuario)
+            formulario.save(commit=False)
+            formulario.reserva_usuario = usuario
             formulario.save()
-            return redirect('/logeo/perfil')
+            print("fulario")
+            messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")
+            return redirect('/')
+            # return redirect('/logeo/reserva/' + str(id_usuario))
     else:
         formulario = reservaForm()
     context = {
         'titulo' : 'Reservar Mesa',
         'formulario' : formulario,
-        'lista' : lista
+        'usuario': usuario
     }
     return render(
         request, 
         'vista/reserva.html', 
         context
     )
+
+def cambiarContraseña(request, id_usuario):
+    usuario = User.objects.get(pk=id_usuario)
+    if request.method == 'POST': 
+        if hashers.check_password(request.POST["oldpass"], usuario.password):
+            try:
+                if request.POST["password1"] and request.POST["password2"]:
+                    usuario.set_password(request.POST["password1"])
+                    usuario.save()
+                    messages.add_message(request, level=messages.SUCCESS, message="¡Contraseña modificada correctamente!")
+                    return redirect('/')
+                else:
+                    messages.add_message(request, level=messages.ERROR, message="¡Error, al modificar contraseña!")
+            except:
+                messages.add_message(request, level=messages.ERROR, message="¡Error, al modificar contraseña!")
+    return render(request, 'vista/cambiarContraseña.html')  
+        
+
+
+            

@@ -6,7 +6,9 @@ from django import forms
 from .models import User, Direccion, Region, Reclamo, Reserva
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.widgets import NumberInput
 import datetime
+
 def agregarClaseFormControl(elementos):
     for campo in elementos:
         campo.field.widget.attrs['class'] = 'form-control'
@@ -20,13 +22,11 @@ class profileForm(ModelForm):
         agregarClaseFormControl(self.visible_fields())
     class Meta:
         model = User
-        fields = ['user_nombre', 'user_apellidos',
-                  'password', 'user_correo']
+        fields = ['user_nombre', 'user_apellidos', 'user_correo']
 
         labels = {
             'user_nombre' : 'Nombre',
             'user_apellidos' : 'Apellidos',
-            'password' : 'Contraseña',
             'user_correo' : 'Correo',
         }
 
@@ -50,7 +50,6 @@ class direccionForm(ModelForm):
             'dir_nro': 'Ingrese el número de la casa',
             'dir_depto_nro': 'Ingrese el número del departamento'
         }
-
         widgets = {
             'dir_nro': forms.NumberInput(),
             'dir_depto_nro': forms.NumberInput(),
@@ -65,24 +64,36 @@ class reclamoForm(ModelForm):
     class Meta:
         model = Reclamo
         fields = ['nombre','apellido','reclamo_fecha', 'reclamo_descrip']
-        widgets = {
-            
+        widgets = {   
             'reclamo_fecha': forms.DateTimeInput(attrs={'class': 'form-control'}),
-            
         }
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
         
 class reservaForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(reservaForm,self).__init__(*args, **kwargs)
         agregarClaseFormControl(self.visible_fields())
+        self.fields['fecha_reserva'].widget.format = '%d/%m/%Y'
+        self.fields['hora_reserva'].widget.format = '%H:%M'
+        # self.fields['reserva_usuario'].widget.attrs['disabled'] = 'disabled' 
     class Meta:
         model = Reserva
-        fields = ['id_reserva', 'fecha_reserva', 'reserva_usuario', 'reserva_mesa']
+        fields = ['fecha_reserva', 'hora_reserva','reserva_mesa']
         labels = {
-            'id_reserva': 'ID' ,
-            'fecha_reserva' : 'Reserva',
-            'reserva_usuario' : 'Usuario',
-            'reserva_mesa' : 'Mesa'
+            'fecha_reserva' : 'Fecha',
+            'hora_reserva' : 'Hora',
+            'reserva_mesa' : 'Mesa',
         }
+        widgets = {
+            'fecha_reserva' : forms.DateInput(attrs={'type': 'date'}),
+            'hora_reserva' : forms.TimeInput(attrs={'type': 'time'})
+        }
+
+class contraseñaForm(ModelForm):
+     def __init__(self, *args, **kwargs):
+        super(reservaForm,self).__init__(*args, **kwargs)
+        agregarClaseFormControl(self.visible_fields())
 
 

@@ -1,0 +1,29 @@
+{% extends 'vista/Principal.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="col">
+        <form method="POST">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Cambio de Contraseña</h1>
+                </div>
+                <div class="card-body">
+                    {% csrf_token %}
+                    <label for="pass form-label">Ingrese su Contraseña Actual</label>
+                    <input class="form-control" name="oldpass" type="password">
+                    <label for="pass form-label">Ingrese su Contraseña Nueva</label>
+                    <input class="form-control" name="password1" type="password">
+                    <label for="pass form-label">Confirme su Contraseña Nueva</label>
+                    <input class="form-control" name="password2" type="password">
+                </div>
+                <div class="card-footer">
+                    <a href="">
+                        <button class="btn btn-warning">Cambiar</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
