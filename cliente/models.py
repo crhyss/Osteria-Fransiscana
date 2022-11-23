@@ -5,7 +5,6 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 import datetime
 
-
 class Region(models.Model):
     id_region = models.AutoField(primary_key = True)
     region_nombre = models.CharField(max_length = 40, blank = False)
@@ -121,14 +120,40 @@ class Mesa(models.Model):
     def __str__(self):
         return str(self.id_mesa)
 
+class Evento(models.Model):
+    id_evento = models.AutoField(primary_key=True)
+    nombre_evento = models.CharField(max_length=40, blank=False,null=True)
+    def __str__(self):
+        return str(self.nombre_evento)
+
 class Reserva(models.Model):
     id_reserva = models.AutoField(primary_key=True)
     fecha_reserva = models.DateField(max_length=40, blank=False)
     hora_reserva = models.TimeField(blank=True, null=True)
     reserva_mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, default=None)
     reserva_usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    reserva_evento = models.ForeignKey(Evento, on_delete=models.CASCADE, default=None)
     def __str__ (self):
         return self.reserva_mesa
+
+    def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario, reserva_evento):
+        reserva = Reserva()
+        reserva.fecha_reserva = fecha_reserva
+        reserva.hora_reserva = hora_reserva
+        reserva.reserva_mesa = Mesa.objects.get(id_mesa = reserva_mesa)
+        reserva.reserva_usuario = User.objects.get(id_user = reserva_usuario)
+        reserva.reserva_evento = Evento.objects.get(id_evento = reserva_evento)
+        reserva.save()
+
+    # Formato de campo Contraseña, con bóton de visibilidad (agregar a forms (con js?))
+
+    # <div class="password">
+    # <label for="pass" class="form-label">Ingrese su Contraseña</label>
+    # <input id="pass" class="form-control" name="pass" type="password" placeholder="Ingrese su Contraseña" value="" >
+    # <i style="cursor:pointer;" id="visibilityBtn">
+    #     <span id="visibilityIcon" class="material-icons">visibility</span>
+    # </i>
+    # </div>
 
     
 

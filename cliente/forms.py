@@ -80,11 +80,12 @@ class reservaForm(ModelForm):
         # self.fields['reserva_usuario'].widget.attrs['disabled'] = 'disabled' 
     class Meta:
         model = Reserva
-        fields = ['fecha_reserva', 'hora_reserva','reserva_mesa']
+        fields = ['fecha_reserva', 'hora_reserva','reserva_mesa', 'reserva_evento']
         labels = {
             'fecha_reserva' : 'Fecha',
             'hora_reserva' : 'Hora',
             'reserva_mesa' : 'Mesa',
+            'reserva_evento' : 'Evento'
         }
         widgets = {
             'fecha_reserva' : forms.DateInput(attrs={'type': 'date'}),

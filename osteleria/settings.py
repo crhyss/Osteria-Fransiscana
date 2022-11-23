@@ -13,15 +13,9 @@ from django.contrib import admin
 from pathlib import Path
 from os.path import join
 import os
-<<<<<<< HEAD
 # import environ
 # env = environ.Env()
 # environ.Env.read_env()
-=======
-import environ
-#env = environ.Env()
-#environ.Env.read_env()
->>>>>>> 8ccb81ee085a8b6a29f135189026ceba08f3917d
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,10 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'mi9ak)xv-261@r&al*&xv=m*-k-g#17ci3hr%le5#hu^r2#t-5'
-<<<<<<< HEAD
 # SECRET_KEY = env('SECRET_KEY')
-=======
->>>>>>> 8ccb81ee085a8b6a29f135189026ceba08f3917d
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -105,7 +96,6 @@ WSGI_APPLICATION = 'osteleria.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-<<<<<<< HEAD
 # DATABASES = {
 #      'default': {
 #          'ENGINE': 'django.db.backends.mysql',
@@ -124,18 +114,6 @@ DATABASES = {
     }
 }
 
-=======
-#DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': env('DATABASE_NAME'),
-#         'USER': env('DATABASE_USER'),
-#         'PASSWORD': env('DATABASE_PASS'),
-#         'HOST': env('HOSTNAME'),
-#         'PORT': env('PORT')
-#     	}
-#}
->>>>>>> 8ccb81ee085a8b6a29f135189026ceba08f3917d
 
 DATABASES = {
     'default': {

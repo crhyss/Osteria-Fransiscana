@@ -10,12 +10,27 @@
                 </div>
                 <div class="card-body">
                     {% csrf_token %}
-                    <label for="pass form-label">Ingrese su Contraseña Actual</label>
-                    <input class="form-control" name="oldpass" type="password">
-                    <label for="pass form-label">Ingrese su Contraseña Nueva</label>
-                    <input class="form-control" name="password1" type="password">
-                    <label for="pass form-label">Confirme su Contraseña Nueva</label>
-                    <input class="form-control" name="password2" type="password">
+                    <div class="old-password">
+                        <label for="pass1 form-label">Ingrese su Contraseña Actual</label>
+                        <input id="pass" class="form-control" name="oldpass" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i style="cursor:pointer;" id="visibilityBtn">
+                            <span id="visibilityIcon" class="material-icons">visibility</span>
+                        </i>
+                    </div>
+                    <div class="new-password">
+                        <label for="pass form-label">Ingrese su Contraseña Nueva</label>
+                        <input id="pass2" class="form-control" name="password1" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i style="cursor:pointer;" id="visibilityBtn1">
+                            <span id="visibilityIcon1" class="material-icons">visibility</span>
+                        </i>
+                    </div>
+                    <div class="conf-password">
+                        <label for="pass form-label">Confirme su Contraseña Nueva</label>
+                        <input id="pass3" class="form-control" name="password2" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i style="cursor:pointer;" id="visibilityBtn2">
+                            <span id="visibilityIcon2" class="material-icons">visibility</span>
+                        </i>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <a href="">

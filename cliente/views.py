@@ -22,13 +22,8 @@ def registro(request):
                     formulario.cleaned_data["user_apellidos"],
                     request.POST["password1"]
                 )
-<<<<<<< HEAD
                 message = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
                 messages.add_message(request, level=messages.SUCCESS , message="¡Usuario registrado correctamente!")
-=======
-                mesage = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
-                messages.success(request, mesage)
->>>>>>> 8ccb81ee085a8b6a29f135189026ceba08f3917d
                 return redirect(to='entrar')
             else:
                 messages.add_message(request, level=messages.WARNING , message="¡Las contraseñas ingresadas no coinciden!")
@@ -61,12 +56,8 @@ def entrar(request):
             messages.add_message(request, level=messages.SUCCESS , message="¡Sesión iniciada correctamente!")
             return redirect(to= "loby")
         else:
-<<<<<<< HEAD
             messages.add_message(request, level=messages.WARNING , message="¡Usuario ingresado, no Existe!")
             return redirect(to="registro")
-=======
-            messages.error(request, "El usuario o contraseña invalidos")
->>>>>>> 8ccb81ee085a8b6a29f135189026ceba08f3917d
     return render(request, 'registration/login.html')
 
 def salir(request):
@@ -189,15 +180,19 @@ def reserva(request, id_usuario):
     if request.method == 'POST':
         formulario = reservaForm(request.POST, instance=usuario)
         if formulario.is_valid():
-            print(formulario)
-            print(usuario)
-            formulario.save(commit=False)
-            formulario.reserva_usuario = usuario
-            formulario.save()
+            Reserva.guardar_reserva(
+                fecha_reserva = request.POST["fecha_reserva"],
+                hora_reserva = request.POST["hora_reserva"],
+                reserva_mesa = request.POST["reserva_mesa"],
+                reserva_evento = request.POST["reserva_evento"],
+                reserva_usuario = usuario.id_user,
+            )
             print("fulario")
             messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")
             return redirect('/')
             # return redirect('/logeo/reserva/' + str(id_usuario))
+        else:
+            messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")
     else:
         formulario = reservaForm()
     context = {
@@ -211,6 +206,16 @@ def reserva(request, id_usuario):
         context
     )
 
+def historialReservas(request, id_usuario):
+    data = {
+        'reservas' : Reserva.objects.filter(reserva_usuario = id_usuario)
+    }
+    return render(
+        request, 
+        'vista/historialReservas.html',
+        data
+)
+
 def cambiarContraseña(request, id_usuario):
     usuario = User.objects.get(pk=id_usuario)
     if request.method == 'POST': 
@@ -220,7 +225,7 @@ def cambiarContraseña(request, id_usuario):
                     usuario.set_password(request.POST["password1"])
                     usuario.save()
                     messages.add_message(request, level=messages.SUCCESS, message="¡Contraseña modificada correctamente!")
-                    return redirect('/')
+                    return redirect('/logeo/perfil/')
                 else:
                     messages.add_message(request, level=messages.ERROR, message="¡Error, al modificar contraseña!")
             except:
