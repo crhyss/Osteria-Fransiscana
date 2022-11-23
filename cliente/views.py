@@ -22,8 +22,13 @@ def registro(request):
                     formulario.cleaned_data["user_apellidos"],
                     request.POST["password1"]
                 )
+<<<<<<< HEAD
                 message = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
                 messages.add_message(request, level=messages.SUCCESS , message="¡Usuario registrado correctamente!")
+=======
+                mesage = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
+                messages.success(request, mesage)
+>>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
                 return redirect(to='entrar')
             else:
                 messages.add_message(request, level=messages.WARNING , message="¡Las contraseñas ingresadas no coinciden!")
@@ -54,10 +59,17 @@ def entrar(request):
         if user is not None:
             login(request, user)
             messages.add_message(request, level=messages.SUCCESS , message="¡Sesión iniciada correctamente!")
-            return redirect(to= "loby")
+            if user.is_superuser:
+                return redirect(to="/admin")
+            else:
+                return redirect(to= "loby")
         else:
+<<<<<<< HEAD
             messages.add_message(request, level=messages.WARNING , message="¡Usuario ingresado, no Existe!")
             return redirect(to="registro")
+=======
+            messages.error(request, "El usuario o contraseña invalidos")
+>>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
     return render(request, 'registration/login.html')
 
 def salir(request):
@@ -184,8 +196,12 @@ def reserva(request, id_usuario):
                 fecha_reserva = request.POST["fecha_reserva"],
                 hora_reserva = request.POST["hora_reserva"],
                 reserva_mesa = request.POST["reserva_mesa"],
+<<<<<<< HEAD
                 reserva_evento = request.POST["reserva_evento"],
                 reserva_usuario = usuario.id_user,
+=======
+                reserva_usuario = usuario.id_user
+>>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
             )
             print("fulario")
             messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")

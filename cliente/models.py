@@ -136,12 +136,17 @@ class Reserva(models.Model):
     def __str__ (self):
         return self.reserva_mesa
 
+<<<<<<< HEAD
     def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario, reserva_evento):
+=======
+    def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario):
+>>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
         reserva = Reserva()
         reserva.fecha_reserva = fecha_reserva
         reserva.hora_reserva = hora_reserva
         reserva.reserva_mesa = Mesa.objects.get(id_mesa = reserva_mesa)
         reserva.reserva_usuario = User.objects.get(id_user = reserva_usuario)
+<<<<<<< HEAD
         reserva.reserva_evento = Evento.objects.get(id_evento = reserva_evento)
         reserva.save()
 
@@ -155,6 +160,9 @@ class Reserva(models.Model):
     # </i>
     # </div>
 
+=======
+        reserva.save()
+>>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
     
 
    
