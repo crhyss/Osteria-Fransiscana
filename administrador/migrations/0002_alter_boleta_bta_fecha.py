@@ -7,13 +7,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cliente', '0001_initial'),
+        ('administrador', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='reclamo',
-            name='reclamo_fecha',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2022, 11, 26, 20, 8, 3, 886654), null=True),
+            model_name='boleta',
+            name='bta_fecha',
+            field=models.DateTimeField(blank=True, default=datetime.datetime(2022, 11, 26, 20, 8, 3, 970408), null=True),
         ),
     ]

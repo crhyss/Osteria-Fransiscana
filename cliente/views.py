@@ -6,7 +6,7 @@ from cliente.models import Direccion, Region, Reclamo , Usuario, Reserva
 from django.contrib.auth.forms import AuthenticationForm
 from productos.models import Producto, Categoria_prod
 from django.core.paginator import Paginator
-from web.models import Carrito, Seleccion
+
 
 def registro(request):
     data = {
@@ -55,7 +55,6 @@ def is_valid_queryparam(param):
     return param != '' and param is not None
 def carrito(request):
     productos = Producto.objects.all()
-    carta = Seleccion.objects.all()
     buscar = request.GET.get('buscar')
     lista = Categoria_prod.objects.all()
     br= request.GET.get('categoria')
@@ -69,7 +68,6 @@ def carrito(request):
     context = {
         'productos': productos,
         'lista': lista,
-        'carrito':carta
     }
 
     return render(request, 'carrito/carta.html',context)
