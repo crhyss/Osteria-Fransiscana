@@ -96,6 +96,12 @@
                 </ul>
             </div>
             <div class="col-md-3 text-end">
+                    <button class="btn btn-info me-2 d-flex align-items-center" type="button"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><span
+                        class="fa fa-shopping-basket "></span id="cart">
+                    <div id="cart">0</div>
+                </button>
+
                 {% if user.is_superuser %}
                 <a href="{% url 'salir'%}">
                     <button type="button" class="btn btn-warning me-2">Salir</button>
@@ -107,6 +113,7 @@
                 <a href="{% url 'salir'%}">
                     <button type="button" class="btn btn-warning me-2">Salir</button>
                 </a>
+                
                 <a href="/perfil">
                     <button type="button" class="btn btn-success me-2">Perfil</button>
                 </a>
@@ -130,8 +137,9 @@
     <main>
         {% block content %} {% include 'vista/header.html' %} {% include 'web/vista/loby.html' %} {% endblock content %} {% block content1 %} {% endblock content1 %}
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+
     <footer class="py-3 my-4">
         {% block footer %} {% include 'vista/footer.html' %} {% endblock footer %}
     </footer>

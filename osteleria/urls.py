@@ -17,8 +17,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 from .views import paginaprincipal , ordenes, perfil
-
-
+from webpay_plus.routes import webpay_plus_create,commitpay
+from . import views
 urlpatterns = [
     path('', paginaprincipal,name="loby"),
     path('logeo/', include('cliente.urls'),name="login"),
@@ -31,4 +31,6 @@ urlpatterns = [
     path('jet/', include('jet.urls','jet')),
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
+    path('webpay-plus/create/', webpay_plus_create,name="create"),
+    path('webpay-plus/commit-pay/', commitpay),
 ]
