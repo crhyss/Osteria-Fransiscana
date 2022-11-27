@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .views import paginaprincipal , ordenes, perfil
+from .views import paginaprincipal , ordenes, perfil, confirmacionDelivery
 from webpay_plus.routes import webpay_plus_create,commitpay
 urlpatterns = [
     path('', paginaprincipal,name="loby"),
@@ -30,5 +30,6 @@ urlpatterns = [
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
     path('webpay-plus/create/', webpay_plus_create,name="create"),
-    path('webpay-plus/commit-pay/', commitpay),
+    path('webpay-plus/create/commit-pay/', commitpay),
+    path('Confirmacion/<int:id>',confirmacionDelivery,name="confirmacion" ),
 ]

@@ -1,6 +1,6 @@
 from django.db import models
 import datetime
-from cliente.models import Usuario
+from cliente.models import User
 # Create your models here.
 class Rol(models.Model):
     id_rol = models.AutoField(primary_key = True)
@@ -33,4 +33,4 @@ class Boleta(models.Model):
     bta_Total = models.PositiveIntegerField()
     id_tipo_boleta = models.ForeignKey(Tipo_venta,on_delete=models.CASCADE, default=None)
     id_estado_boleta = models.ForeignKey(Estado_venta,on_delete=models.CASCADE, default=None)
-    id_Usuario_boleta = models.ForeignKey(Usuario,on_delete=models.CASCADE, default=None)
+    id_Usuario_boleta = models.ForeignKey(User,on_delete=models.CASCADE, default=None)
