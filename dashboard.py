@@ -17,11 +17,6 @@ class CustomIndexDashboard(Dashboard):
             _('Gestion'),
             children=[
                 {
-                    'title': _('Productos'),
-                    'url': '/productos/agregarp',
-                    'external': False,
-                },
-                {
                     'title': _('Visualizar Ordenes'),
                     'url': '/ordenes/',
                     'external': False,

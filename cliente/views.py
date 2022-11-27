@@ -73,7 +73,6 @@ def is_valid_queryparam(param):
 
 def carrito(request):
     productos = Producto.objects.all()
-    qr = Producto.objects.all()
     buscar = request.GET.get('buscar')
     lista = Categoria_prod.objects.all()
     br= request.GET.get('categoria')
