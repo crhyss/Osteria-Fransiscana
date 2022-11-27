@@ -1,4 +1,4 @@
- {% extends 'vista/Principal.html' %} {% block content %}
+{% extends 'vista/Principal.html' %} {% block content %}
 <link rel="stylesheet" href="/static/css/style-cart.css">
 <link rel="stylesheet" href="/static/css/font-awesome.css">
 <link rel="stylesheet" href="/static/css/style-ped.css">
@@ -20,8 +20,10 @@
             </nav>
             <div class="wrap">
                 <ul class="tabs">
-                    <li><a href="#tab1"><span class="fa fa-motorcycle"></span><span class="tab-text">Delivery</span></a></li>
-                    <li><a href="#tab2"><span class="fa fa-home"></span><span class="tab-text">Para Retiro</span></a></li>
+                    <li><a href="#tab1"><span class="fa fa-motorcycle"></span><span class="tab-text">Delivery</span></a>
+                    </li>
+                    <li><a href="#tab2"><span class="fa fa-home"></span><span class="tab-text">Para Retiro</span></a>
+                    </li>
                 </ul>
 
                 <div class="secciones">
@@ -32,7 +34,9 @@
                                 <span class="margenes">Ej: Santiago 123</span>
                                 <input class="margenes" type="text" placeholder="Indicaciones de entrega" name="tipo_de_dato">
                                 <span class="margenes">Ej: Número de Depto / Casa</span>
-                                <input class="margenes" class="cent" type="submit" id="submit" value="Pagar">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Pagar
+                                </button>
                                 <span class="margenes">*Se le aplicara un costo de $3500 por envio.</span>
                             </form>
                         </div>
@@ -43,14 +47,46 @@
                                 <div>
                                     <label class="margenes">Elige un local</label>
                                     <select>
-                                            <option value="Mall ">Mall Plaza Sur</option>
-                                            <option value="Duoc ">Duoc Uc</option>  
-                                    </div>
-                                    <input class="form margenes" type="submit" id="submit" value="Pagar">
-                                </form>
-            </article>
-        </div>
-    </div>
-</main>
+                                        <option value="Mall ">Mall Plaza Sur</option>
+                                        <option value="Duoc ">Duoc Uc</option>
+                                </div>
+                                <input class="form margenes" type="submit" id="submit" value="Pagar">
+                            </form>
+                    </article>
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confimacion de pago</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="detalle">
+
+                        </div>
+                        <form  id="TotalForm" action="/webpay-plus/create/" method="POST">
+                            {% csrf_token %}
+                            <div class="modal-content" >
+                                Total a pagar :
+                                <div id="totalComp">
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button  id="Envia" type="submit" value="Submit"  class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
 </body>
+<script type="text/javascript" src="/static/js/Total.js"></script>
 {% endblock content %}

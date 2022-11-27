@@ -12,13 +12,19 @@
                 <form method="POST">
                     <div class="d-grid">
                         {% csrf_token %}
-                        <label for="region">Región</label>
-                        <select name="region">
-                        <option disabled selected value> --- Seleccione una Región --- </option>
-                        {% for region in regiones %}
-                            <option value="{{ region.id_region }}">{{ region.region_nombre }}</option>
-                        {% endfor %}
-                        
+                        <label for="region">Ingrese la Región</label>
+                        <select name="region" id="region" required>
+                            <option value="0"> --- Seleccione una Región --- </option>
+                            {% for region in regiones %}
+                                <option value="{{ region.id_region }}">{{ region.region_nombre }}</option>
+                            {% endfor %}               
+                        </select>
+                        <label for="comuna">Ingrese la Comuna</label>
+                        <select name="comuna" id="comuna">
+                            <option value="0" id="0"> --- Seleccione una comuna --- </option>
+                            {% for comuna in comunas %}
+                                <option id="{{comuna.comuna_region_id}}" value="{{ comuna.id_comuna }}">{{ comuna.comuna_nombre }}</option>
+                            {% endfor %}               
                         </select>
                         {{formulario}}  
                             <br>

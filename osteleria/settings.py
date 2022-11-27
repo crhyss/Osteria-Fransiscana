@@ -13,9 +13,9 @@ from django.contrib import admin
 from pathlib import Path
 from os.path import join
 import os
-# import environ
-# env = environ.Env()
-# environ.Env.read_env()
+import environ
+env = environ.Env()
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,15 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = env('SECRET_KEY')
-SECRET_KEY = 'mi9ak)xv-261@r&al*&xv=m*-k-g#17ci3hr%le5#hu^r2#t-5'
-
+#SECRET_KEY = 'mi9ak)xv-261@r&al*&xv=m*-k-g#17ci3hr%le5#hu^r2#t-5'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+#ALLOWED_HOSTS = ['127.0.0.1','127.0.0.1:8000','52.1.165.86','ec2-52-1-165-86.compute-1.amazonaws.com']
 
 # Application definition
 
@@ -97,22 +96,24 @@ WSGI_APPLICATION = 'osteleria.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-#DATABASES = {
-
-#    'default': {
-#    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#    'NAME': env('DATABASE_NAME'),
-#    'USER': env('DATABASE_USER'),
-#    'PASSWORD': env('DATABASE_PASS'),
-#    }
-#}
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+     'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': env('DATABASE_NAME'),
+         'USER': env('DATABASE_USER'),
+         'PASSWORD': env('DATABASE_PASS'),
+         'HOST': env('HOSTNAME'),
+         'PORT': env('PORT')
+     	}
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -151,6 +152,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = join(BASE_DIR,'static/')
 STATIC_ROOT = join(BASE_DIR,'static','static_root')
 STATICFILES_DIRS = [join(BASE_DIR,"static")]
 
@@ -159,6 +161,8 @@ MEDIA_ROOT = join(BASE_DIR,'static/producto')
 
 SOCIAL_AUTH_FACEBOOK_KEY = '2779822452237843'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'a39654914ead729d015e217c91e614e9'
+
+AUTH_USER_MODEL = 'cliente.User'
 
 AUTHENTICATION_BACKENDS = [
 'social_core.backends.facebook.FacebookOAuth2',
@@ -214,7 +218,7 @@ JET_SIDE_MENU_ITEMS = [
         {'label': 'Añadir productos',
         'url': '/productos/agregarp'},
         {'label': 'Visualizar Ordenes',
-        'url': '/ordenes/'},
+        'url': '/productos/pedidos/'},
         {'label': 'Reclamos',
         'url': '/logeo/reclamo/lista/'},
         

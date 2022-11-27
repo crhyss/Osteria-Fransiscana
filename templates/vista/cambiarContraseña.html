@@ -1,0 +1,44 @@
+{% extends 'vista/Principal.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="col">
+        <form method="POST">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Cambio de Contraseña</h1>
+                </div>
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class="old-password">
+                        <label for="pass1 form-label">Ingrese su Contraseña Actual</label>
+                        <input id="pass" class="form-control" name="oldpass" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i style="cursor:pointer;" id="visibilityBtn">
+                            <span id="visibilityIcon" class="material-icons">visibility</span>
+                        </i>
+                    </div>
+                    <div class="new-password">
+                        <label for="pass form-label">Ingrese su Contraseña Nueva</label>
+                        <input id="pass2" class="form-control" name="password1" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i style="cursor:pointer;" id="visibilityBtn1">
+                            <span id="visibilityIcon1" class="material-icons">visibility</span>
+                        </i>
+                    </div>
+                    <div class="conf-password">
+                        <label for="pass form-label">Confirme su Contraseña Nueva</label>
+                        <input id="pass3" class="form-control" name="password2" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i style="cursor:pointer;" id="visibilityBtn2">
+                            <span id="visibilityIcon2" class="material-icons">visibility</span>
+                        </i>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="">
+                        <button class="btn btn-warning">Cambiar</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
