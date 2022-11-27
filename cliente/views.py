@@ -26,6 +26,10 @@ def registro(request):
                 return redirect(to='entrar')
             else:
                 messages.add_message(request, level=messages.WARNING , message="¡Las contraseñas ingresadas no coinciden!")
+                return redirect(to= "loby")
+        else:
+            messages.add_message(request, level=messages.ERROR , message="¡Usuario ingresado no existe!")
+            return redirect(to= "registro")
     return render(request, 'registration/registro.html', data)
 
 def addDirec(request):
@@ -211,7 +215,7 @@ def entrar(request):
     if request.method == 'POST':
         print("post")
         try:
-            detalle_usuario = Usuario.objects.get(usr_correo = request.POST["correo"])
+            detalle_usuario = User.objects.get(usr_correo = request.POST["correo"])
             if hashers.check_password(request.POST["pass"], detalle_usuario.usr_pass):
                 print("f")
                 print(detalle_usuario.usr_correo)
