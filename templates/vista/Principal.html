@@ -94,7 +94,7 @@
                 <a href="/admin">
                     <button type="button" class="btn btn-success me-2">Perfil</button>
                 </a>
-                {% elif user.is_authenticated%}
+                {% elif request.session.is_authenticated%}
                 <a href="{% url 'salir'%}">
                     <button type="button" class="btn btn-warning me-2">Salir</button>
                 </a>
@@ -102,7 +102,7 @@
                     <button type="button" class="btn btn-success me-2">Perfil</button>
                 </a>
                 {% else %}
-                <a href="{% url 'login'%}" class="btn-ingreso">
+                <a href="/logeo/login" class="btn-ingreso">
                     <button type="button" class="btn btn-primary me-2">Ingresar</button>
                 </a>
                 {% endif %}

@@ -17,6 +17,13 @@
             <button class="btn btn-success">Historial</button>
         </a>
     </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
     {% if pedidos %}
     <table class="table table-striped">
         <thead>

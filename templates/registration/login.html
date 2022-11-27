@@ -11,33 +11,43 @@
 
 <body>
 	<div class="container">
-		<div class="row login">
-			<div class="col imagen">
-				<img src={% static 'producto/margherita_wikipedia.jpg' %} width="330px" height="250px">
-			</div>
-			<div class="col">
-				<h2 class="fw-bold text-center py-5">Bienvenido</h2>
-				<form method="POST">
-					<div class="d-grid">
-						{% csrf_token %}
-						{{form}}
-						 <br>
-						<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesion">
-					</div>
-					<div class="my-3 text-center">
-						<span>No tienes una cuenta? <a href="{% url 'registro'%}">Registrate</a></span> <br>
-						<span><a href="#">Recuperar Contraseña</a></span>
-					</div>
-				</form>
-				<div class="container w-100 my-5">
-					<div class="row text-center">
-						<a href="{% url 'social:begin' 'facebook' %}">Login con facebook</a>
-					</div>
-				</div>
+		{% if messages %}
+    	{% for message in messages %}
+	    <div class="alert alert-danger" role="alert">
+        	{{ message }}
+    	</div>
+    	{% endfor %}
+    	{% endif %}
+        <div class="row login">
+            <div class="col imagen">
+                <img src={% static 'producto/margherita_wikipedia.jpg' %} width="330px" height="250px">
+            </div>
+            <div class="col">
+                <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+                <form method="POST">
+                    <div class="d-grid">
+                        {% csrf_token %}
+                        <label for="correo">Ingrese su Correo</label>
+                        <input name="correo" type="text">
+                        <label for="pass">Ingrese su Contraseña</label>
+                        <input name="pass" type="password">
+                         <br>
+                        <input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesion">
+                    </div>
+                    <div class="my-3 text-center">
+                        <span>No poseo una cuenta. <a href="{% url 'registro'%}">Registrate</a></span> <br>
+                        <span><a href="#">Recuperar Contraseña</a></span>
+                    </div>
+                </form>
+                <div class="container w-100 my-5">
+                    <div class="row text-center">
+                        <a href="{% url 'social:begin' 'facebook' %}">Login con facebook</a>
+                    </div>
+                </div>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
