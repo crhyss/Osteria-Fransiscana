@@ -21,7 +21,6 @@ def registro(request):
                     formulario.cleaned_data["user_apellidos"],
                     request.POST["password1"]
                 )
-                message = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
                 messages.add_message(request, level=messages.SUCCESS , message="¡Usuario registrado correctamente!")
                 return redirect(to='entrar')
             else:
@@ -58,6 +57,7 @@ def entrar(request):
             login(request, user)
             messages.add_message(request, level=messages.SUCCESS , message="¡Sesión iniciada correctamente!")
             if user.is_superuser:
+                messages.add_message(request, level=messages.SUCCESS , message="¡Sesión iniciada como administrador!")
                 return redirect(to="/admin")
             else:
                 return redirect(to= "loby")
@@ -211,41 +211,41 @@ def reserva(request, id_usuario):
         context
     )
 
-def entrar(request):
-    if request.method == 'POST':
-        print("post")
-        try:
-            detalle_usuario = User.objects.get(usr_correo = request.POST["correo"])
-            if hashers.check_password(request.POST["pass"], detalle_usuario.usr_pass):
-                print("f")
-                print(detalle_usuario.usr_correo)
-                request.session["is_authenticated"] = detalle_usuario.is_authenticated
-                return redirect(to='loby')
-            else:
-                print("else")
-                messages.success(request, "Correo o contraseña incorrectos")
-        except:
-            print("except")
-            messages.success(request, "Correo o contraseña no existen")
-    return render(request, 'registration/login.html')
+# def entrar(request):
+#     if request.method == 'POST':
+#         print("post")
+#         try:
+#             detalle_usuario = User.objects.get(usr_correo = request.POST["correo"])
+#             if hashers.check_password(request.POST["pass"], detalle_usuario.usr_pass):
+#                 print("f")
+#                 print(detalle_usuario.usr_correo)
+#                 request.session["is_authenticated"] = detalle_usuario.is_authenticated
+#                 return redirect(to='loby')
+#             else:
+#                 print("else")
+#                 messages.success(request, "Correo o contraseña incorrectos")
+#         except:
+#             print("except")
+#             messages.success(request, "Correo o contraseña no existen")
+#     return render(request, 'registration/login.html')
 
-def addDirec(request):
-    data = {
-        'formulario': direccionForm,
-        'regiones': Region.objects.all(),
-        'comunas': Comuna.objects.all()
-    }
-    if request.method == 'POST':
-        formulario = direccionForm(data=request.POST)
-        if formulario.is_valid():
-            datos = formulario.save(commit=False)
-            datos.dir_comuna = Comuna.objects.get(id_comuna = request.POST["comuna"])
-            datos.dir_calle = request.POST["dir_calle"].upper()
-            if request.POST["dir_depto_nro"] != "":
-                datos.dir_depto = True
-            datos.save()
+# def addDirec(request):
+#     data = {
+#         'formulario': direccionForm,
+#         'regiones': Region.objects.all(),
+#         'comunas': Comuna.objects.all()
+#     }
+#     if request.method == 'POST':
+#         formulario = direccionForm(data=request.POST)
+#         if formulario.is_valid():
+#             datos = formulario.save(commit=False)
+#             datos.dir_comuna = Comuna.objects.get(id_comuna = request.POST["comuna"])
+#             datos.dir_calle = request.POST["dir_calle"].upper()
+#             if request.POST["dir_depto_nro"] != "":
+#                 datos.dir_depto = True
+#             datos.save()
             
-    return render(request, 'registration/registroDir.html', data)
+#     return render(request, 'registration/registroDir.html', data)
 
 def historialReservas(request, id_usuario):
     data = {
