@@ -1,92 +1,145 @@
-{% extends 'vista/Principal.html' %} {% block content %}
-<link rel="stylesheet" href="/static/css/style-cart.css">
-<link rel="stylesheet" href="/static/css/font-awesome.css">
-<link rel="stylesheet" href="/static/css/style-ped.css">
+{% extends 'vista/Principal.html' %} {% load static %} {% block content %}
+<!doctype html>
+<html>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="/static/js/main.js"></script>
+<head>
+    <title>PEDIDO</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+</head>
 
 <body>
-    <div class="contenedor">
-        <header>
-            <div class="container">
-                <h1 class="text-center">MI PEDIDO</h1>
-                <hr>
-            </div>
-        </header>
-        <main>
-            <nav>
-                <a class="banner" data-pushbar-target="pushbar-productos"></a>
-            </nav>
-            <div class="wrap">
-                <ul class="tabs">
-                    <li><a href="#tab1"><span class="fa fa-motorcycle"></span><span class="tab-text">Delivery</span></a>
-                    </li>
-                    <li><a href="#tab2"><span class="fa fa-home"></span><span class="tab-text">Para Retiro</span></a>
-                    </li>
-                </ul>
-
-                <div class="secciones">
-                    <article id="tab1">
-                        <div id="login-content" class="form">
-                            <form>
-                                <input class="margenes" type="text" placeholder="Dirección de entrega" name="tipo_de_dato">
-                                <span class="margenes">Ej: Santiago 123</span>
-                                <input class="margenes" type="text" placeholder="Indicaciones de entrega" name="tipo_de_dato">
-                                <span class="margenes">Ej: Número de Depto / Casa</span>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Pagar
-                                </button>
-                                <span class="margenes">*Se le aplicara un costo de $3500 por envio.</span>
-                            </form>
-                        </div>
-                    </article>
-                    <article id="tab2">
-                        <div id="retiro-content" class="form">
-                            <form>
-                                <div>
-                                    <label class="margenes">Elige un local</label>
-                                    <select>
-                                        <option value="Mall ">Mall Plaza Sur</option>
-                                        <option value="Duoc ">Duoc Uc</option>
-                                </div>
-                                <input class="form margenes" type="submit" id="submit" value="Pagar">
-                            </form>
-                    </article>
-                </div>
-            </div>
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confimacion de pago</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" id="detalle">
-
-                        </div>
-                        <form  id="TotalForm" action="/webpay-plus/create/" method="POST">
-                            {% csrf_token %}
-                            <div class="modal-content" >
-                                Total a pagar :
-                                <div id="totalComp">
-
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                                <button  id="Envia" type="submit" value="Submit"  class="btn btn-primary">Enviar</button>
-                            </div>
-                        </form>
+    <div class="container">
+        <h1 class="text-center" style="margin-top: 50px;">MI PEDIDO</h1>
+        <hr>
+    </div>
+    <div class="row cent">
+        <div class="col-sm-6">
+            <div class="card" style="width: 650px; margin-left: 120px; margin-top: 100px;">
+                <div class="card-body ">
+                    <h5 class="card-title">Elige un tipo de entrega</h5>
+                    <div class="input-group border">
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">Retiro<svg style="margin-left: 26px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-check" viewBox="0 0 16 16">
+                            <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708L7.293 1.5Z"/>
+                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514Z"/>
+                          </svg></button>
+                        <span class="input-group-addon"></span>
+                        <p class="text-start" style="margin-top: 15px; margin-left: 435px;">Gratis</p>
+                    </div>
+                    <div class="input-group border">
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2">Delivery<svg style="margin-left: 12px;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-bicycle"
+                            viewBox="0 0 16 16">
+                            <path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"/>
+                          </svg></button>
+                        <span class="input-group-addon"></span>
+                        <p class="text-start" style="margin-top: 15px; margin-left: 433px;">$3500</p>
                     </div>
                 </div>
             </div>
-        </main>
-</body>
-<script type="text/javascript" src="/static/js/Total.js"></script>
+            <a class="cent" style=" color:black;margin-left: 120px;" href="">Volver al carro de compras</a>
+        </div>
+        <div class="col-sm-6">
+            <div class="card" style="width: 400px; margin-left: 120px; margin-top: 100px;">
+                <form  id="TotalForm" action="/webpay-plus/create/" method="POST">
+                <div class="card-body">
+                    <h5 class="card-title">Resumen de la compra</h5>
+                    <div class="input-group">
+                        
+                        <p class="text-start">Total compra:</p>
+                        <span class="input-group-addon"></span>
+                        <p class="text-start TotalProducto" style="margin-left: 187px;" id="TotalProducto" value="0">$0</p>
+                        {% csrf_token %}
+                    </div>
+                    <div class="input-group">
+                        <p class="text-start">Costo de envío:</p>
+                        <span class="input-group-addon"></span>
+                        <p class="text-end CostoEnvio" style="margin-left: 182px;"id="CostoEnvio" value="0">$0</p>
+                    </div>
+                    <div class="input-group card-footer">
+                        <p class="text-start" >Total:</p>
+                        <span class="input-group-addon"></span>
+                        <p class="text-start TotalVenta" style="margin-left: 200px;"id="TotalVenta" value="0">$0</p>
+                    </div>
+                    <div id="totalComp">
+                        
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" id="activador" disabled class="btn btn-success btn-sm totalComp">Ir a pagar</button>
+                    
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Para Retiro</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                          <option selected>Locales</option>
+                          <option value="1">Mall Paseo San Bernardo</option>
+                        </select>
+                        <label for="floatingSelect">Elige un local</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button CerrarBoton" class="btn btn-success" onclick="DetalleCompra()">Pagar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delivery</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                          <option selected>Comúna</option>
+                          <option value="1">San Bernardo</option>
+                          <option value="2">El Bosque</option>
+                        </select>
+                        <label for="floatingSelect">Elige un tu comuna</label>
+                    </div>
+                    <br>
+                    <input class="margenes form-control" type="text" placeholder="Indicaciones de entrega" name="tipo_de_dato">
+                    <span class="margenes">Ej: Número de Depto / Casa</span>
+                </div>
+
+                <div class="modal-footer">
+                    <span class="margenes">*Se le aplicara un costo de $3500 por envio.</span>
+                    <div class="">
+                        <button type="button" class="btn btn-success" >Pagar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })
+    </script>
+    <script type="text/javascript" src="/static/js/Total.js"></script>
+
+</html>
 {% endblock content %}

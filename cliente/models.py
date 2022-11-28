@@ -136,26 +136,11 @@ class Reserva(models.Model):
     def __str__ (self):
         return self.reserva_mesa
 
-    def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario, reserva_evento):
+    def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario):
         reserva = Reserva()
         reserva.fecha_reserva = fecha_reserva
         reserva.hora_reserva = hora_reserva
         reserva.reserva_mesa = Mesa.objects.get(id_mesa = reserva_mesa)
         reserva.reserva_usuario = User.objects.get(id_user = reserva_usuario)
-        reserva.reserva_evento = Evento.objects.get(id_evento = reserva_evento)
         reserva.save()
-
-    # Formato de campo Contraseña, con bóton de visibilidad (agregar a forms (con js?))
-
-    # <div class="password">
-    # <label for="pass" class="form-label">Ingrese su Contraseña</label>
-    # <input id="pass" class="form-control" name="pass" type="password" placeholder="Ingrese su Contraseña" value="" >
-    # <i style="cursor:pointer;" id="visibilityBtn">
-    #     <span id="visibilityIcon" class="material-icons">visibility</span>
-    # </i>
-    # </div>
-
     
-
-   
-

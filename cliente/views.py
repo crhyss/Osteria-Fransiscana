@@ -6,7 +6,7 @@ from cliente.models import Direccion, Region, Reclamo , User, Reserva, Comuna
 from django.contrib.auth.forms import AuthenticationForm
 from productos.models import Producto, Categoria_prod
 from django.core.paginator import Paginator
-
+from administrador.models import Estado_venta
 def registro(request):
     data = {
         'formulario': userForm()
@@ -273,6 +273,16 @@ def cambiarContraseña(request, id_usuario):
                 messages.add_message(request, level=messages.ERROR, message="¡Error, al modificar contraseña!")
     return render(request, 'vista/cambiarContraseña.html')  
         
+def confirmacionDelivery(request,id):
+    estado = Estado_venta.objects.get(pk=id)
+    context = {
+        'estado': estado,
+
+    }
+    return render(
+        request, 
+        'carrito/confirmacion-delivery.html',context
+    )    
 
 
             

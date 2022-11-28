@@ -48,3 +48,13 @@ def confirmacionDelivery(request,id):
         request, 
         'carrito/confirmacion-delivery.html',context
     )    
+def confirmacionRetiro(request,id):
+    estado = Estado_venta.objects.get(pk=id)
+    context = {
+        'estado': estado,
+
+    }
+    return render(
+        request, 
+        'carrito/confirmacion-retiro.html',context
+    )    

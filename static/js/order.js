@@ -72,6 +72,7 @@ function pshoppinCart() {
             '<div class="col-4 d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">' +
             '<input class="form-control" min="1" id="number' + orders[i][4] + '" onclick="aumentarcompra(\''+i+'\','+orders[i][4]+')" type="number" value="' + orders[i][3] + '">' + boton + '</div> </div>'
         ptotal.innerHTML = 'Total: $' + total + ' ';
+        cart.innerHTML = orders.length;
     }
 }
 
@@ -115,6 +116,7 @@ function aumentarcompra(arreglo,idproducto) {
       
     }
     var retornado = sumador
+    cart.innerHTML = orders.length;
     ptotal.innerHTML = 'Total: $' + retornado + ' ';
     localStorage.setItem('total', retornado);
     localStorage.setItem('orders', JSON.stringify(orders));  
