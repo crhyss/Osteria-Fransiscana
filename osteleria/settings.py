@@ -25,10 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'mi9ak)xv-261@r&al*&xv=m*-k-g#17ci3hr%le5#hu^r2#t-5'
-<<<<<<< HEAD
 # SECRET_KEY = env('SECRET_KEY')
-=======
->>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -99,7 +96,6 @@ WSGI_APPLICATION = 'osteleria.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-<<<<<<< HEAD
 # DATABASES = {
 #      'default': {
 #          'ENGINE': 'django.db.backends.mysql',
@@ -119,8 +115,6 @@ DATABASES = {
 }
 
 
-=======
->>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
