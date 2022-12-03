@@ -1,0 +1,25 @@
+{% extends 'vista/Principal.html' %} 
+{% load static %} 
+{% block title %}
+    Vista de mesas
+{% endblock title %}
+{% block content %}
+<br>
+<div class="row">
+    {% for mesa in mesas %}
+        <div class="col-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title"> Mesa {{mesa.mesa_nro}}</h5>
+                    <p class="card-text"> Estado {{mesa.mesa_estado}}</p>
+                    <p class="card-text"> Estado {{mesa.id_mesa}}</p>
+                    <br>
+                    <button>Comenzar Venta</button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <br>
+    
+</div>
+{% endblock content %}

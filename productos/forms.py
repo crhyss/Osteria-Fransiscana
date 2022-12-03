@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from .models import Producto, Categoria_prod, Pedido
+from .models import Producto, Categoria_prod
+from web.models import Pedido
 from django.views.generic import ListView
 def agregarClaseFormControl(elementos):
     for campo in elementos:

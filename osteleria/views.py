@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from productos.models import Producto, Categoria_prod
+from web.models import Carrito
 from cliente.models import User
 from django.contrib.auth import models
 from django.contrib.admin import ModelAdmin 

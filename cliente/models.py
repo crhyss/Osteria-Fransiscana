@@ -34,6 +34,27 @@ class Direccion(models.Model):
     dir_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE, default=None)
     def __str__(self):
         return self.dir_calle
+    def agregar_dir(dir_calle, dir_nro, dir_depto_nro, comuna):
+        if dir_depto_nro == "":
+            dir_depto_nro = 0
+        try:
+            dir = Direccion.objects.get(
+                dir_calle = dir_calle,
+                dir_nro = dir_nro,
+                dir_depto_nro = dir_depto_nro,
+                dir_comuna = comuna
+            )
+            return dir
+        except:
+            dir = Direccion()
+            dir.dir_calle = dir_calle
+            dir.dir_nro = dir_nro
+            if dir_depto_nro != "":
+                dir.dir_depto = True
+                dir.dir_depto_nro = dir_depto_nro
+            dir.dir_comuna = Comuna.objects.get(id_comuna = comuna)
+            dir.save()
+            return dir
 
 
 class Local(models.Model):
@@ -62,7 +83,7 @@ class UserManager(BaseUserManager):
             user_correo,
             user_nombre,
             user_apellidos,
-            Tipo_usuario.objects.get(id_tipo_usr = 1), 
+            Tipo_usuario.objects.get(id_tipo_usr = 2), 
             False,
             False,
             user_pass
@@ -110,13 +131,16 @@ class Reclamo(models.Model):
 
 class EstadoMesa(models.Model):
     id_estado_mesa = models.AutoField(primary_key=True)
-    estado_mesa = models.BooleanField(default=True)
+    estado_mesa = models.CharField(max_length=20)
+    def __str__(self):
+        return str(self.estado_mesa)
 
 class Mesa(models.Model):
     id_mesa = models.AutoField(primary_key=True)
-    mesa_nro = models.IntegerField(max_length=2, blank=False)
-    mesa_sillas = models.IntegerField(max_length=2, blank=False)
+    mesa_nro = models.IntegerField(blank=False)
+    mesa_sillas = models.IntegerField(blank=False)
     mesa_estado = models.ForeignKey(EstadoMesa, on_delete=models.CASCADE, default=None)
+
     def __str__(self):
         return str(self.id_mesa)
 
@@ -136,17 +160,12 @@ class Reserva(models.Model):
     def __str__ (self):
         return self.reserva_mesa
 
-<<<<<<< HEAD
     def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario, reserva_evento):
-=======
-    def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario):
->>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
         reserva = Reserva()
         reserva.fecha_reserva = fecha_reserva
         reserva.hora_reserva = hora_reserva
         reserva.reserva_mesa = Mesa.objects.get(id_mesa = reserva_mesa)
         reserva.reserva_usuario = User.objects.get(id_user = reserva_usuario)
-<<<<<<< HEAD
         reserva.reserva_evento = Evento.objects.get(id_evento = reserva_evento)
         reserva.save()
 
@@ -160,9 +179,6 @@ class Reserva(models.Model):
     # </i>
     # </div>
 
-=======
-        reserva.save()
->>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
     
 
    

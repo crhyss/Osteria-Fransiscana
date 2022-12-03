@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Producto, Categoria_prod, Pedido
+from .models import Producto, Categoria_prod
 from .forms import ProductoForm, PedidoForm, PedidoForm_V
 from django.core.paginator import Paginator
+from web.models import Pedido
+
 def agregarp(request):
     lista = Categoria_prod.objects.all()
     productos = Producto.objects.all()

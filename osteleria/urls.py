@@ -20,6 +20,7 @@ from .views import paginaprincipal , ordenes, perfil
 urlpatterns = [
     path('', paginaprincipal,name="loby"),
     path('logeo/', include('cliente.urls'),name="login"),
+    path('web/', include('web.urls'), name="mesero"),
     path('productos/', include('productos.urls'),name="producto"),
     path('map/', include('map.urls'),name="mapa"),
     path('ordenes/', ordenes, name='ordenes'),

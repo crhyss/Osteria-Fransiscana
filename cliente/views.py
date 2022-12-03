@@ -22,13 +22,8 @@ def registro(request):
                     formulario.cleaned_data["user_apellidos"],
                     request.POST["password1"]
                 )
-<<<<<<< HEAD
-                message = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
-                messages.add_message(request, level=messages.SUCCESS , message="¡Usuario registrado correctamente!")
-=======
                 mesage = "{0} {1} su usuario ha sido creado exitosamente".format(formulario.cleaned_data["user_correo"], formulario.cleaned_data["user_apellidos"])
                 messages.success(request, mesage)
->>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
                 return redirect(to='entrar')
             else:
                 messages.add_message(request, level=messages.WARNING , message="¡Las contraseñas ingresadas no coinciden!")
@@ -43,13 +38,14 @@ def addDirec(request):
     if request.method == 'POST':
         formulario = direccionForm(data=request.POST)
         if formulario.is_valid():
-            datos = formulario.save(commit=False)
-            datos.dir_comuna = Comuna.objects.get(id_comuna = request.POST["comuna"])
-            datos.dir_calle = request.POST["dir_calle"].upper()
-            if request.POST["dir_depto_nro"] != "":
-                datos.dir_depto = True
-            datos.save()
-            
+            calle = request.POST["dir_calle"].upper()
+            dir = Direccion.agregar_dir(
+                calle,
+                request.POST["dir_nro"],
+                request.POST["dir_depto_nro"],
+                request.POST["comuna"]
+            )       
+            print(dir)
     return render(request, 'registration/registroDir.html', data)
 
 def entrar(request):
@@ -64,12 +60,7 @@ def entrar(request):
             else:
                 return redirect(to= "loby")
         else:
-<<<<<<< HEAD
-            messages.add_message(request, level=messages.WARNING , message="¡Usuario ingresado, no Existe!")
-            return redirect(to="registro")
-=======
             messages.error(request, "El usuario o contraseña invalidos")
->>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
     return render(request, 'registration/login.html')
 
 def salir(request):
@@ -196,12 +187,8 @@ def reserva(request, id_usuario):
                 fecha_reserva = request.POST["fecha_reserva"],
                 hora_reserva = request.POST["hora_reserva"],
                 reserva_mesa = request.POST["reserva_mesa"],
-<<<<<<< HEAD
                 reserva_evento = request.POST["reserva_evento"],
                 reserva_usuario = usuario.id_user,
-=======
-                reserva_usuario = usuario.id_user
->>>>>>> 66563a0df841e7c93736117d232ff02373d9c67f
             )
             print("fulario")
             messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")
