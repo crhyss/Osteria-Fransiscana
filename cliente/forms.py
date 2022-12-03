@@ -7,6 +7,7 @@ from .models import User, Direccion, Region, Reclamo, Reserva
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.widgets import NumberInput
+from web.models import Carrito,Seleccion 
 import datetime
 
 def agregarClaseFormControl(elementos):
@@ -97,4 +98,12 @@ class contraseñaForm(ModelForm):
         super(reservaForm,self).__init__(*args, **kwargs)
         agregarClaseFormControl(self.visible_fields())
 
+class carritoForm(ModelForm):
+    class Meta:
+        model = Carrito
+        fields= ['id_carrito','id_usuario']
 
+class seleccionForm(ModelForm):
+    class Meta:
+        model = Seleccion
+        fields =['id_prod','cantidad','id_carrito']

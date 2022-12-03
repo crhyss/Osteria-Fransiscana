@@ -1,32 +1,41 @@
-# from cliente.models import Usuario
-# from productos.models import Producto
-# from django.db import models
-
-# class Carrito(models.Model):
-#     id_carrito = models.AutoField(primary_key=True)
-#     id_usuario = models.ForeignKey(Usuario, on_delete= models.CASCADE)
-#     def agregar_prod(id_carrito, id_prod):
-#         try:
-#             select = Seleccion.objects.get(id_carrito = id_carrito, id_prod = id_prod)
-#             select.cantidad = select.cantidad + 1
-#         except:
-#             select = Seleccion()
-#             select.id_prod(id_prod)
-#             select.id_carrito(id_carrito)
-#             select.save()
-#     def eliminar_prod(id_carrito, id_prod):
-#         Seleccion.objects.delete(id_carrito = id_carrito, id_prod = id_prod)
-#     def listar_prod(id_carrito):
-#         select = Seleccion.objects.get(id_carrito = id_carrito)
-#         return select
-
-# class Seleccion(models.Model):
-#     id_seleccion = models.AutoField(primary_key=True)
-#     id_prod = models.ForeignKey(Producto, on_delete= models.CASCADE, blank=False)
-#     cantidad = models.IntegerField(default=0)
-#     id_carrito = models.ForeignKey(Carrito, on_delete= models.CASCADE)
+from cliente.models import User
+from productos.models import Producto
 from django.db import models
 from cliente.models import Mesa
+class Carrito(models.Model):
+    id_carrito = models.AutoField(primary_key=True)
+    id_usuario = models.ForeignKey(User, on_delete= models.CASCADE)
+    def agregar_prod(id_usuario, id_prod):
+        carrito = Carrito.llamar_carrito(id_usuario)
+        try:
+            select = Seleccion.objects.get(id_carrito = carrito.id_carrito, id_prod_id = id_prod)
+            select.cantidad = select.cantidad + 1
+            select.save()
+        except:
+            select = Seleccion()
+            select.id_prod = Producto.objects.get(id_producto = id_prod)
+            select.id_carrito = Carrito.objects.get(id_carrito = carrito.id_carrito)
+            select.save()
+    def eliminar_prod(id_carrito, id_prod):
+        Seleccion.objects.get(id_carrito = id_carrito, id_prod = id_prod).delete()
+    def listar_prod(id_usuario):
+        carrito = Carrito.llamar_carrito(id_usuario)
+        select = Seleccion.objects.filter(id_carrito = carrito.id_carrito)
+        return select
+    def llamar_carrito(id_usuario):
+            try:
+                carrito = Carrito.objects.get(id_usuario = id_usuario)
+            except:
+                carrito = Carrito()
+                carrito.id_usuario = User.objects.get(id_user = id_usuario)
+                carrito.save()
+            return carrito
+class Seleccion(models.Model):
+    id_seleccion = models.AutoField(primary_key=True)
+    id_prod = models.ForeignKey(Producto, on_delete= models.CASCADE, blank=False)
+    cantidad = models.IntegerField(default=1)
+    id_carrito = models.ForeignKey(Carrito, on_delete= models.CASCADE)
+
 
 class Estado_venta(models.Model):
     id_estado_venta = models.AutoField(primary_key=True)

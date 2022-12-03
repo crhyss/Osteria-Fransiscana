@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import salir, registro, carrito, pedido, mesero, reclamos, addDirec, listarReclamos, perfilCliente, modificarPerfil, reserva, entrar, cambiarContraseña, historialReservas
+from .views import salir, registro, carrito, pedido, mesero, reclamos, addDirec, listarReclamos, perfilCliente, modificarPerfil, reserva, entrar, cambiarContraseña, historialReservas,orders,deletecart
 
 urlpatterns = [
     path('oauth/', include('social_django.urls', namespace='social')),
@@ -7,6 +7,8 @@ urlpatterns = [
     path('registro/',registro, name='registro'),
     path('registro/direccion', addDirec, name='DirecUsuario'),
     path('carrito/',carrito, name='carrito'),
+    path('carrito/eliminar',deletecart, name='deletecart'),
+    path('orders/<int:id_usuario>',orders,name='orders'),
     path('pedido/',pedido, name='pedido'),
     path('mesero/',mesero, name='mesero'),
     path('reclamo/',reclamos, name='reclamos'),

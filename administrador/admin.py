@@ -1,5 +1,5 @@
 from django.contrib import admin
-from.models import Rol,cupon,Boleta,Tipo_venta,Estado_venta
+from.models import Rol,cupon
 from productos.models import Producto,Categoria_prod
 from django.utils.html import format_html
 from django.contrib.admin.views.decorators import staff_member_required
@@ -40,12 +40,12 @@ class categoriaAdmin(admin.ModelAdmin):
 class cuponAdmin(admin.ModelAdmin):
     list_display=('id_cupon','Nombre_cupon','cantidad','Monto')
 
-@admin.register(Boleta)
-class BoletaAdmin(admin.ModelAdmin):
-    list_display=('nro_orden','bta_fecha','cantidad_prod','productos','bta_Total','id_tipo_boleta','id_estado_boleta','id_Usuario_boleta')
-@admin.register(Tipo_venta)
-class Tipo_venta_BAdmin(admin.ModelAdmin):
-    list_display=('id_tipo_venta','tipo_venta')
-@admin.register(Estado_venta)
-class Estado_ventaAdmin(admin.ModelAdmin):
-    list_display=('id_estado','Estado_venta')
+# @admin.register(Boleta)
+# class BoletaAdmin(admin.ModelAdmin):
+#     list_display=('nro_orden','bta_fecha','cantidad_prod','productos','bta_Total','id_tipo_boleta','id_estado_boleta','id_Usuario_boleta')
+# @admin.register(Tipo_venta)
+# class Tipo_venta_BAdmin(admin.ModelAdmin):
+#     list_display=('id_tipo_venta','tipo_venta')
+# @admin.register(Estado_venta)
+# class Estado_ventaAdmin(admin.ModelAdmin):
+#     list_display=('id_estado','Estado_venta')

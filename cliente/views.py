@@ -1,12 +1,13 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate, hashers
-from cliente.forms import direccionForm, userForm,reclamoForm, reservaForm,profileForm
+from cliente.forms import direccionForm, userForm,reclamoForm, reservaForm,profileForm,carritoForm,seleccionForm
 from cliente.models import Direccion, Region, Reclamo , User, Reserva, Comuna
 from django.contrib.auth.forms import AuthenticationForm
 from productos.models import Producto, Categoria_prod
 from django.core.paginator import Paginator
-from administrador.models import Estado_venta
+from web.models import Estado_venta,Carrito,Seleccion 
+from django.http import HttpResponse
 def registro(request):
     data = {
         'formulario': userForm()
@@ -78,6 +79,9 @@ def carrito(request):
     productos = Producto.objects.all()
     buscar = request.GET.get('buscar')
     lista = Categoria_prod.objects.all()
+    carrito = Carrito.llamar_carrito(request.user.id_user)
+    listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod')
+    .values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
     br= request.GET.get('categoria')
     if is_valid_queryparam(buscar):
         productos = productos.filter(prod_nombre__icontains=buscar)
@@ -89,6 +93,7 @@ def carrito(request):
     context = {
         'productos': productos,
         'lista': lista,
+        'listar':listar
     }
 
     return render(request, 'carrito/carta.html',context)
@@ -211,41 +216,6 @@ def reserva(request, id_usuario):
         context
     )
 
-# def entrar(request):
-#     if request.method == 'POST':
-#         print("post")
-#         try:
-#             detalle_usuario = User.objects.get(usr_correo = request.POST["correo"])
-#             if hashers.check_password(request.POST["pass"], detalle_usuario.usr_pass):
-#                 print("f")
-#                 print(detalle_usuario.usr_correo)
-#                 request.session["is_authenticated"] = detalle_usuario.is_authenticated
-#                 return redirect(to='loby')
-#             else:
-#                 print("else")
-#                 messages.success(request, "Correo o contraseña incorrectos")
-#         except:
-#             print("except")
-#             messages.success(request, "Correo o contraseña no existen")
-#     return render(request, 'registration/login.html')
-
-# def addDirec(request):
-#     data = {
-#         'formulario': direccionForm,
-#         'regiones': Region.objects.all(),
-#         'comunas': Comuna.objects.all()
-#     }
-#     if request.method == 'POST':
-#         formulario = direccionForm(data=request.POST)
-#         if formulario.is_valid():
-#             datos = formulario.save(commit=False)
-#             datos.dir_comuna = Comuna.objects.get(id_comuna = request.POST["comuna"])
-#             datos.dir_calle = request.POST["dir_calle"].upper()
-#             if request.POST["dir_depto_nro"] != "":
-#                 datos.dir_depto = True
-#             datos.save()
-            
-#     return render(request, 'registration/registroDir.html', data)
 
 def historialReservas(request, id_usuario):
     data = {
@@ -284,5 +254,28 @@ def confirmacionDelivery(request,id):
         'carrito/confirmacion-delivery.html',context
     )    
 
+def orders(request,id_usuario):
+    formcart= Carrito.llamar_carrito(request.user.id_user)
+    seleccion= Carrito.agregar_prod(request.user.id_user,request.POST["idProd"])
+    listar= Carrito.listar_prod(request.user.id_user)
+    contar= Seleccion.objects.all().count()
+    print(listar)
+    context = {
+        'formcart':formcart,
+        'seleccion':seleccion,
+        'listar':listar,
+        'contar':contar
+        
+    }
+    return redirect('/logeo/carrito/',context)
 
-            
+def deletecart(request):
+    print(request.POST)
+    formcart= Carrito.llamar_carrito(request.user.id_user)
+    Carrito.eliminar_prod(formcart.id_carrito,request.POST["idProdu"])
+    listar= Carrito.listar_prod(request.user.id_user)
+    context = {
+        'listar':listar,
+        'formcart':formcart
+    }
+    return redirect('/logeo/carrito',context)

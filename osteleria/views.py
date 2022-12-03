@@ -4,14 +4,16 @@ from productos.models import Producto, Categoria_prod
 from cliente.models import User
 from django.contrib.auth import models
 from django.contrib.admin import ModelAdmin 
-from administrador.models import Estado_venta
+from web.models import Estado_venta,Seleccion
 def paginaprincipal(request):
     productos = Producto.objects.all()
     lista = Categoria_prod.objects.all()
+    contar= Seleccion.objects.all().count()
     context = {
         'titulo': 'Productos',
         'productos': productos,
         'lista': lista,
+        'contar':contar,
     }
     return render(
         request,
