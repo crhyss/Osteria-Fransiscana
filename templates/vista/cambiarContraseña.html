@@ -10,25 +10,31 @@
                 </div>
                 <div class="card-body">
                     {% csrf_token %}
-                    <div class="old-password">
+                    <div class="old-password d-flex flex-column">
                         <label for="pass1 form-label">Ingrese su Contraseña Actual</label>
-                        <input id="pass" class="form-control" name="oldpass" type="password" placeholder="Ingrese su Contraseña" value="">
-                        <i style="cursor:pointer;" id="visibilityBtn">
-                            <span id="visibilityIcon" class="material-icons">visibility</span>
+                        <input id="pass" class="mb-2 form-control" name="oldpass" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i class="" style="cursor:pointer;" id="visibilityBtn">
+                            <span class="material-symbols-outlined">
+                                visibility
+                            </span>
                         </i>
                     </div>
-                    <div class="new-password">
+                    <div class="new-password d-flex flex-column">
                         <label for="pass form-label">Ingrese su Contraseña Nueva</label>
-                        <input id="pass2" class="form-control" name="password1" type="password" placeholder="Ingrese su Contraseña" value="">
-                        <i style="cursor:pointer;" id="visibilityBtn1">
-                            <span id="visibilityIcon1" class="material-icons">visibility</span>
+                        <input id="pass2" class="mb-2 form-control" name="password1" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i class="" style="cursor:pointer;" id="visibilityBtn">
+                            <span class="material-symbols-outlined">
+                                visibility
+                            </span>
                         </i>
                     </div>
-                    <div class="conf-password">
+                    <div class="conf-password d-flex flex-column">
                         <label for="pass form-label">Confirme su Contraseña Nueva</label>
-                        <input id="pass3" class="form-control" name="password2" type="password" placeholder="Ingrese su Contraseña" value="">
-                        <i style="cursor:pointer;" id="visibilityBtn2">
-                            <span id="visibilityIcon2" class="material-icons">visibility</span>
+                        <input id="pass3" class="mb-2 form-control" name="password2" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i class="" style="cursor:pointer;" id="visibilityBtn">
+                            <span class="material-symbols-outlined">
+                                visibility
+                            </span>
                         </i>
                     </div>
                 </div>

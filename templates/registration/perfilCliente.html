@@ -1,21 +1,21 @@
 {% extends 'vista/Principal.html' %}
 {% load static %}
 {% block content %}
-<div class="container-perfil">
-    <div class="card">
+<div class="container-perfil mt-4 d-flex justify-content-center">
+    <div class="card mt-4 mb-4" id="container-perfil">
         <div class="card-header">
-            <h1 class="card-title">Perfil de {{user.user_nombre}}</h1> 
+            <h1 class="card-title mt-2">Perfil de {{user.user_nombre}}</h1> 
         </div>
-        <div class="card-body">  
-            <div class="mb-3">
+        <div class="card-body px-4">  
+            <div class="mb-3 d-flex flex-column">
                 <label for="username" class="form-label">Nombre</label>
                 <p class="text-capitalize form-control" disabled="disabled">{{user.user_nombre}}</p>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 d-flex flex-column">
                 <label for="username" class="form-label">Apellidos</label>
                 <p class="text-capitalize form-control" disabled="disabled">{{user.user_apellidos}}</p>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 d-flex flex-column">
                 <label for="username" class="form-label">Correo</label>
                 <p class="text-capitalize form-control" disabled="disabled">{{user.user_correo}}</p>
             </div>

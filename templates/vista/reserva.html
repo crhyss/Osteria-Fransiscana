@@ -1,14 +1,14 @@
 {% extends 'vista/Principal.html' %}
 
 {% block content %}
-<div class="row">    
-    <form method = "POST">
-        <div class="card">
+<div class="row mt-5" id="container-reserva">    
+    <form method="POST" class="d-flex justify-content-center">
+        <div class="card" style="width: 70%;">
             {% csrf_token %}
             <div class="card-header">
                 <h1 class="card-tittle">Reserva</h1>
             </div>
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 {{ formulario }}
             </div>
             <div class="card-footer" style="display: flex; justify-content: center;">

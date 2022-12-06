@@ -184,8 +184,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
 }
+
+/* .container-perfil{
+    width: 50%;
+} */
 
 .card-header{
     display: flex;
@@ -217,4 +220,21 @@ body {
     padding: 20px;
 }
 
+#container-login-img{
+ justify-content: end;   
+}
+
+#container-login-img img{
+    width: 430px;
+    height: 380px;
+}
+ 
+#article-perfil label{
+    margin-top: 6px;
+    margin-bottom: 3px;
+}
+
+#container-reserva .card-body label{
+    margin-top: 7px;
+}
 

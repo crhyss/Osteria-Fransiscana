@@ -8,7 +8,7 @@
         </article>
         <form action="" method = "POST">
             {% csrf_token %}
-            <article class="card-body">
+            <article class="card-body d-flex flex-column" id="article-perfil">
                 {{ formulario }}
             </article>
             <article class="card-footer" style="display: flex; justify-content: center;">
