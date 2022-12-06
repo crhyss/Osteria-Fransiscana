@@ -116,30 +116,32 @@ body {
     min-height: 96px;
 }
 
+
 /* ? vistamesero */
-.carrito{
+
+.carrito {
     font-size: 120px;
     margin: 5%;
     margin-left: 40%;
 }
 
-
-.pregunta{
+.pregunta {
     font-size: 15px;
     margin-right: 40%;
 }
 
-.select{
+.select {
     width: 100px;
 }
 
-.cuadrodetxt{
+.cuadrodetxt {
     /*margin-left: 100%;*/
     width: 100%;
     font-size: 20px;
     height: auto;
 }
-.order{
+
+.order {
     margin-left: 35%;
     width: 100%;
     text-align: auto;
@@ -147,18 +149,21 @@ body {
     padding-bottom: 20px;
     border-bottom: 1px solid #9e9e9e;
 }
-.resizedTextbox{
+
+.resizedTextbox {
     width: 300px;
     height: 200px;
     margin-left: 35%;
 }
-.colMS{
+
+.colMS {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 80vh;
 }
+
 
 /* .botones.col-md-3.text-end{
     display: flex;
@@ -172,30 +177,34 @@ body {
     padding-left: 72px;
 } */
 
-.d-flex.justify-content-around{
+.d-flex.justify-content-around {
     flex-wrap: wrap;
 }
 
-.d-flex.justify-content-around .card{
+.d-flex.justify-content-around .card {
     margin-bottom: 20px;
 }
 
-.container-register{
+.container-register {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+<<<<<<< HEAD
 /* .container-perfil{
     width: 50%;
 } */
 
 .card-header{
+=======
+.card-header {
+>>>>>>> e70c4914fff24de847da222f994d92a0de8dce09
     display: flex;
     justify-content: center;
 }
 
-.row.login{
+.row.login {
     height: 80vh;
     display: flex;
     justify-content: center;
@@ -203,14 +212,14 @@ body {
     margin-top: 20px;
 }
 
-.row.reclamos{
+.row.reclamos {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 80vh;
 }
 
-.card.col-sm-12.col-md-6.mx-auto.mt-5{
+.card.col-sm-12.col-md-6.mx-auto.mt-5 {
     width: 80%;
 }
 
@@ -220,6 +229,7 @@ body {
     padding: 20px;
 }
 
+<<<<<<< HEAD
 #container-login-img{
  justify-content: end;   
 }
@@ -238,3 +248,8 @@ body {
     margin-top: 7px;
 }
 
+=======
+#reclamos form label {
+    text-align: left;
+}
+>>>>>>> e70c4914fff24de847da222f994d92a0de8dce09

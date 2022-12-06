@@ -1,42 +1,35 @@
-{% extends "admin/base_site.html" %}
-{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} {{ site_title|default:_('Agregar Producto') }}{% endblock %}
-
-{% load static %}
-{% block nav-global %}
+{% extends "admin/base_site.html" %} {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} {{ site_title|default:_('Agregar Producto') }}{% endblock %} {% load static %} {% block nav-global %}
 <link rel="shortcut icon" href={% static 'media/favicon.ico' %} type="image/x-icon">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-
-{% endblock %}
-{% block content %}
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'> {% endblock %} {% block content %}
 <div class="row" style="display: flex; justify-content: center;">
     <h1> Reclamos</h1>
 </div>
 <div class="container ">
-{% if reclamos %}
-    <div class="row">
-        <table class = "table table-hover table-sm table-responsive">
+    {% if reclamos %}
+    <div class="row text-start">
+        <table class="table table-hover table-sm table-responsive">
             <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Fecha</th>
-                <th>Descripcion</th>
-            </tr>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha</th>
+                    <th>Descripcion</th>
+                </tr>
             </thead>
             <tbody>
-                
+
                 {%for reclamo in reclamos%}
-                    <tr id="{{reclamo.id_reclamos}}">
-                        <td>{{reclamo.nombre}}</td>
-                        <td>{{reclamo.apellido}}</td>
-                        <td>{{reclamo.reclamo_fecha}}</td>
-                        <td>{{reclamo.reclamo_descrip}}</td>
-                    </tr>
+                <tr id="{{reclamo.id_reclamos}}">
+                    <td>{{reclamo.nombre}}</td>
+                    <td>{{reclamo.apellido}}</td>
+                    <td>{{reclamo.reclamo_fecha}}</td>
+                    <td>{{reclamo.reclamo_descrip}}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-{% endif %}
+    {% endif %}
 </div>
 {% endblock content %}

@@ -96,9 +96,9 @@ def carrito(request):
 def pedido(request):
     return render(request, 'carrito/pedido.html')
 
-
 def mesero(request):
     return render(request, 'test/vistamesero.html')
+
 
 
 def reclamos(request):
