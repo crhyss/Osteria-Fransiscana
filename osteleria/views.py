@@ -58,3 +58,8 @@ def confirmacionRetiro(request,id):
         request, 
         'carrito/confirmacion-retiro.html',context
     )    
+def sobrenosotros(request):
+    return render(
+        request, 
+        'vista/sobrenosotros.html',
+    )    

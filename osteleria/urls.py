@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .views import paginaprincipal , ordenes, perfil, confirmacionDelivery, confirmacionRetiro
+from .views import paginaprincipal , ordenes, perfil, confirmacionDelivery, confirmacionRetiro, sobrenosotros
 from webpay_plus.routes import webpay_plus_create,commitpay
 from administrador.views import grafico
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('ordenes/', ordenes, name='ordenes'),
     path('accounts/', include('django.contrib.auth.urls'),name="login"),
     path('accounts/profile/',perfil,name='perfil'),
+    path('sobrenosotros/',sobrenosotros,name='sobrenosotros'),
     path('', include('administrador.urls'),name="administrador"),
     path('jet/', include('jet.urls','jet')),
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
