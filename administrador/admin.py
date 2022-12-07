@@ -41,7 +41,8 @@ class cuponAdmin(admin.ModelAdmin):
     list_display=('id_cupon','Nombre_cupon','cantidad','Monto')
 @admin.register(User)
 class cuponAdmin(admin.ModelAdmin):
-    list_display=('id_user','user_correo')
+    list_display=('id_user','user_nombre','user_apellidos','user_correo','user_tipo','is_active','is_staff')
+    list_editable = ('user_correo','user_tipo','is_active','is_staff')
 # @admin.register(Boleta)
 # class BoletaAdmin(admin.ModelAdmin):
 #     list_display=('nro_orden','bta_fecha','cantidad_prod','productos','bta_Total','id_tipo_boleta','id_estado_boleta','id_Usuario_boleta')
