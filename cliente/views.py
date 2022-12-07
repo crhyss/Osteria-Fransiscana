@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate, hashers
 from cliente.forms import direccionForm, userForm,reclamoForm, reservaForm,profileForm,carritoForm,seleccionForm
 from cliente.models import Direccion, Region, Reclamo , User, Reserva, Comuna
@@ -8,6 +9,7 @@ from productos.models import Producto, Categoria_prod
 from django.core.paginator import Paginator
 from web.models import Estado_venta,Carrito,Seleccion 
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 def registro(request):
     data = {
         'formulario': userForm()
@@ -79,9 +81,13 @@ def carrito(request):
     productos = Producto.objects.all()
     buscar = request.GET.get('buscar')
     lista = Categoria_prod.objects.all()
-    carrito = Carrito.llamar_carrito(request.user.id_user)
-    listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod')
-    .values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
+    if request.user.is_authenticated:
+        carrito = Carrito.llamar_carrito(request.user.id_user)
+        listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod')
+        .values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
+    else:
+        carrito = None
+        listar = None
     br= request.GET.get('categoria')
     if is_valid_queryparam(buscar):
         productos = productos.filter(prod_nombre__icontains=buscar)
@@ -93,6 +99,7 @@ def carrito(request):
     context = {
         'productos': productos,
         'lista': lista,
+        'carrito':carrito,
         'listar':listar
     }
 
@@ -107,7 +114,17 @@ def mesero(request):
 
 
 def reclamos(request):
-    data = {
+    if request.user.is_authenticated:
+        carrito = Carrito.llamar_carrito(request.user.id_user)
+        listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod')
+        .values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
+    else:
+        carrito = None
+        listar = None
+    br= request.GET.get('categoria')
+    context = {
+        'carrito':carrito,
+        'listar':listar,
         'formulario':reclamoForm
     }
     if request.method == 'POST':
@@ -117,7 +134,7 @@ def reclamos(request):
             formulario.save()
         else:
             formulario = reclamoForm()
-    return render(request, 'web/vista/reclamos.html', data)
+    return render(request, 'web/vista/reclamos.html', context)
 
 def listarReclamos(request):
     reclamos = Reclamo.objects.all()
@@ -186,7 +203,14 @@ def modificarPerfil(request, id_usuario):
     )
 
 def reserva(request, id_usuario):
-    usuario = User.objects.get(pk=id_usuario) 
+    usuario = User.objects.get(pk=id_usuario)
+    if request.user.is_authenticated:
+        carrito = Carrito.llamar_carrito(request.user.id_user)
+        listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod')
+        .values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
+    else:
+        carrito = None
+        listar = None
     if request.method == 'POST':
         formulario = reservaForm(request.POST, instance=usuario)
         if formulario.is_valid():
@@ -205,10 +229,13 @@ def reserva(request, id_usuario):
             messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")
     else:
         formulario = reservaForm()
+    
     context = {
         'titulo' : 'Reservar Mesa',
         'formulario' : formulario,
-        'usuario': usuario
+        'usuario': usuario,
+        'carrito':carrito,
+        'listar':listar
     }
     return render(
         request, 
@@ -254,7 +281,7 @@ def confirmacionDelivery(request,id):
         'carrito/confirmacion-delivery.html',context
     )    
 
-def orders(request,id_usuario):
+def orders(request):
     formcart= Carrito.llamar_carrito(request.user.id_user)
     seleccion= Carrito.agregar_prod(request.user.id_user,request.POST["idProd"])
     listar= Carrito.listar_prod(request.user.id_user)
@@ -267,15 +294,35 @@ def orders(request,id_usuario):
         'contar':contar
         
     }
-    return redirect('/logeo/carrito/',context)
-
+    return render(
+        request, 
+        'carrito/carta.html',context
+    )
+@csrf_exempt
 def deletecart(request):
-    print(request.POST)
     formcart= Carrito.llamar_carrito(request.user.id_user)
-    Carrito.eliminar_prod(formcart.id_carrito,request.POST["idProdu"])
+    Carrito.eliminar_prod(formcart.id_carrito,request.POST["idProd"])
     listar= Carrito.listar_prod(request.user.id_user)
     context = {
         'listar':listar,
         'formcart':formcart
     }
-    return redirect('/logeo/carrito',context)
+    return render(
+        request, 
+        'carrito/cart.html',context
+    )
+
+def addcart(request):
+    print(request)
+    formcart= Carrito.llamar_carrito(request.user.id_user)
+    seleccion= Carrito.agregar_prod(request.user.id_user,request.POST["idProd"])
+    listar= Carrito.listar_prod(request.user.id_user)
+    context = {
+        'listar':listar,
+        'formcart':formcart,
+        'seleccion':seleccion,
+    }
+    return render(
+        request, 
+        'carrito/cart.html',context
+    )

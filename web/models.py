@@ -22,14 +22,15 @@ class Carrito(models.Model):
         carrito = Carrito.llamar_carrito(id_usuario)
         select = Seleccion.objects.filter(id_carrito = carrito.id_carrito)
         return select
+    @staticmethod
     def llamar_carrito(id_usuario):
-            try:
-                carrito = Carrito.objects.get(id_usuario = id_usuario)
-            except:
-                carrito = Carrito()
-                carrito.id_usuario = User.objects.get(id_user = id_usuario)
-                carrito.save()
-            return carrito
+        try:
+            carrito = Carrito.objects.get(id_usuario = id_usuario)
+        except:
+            carrito = Carrito()
+            carrito.id_usuario = User.objects.get(id_user = id_usuario)
+            carrito.save()
+        return carrito
 class Seleccion(models.Model):
     id_seleccion = models.AutoField(primary_key=True)
     id_prod = models.ForeignKey(Producto, on_delete= models.CASCADE, blank=False)

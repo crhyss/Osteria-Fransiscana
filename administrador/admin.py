@@ -5,7 +5,7 @@ from django.utils.html import format_html
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from django.urls import path
-
+from cliente.models import User
 class MyModelAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super().get_urls()
@@ -39,7 +39,9 @@ class categoriaAdmin(admin.ModelAdmin):
 @admin.register(cupon)
 class cuponAdmin(admin.ModelAdmin):
     list_display=('id_cupon','Nombre_cupon','cantidad','Monto')
-
+@admin.register(User)
+class cuponAdmin(admin.ModelAdmin):
+    list_display=('id_user','user_correo')
 # @admin.register(Boleta)
 # class BoletaAdmin(admin.ModelAdmin):
 #     list_display=('nro_orden','bta_fecha','cantidad_prod','productos','bta_Total','id_tipo_boleta','id_estado_boleta','id_Usuario_boleta')
