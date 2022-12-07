@@ -16,7 +16,7 @@ import os
 import environ
 env = environ.Env()
 environ.Env.read_env()
-Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -106,6 +106,7 @@ DATABASES = {
          'PORT': env('PORT'),
      	}
 }
+
 
 # DATABASES = {
 #     'default': {
@@ -223,7 +224,7 @@ JET_SIDE_MENU_ITEMS = [
         
     ]}
 ]
-JET_MODULE_GOOGLE_ANALYTICS_CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secrets.json')
+
 JET_CHANGE_FORM_SIBLING_LINKS = True
 JET_INDEX_DASHBOARD= 'dashboard.CustomIndexDashboard'
 

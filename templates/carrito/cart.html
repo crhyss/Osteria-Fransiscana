@@ -1,0 +1,63 @@
+{% load static %}
+<div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header ">
+        <h5 class="offcanvas-title  text-cente" id="offcanvasRightLabel">Carro de compras</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body " id="carritoalgoasi">
+        {% if listar != None %}
+        <div class="row">
+            <table class="table table-hover table-sm table-responsive" id="orders">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th></th>
+                            <th>Precio</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for list in listar%}
+                        <tr id="valorId" name="lista">
+                            <td><img src="/static/producto/{{list.id_prod__prod_imagen}}"
+                                    alt="{{list.id_prod__prod_nombre}}" style=" width: 50px; height: 50px;"></td>
+                            <td class="text text-center">{{list.id_prod__prod_nombre}}</td>
+                            <td id="cantidad" class="text text-center">{{list.cantidad}} </td>
+                            <td><a href="" class="fa fa-minus" aria-hidden="true"></a></td>
+                            <td id="precio" class="text text-center">{{list.id_prod__prod_precio_of}}</td>
+                            <td> <a href="{% url 'addcart' %}" type="submit" class="fa fa-plus" aria-hidden="true"></a>
+                            </td>
+                            <td>
+                                <form id="{{list.id_prod__id_producto}}">{% csrf_token %}
+                                    <input type="hidden" name="idProd" id="idProd{{list.id_prod__id_producto}}"
+                                        value="{{list.id_prod__id_producto}}">
+
+                                    <a id="delete" type="submit" onclick="elimina('{{list.id_prod__id_producto}}','{{list.id_prod__prod_precio_of}}','{{list.cantidad}}')"
+                                        class="btn-floating btn-tiny waves-effect waves-light red"><svg width="1em"
+                                            height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                        </svg></a>
+                            </td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+        {% else %}
+        <a href="{% url 'carrito'%}">Inicie Sesion</a>
+        <p>Actualmente no hay productos en el carrito Para agregar debe de iniciar Sesion</p>
+        {% endif %}
+        <div class="row">
+            <p class="text-left col-sm-6" id="ptotal" > </p>
+            <a href="{% url 'pedido'%}" class="btn-ingreso">
+                <button type="button" class="btn btn-primary me-2">Comprar</button>
+            </a>
+        </div>
+    </div>
+</div>

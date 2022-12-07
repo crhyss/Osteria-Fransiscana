@@ -15,22 +15,22 @@ class cupon(models.Model):
     cantidad = models.PositiveIntegerField()
     Monto = models.PositiveIntegerField()
 
-class Tipo_venta(models.Model):
-    id_tipo_venta = models.AutoField(primary_key = True)
-    tipo_venta = models.CharField(max_length=50)
-    def __str__(self):
-        return self.tipo_venta
-class Estado_venta(models.Model):
-    id_estado = models.AutoField(primary_key = True)
-    Estado_venta = models.CharField(max_length=50)
-    def __str__(self):
-        return self.Estado_venta
-class Boleta(models.Model):
-    nro_orden = models.AutoField(primary_key = True)
-    bta_fecha = models.DateTimeField(blank=True, null=True, default=(datetime.datetime.now()))
-    cantidad_prod = models.PositiveIntegerField()
-    productos = models.CharField(max_length=50)
-    bta_Total = models.PositiveIntegerField()
-    id_tipo_boleta = models.ForeignKey(Tipo_venta,on_delete=models.CASCADE, default=None)
-    id_estado_boleta = models.ForeignKey(Estado_venta,on_delete=models.CASCADE, default=None)
-    id_Usuario_boleta = models.ForeignKey(User,on_delete=models.CASCADE, default=None)
+# class Tipo_venta(models.Model):
+#     id_tipo_venta = models.AutoField(primary_key = True)
+#     tipo_venta = models.CharField(max_length=50)
+#     def __str__(self):
+#         return self.tipo_venta
+# class Estado_venta(models.Model):
+#     id_estado = models.AutoField(primary_key = True)
+#     Estado_venta = models.CharField(max_length=50)
+#     def __str__(self):
+#         return self.Estado_venta
+# class Boleta(models.Model):
+#     nro_orden = models.AutoField(primary_key = True)
+#     bta_fecha = models.DateTimeField(blank=True, null=True, default=(datetime.datetime.now()))
+#     cantidad_prod = models.PositiveIntegerField()
+#     productos = models.CharField(max_length=50)
+#     bta_Total = models.PositiveIntegerField()
+#     id_tipo_boleta = models.ForeignKey(Tipo_venta,on_delete=models.CASCADE, default=None)
+#     id_estado_boleta = models.ForeignKey(Estado_venta,on_delete=models.CASCADE, default=None)
+#     id_Usuario_boleta = models.ForeignKey(User,on_delete=models.CASCADE, default=None)
