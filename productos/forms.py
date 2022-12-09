@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Producto, Categoria_prod, Pedido
+from .models import Producto, Categoria_prod#, Pedido
 from django.views.generic import ListView
 def agregarClaseFormControl(elementos):
     for campo in elementos:
@@ -30,7 +30,7 @@ class CategoriaForm(ModelForm):
     class Meta:
         model = Categoria_prod
         fields = ['categoria_prod']
-
+"""
 class PedidoForm_V(ModelForm):
     def __init__(self, *args, **kwargs):
       super(PedidoForm_V,self).__init__(*args, **kwargs)
@@ -54,7 +54,7 @@ class PedidoForm(ModelForm):
             'pedido_modif': 'Detalle',
             'pedido_listo' : 'Estado',
             'pedido_producto' : 'Producto'
-        }
+        }"""
 
 class ContactListView(ListView):
     paginate_by = 4

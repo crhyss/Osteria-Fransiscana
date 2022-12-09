@@ -1,7 +1,8 @@
 from cliente.models import User
 from productos.models import Producto
 from django.db import models
-from cliente.models import Mesa
+from cliente.models import Mesa, EstadoMesa
+
 class Carrito(models.Model):
     id_carrito = models.AutoField(primary_key=True)
     id_usuario = models.ForeignKey(User, on_delete= models.CASCADE)
@@ -46,15 +47,92 @@ class Tipo_venta(models.Model):
     id_tipo_venta = models.AutoField(primary_key=True)
     tipo_venta = models.CharField(max_length=20)
 
+
 class Venta(models.Model):
     id_venta = models.AutoField(primary_key=True)
-    vta_fecha = models.DateTimeField(auto_created=True)
-    vta_bruto = models.IntegerField(max_length=8, default=0)
-    vta_iva = models.IntegerField(max_length=8, default=0)
-    vta_propina = models.IntegerField(max_length=8, default=0)
-    vta_final = models.IntegerField(max_length=8, default=0)
+    vta_fecha = models.DateTimeField(auto_now=True)
+    vta_bruto = models.IntegerField(default=0)
+    vta_iva = models.IntegerField(default=0)
+    vta_propina = models.IntegerField(default=0)
+    vta_final = models.IntegerField(default=0)
     vta_estado = models.ForeignKey(Estado_venta, on_delete= models.CASCADE)
     vta_tipo = models.ForeignKey(Tipo_venta, on_delete= models.CASCADE, blank=True)
+    vta_mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, blank=True, null=True)
+    def nueva_venta_local(id_mesa):
+        venta = Venta()
+        mesa = Mesa.objects.get(id_mesa = id_mesa)
+        venta.vta_estado = Estado_venta.objects.get(id_estado_venta = 1)
+        venta.vta_tipo = Tipo_venta.objects.get(id_tipo_venta = 1)
+        venta.vta_mesa = mesa
+        mesa.mesa_estado = EstadoMesa.objects.get(id_estado_mesa = 2)
+        venta.save()
+        mesa.save()
+        return venta
+    
+    def calcular_venta(self):
+        total = 0
+        bruto = 0
+        iva = 0
+        listar = (Pedido.objects.filter(pedido_venta = self.id_venta).select_related('pedido_producto')
+        .values('id_pedido','pedido_producto__id_producto','pedido_producto__prod_nombre','pedido_producto__prod_precio_ba','pedido_producto__prod_precio_of','pedido_producto__id_producto'))
+        for producto in listar:
+            precio_base = producto.get("pedido_producto__prod_precio_ba")
+            precio_oferta = producto.get("pedido_producto__prod_precio_of")
+            if precio_base >= precio_oferta:
+                total += precio_oferta
+            else:
+                total += precio_base
+        bruto = round((total * 100)/119)
+        iva = total - bruto
+        self.vta_bruto = bruto
+        self.vta_iva = iva
+        self.vta_final = total
+        self.save()
+        return self
 
+    def terminar_venta(self, propina, estado_venta):
+        self.vta_propina = int(propina)
+        self.vta_final = self.vta_final + self.vta_propina
+        self.vta_estado = Estado_venta.objects.get(id_estado_venta = estado_venta)
+        estado = EstadoMesa.objects.get(id_estado_mesa = 3)
+        mesa = Mesa.objects.get(id_mesa = self.vta_mesa_id)
+        mesa.mesa_estado = estado
+        mesa.save()
+        self.save()
 
+class Estado_pedido(models.Model):
+    id_estado_pedido = models.AutoField(primary_key=True)
+    estado_pedido = models.CharField(max_length=25)
+
+    def __str__(self) -> str:
+        return self.estado_pedido
+
+class Pedido(models.Model):
+    id_pedido = models.AutoField(primary_key=True)
+    pedido_modif = models.CharField(max_length=200, blank=False)
+    pedido_estado = models.ForeignKey(Estado_pedido, on_delete= models.CASCADE, default=1)
+    pedido_producto = models.ForeignKey(Producto, on_delete=models.CASCADE, default=None)
+    pedido_venta = models.ForeignKey(Venta, on_delete= models.CASCADE)
+
+    def agregar_pedido(pedido_modif, pedido_prod, id_venta):
+        pedido = Pedido()
+        pedido.pedido_modif = pedido_modif
+        pedido.pedido_producto = Producto.objects.get(id_producto = pedido_prod)
+        pedido.pedido_venta = Venta.objects.get(id_venta = id_venta)
+        pedido.save()
+        return pedido
+
+    def obtener_pedidos(id_venta):
+        try:
+            pedido = Pedido.objects.filter(pedido_venta = id_venta)
+        except:
+            pedido = None
+        return pedido
+
+    def entregar_pedido(id_pedido):
+        pedido = Pedido.objects.get(id_pedido = id_pedido)
+        estado = Estado_pedido.objects.get(id_estado_pedido = 3)
+        pedido.pedido_estado = estado
+        pedido.save()
+        return pedido
 
