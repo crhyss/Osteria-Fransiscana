@@ -1,10 +1,12 @@
 {% extends "admin/base_site.html" %} {% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}"/>
 
-<body class="container">
+<body class="container ">
     <h2 class="text-center card-header">Graficos</h2>
     <div class="row mt-2 text-center" id="lista">
 
-        <div class="col-md-4  p-1">
+        <div class="col-md-4  p-1 ">
             <div class="card">
                 <div>
                     <canvas class="card" id="myChart"></canvas>
@@ -12,21 +14,21 @@
             </div>
         </div>
         <br>
-        <div class="p-1 col-md-3">
+        <div class="p-1 col-md-3 ">
             <div class="card">
                 <div>
                     <canvas id="myChart2"></canvas>
                 </div>
             </div>
         </div>
-        <div class="col-md-4  p-1">
+        <div class="col-md-4  p-1 ">
             <div class="card">
                 <div>
                     <canvas id="myChart3"></canvas>
                 </div>
             </div>
         </div>
-        <div class="col-md-4  p-1">
+        <div class="col-md-4  p-1 ">
             <div class="card">
                 <div>
                     <canvas id="myChart4"></canvas>
@@ -99,29 +101,17 @@
         }
     });
 </script>
-<!---------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------Grafico de barra----------------------------------------------->
-<!---------------------------------------------------------------------------------------------------------------->
+
 <script>
     const bar = document.getElementById('myChart');
 
     new Chart(bar, {
         type: 'bar',
         data: {
-            labels: [{ %
-                    for prod in categoriaProd %
-                }
-                '{{prod.prod_categoria__categoria_prod}}', { % endfor %
-                }
-            ],
+            labels: [{% for prod in categoriaProd %}'{{prod.prod_categoria__categoria_prod}}',{%endfor%}],
             datasets: [{
                 label: 'Producto Por Categoria',
-                data: [{ %
-                        for prod in categoriaProd %
-                    }
-                    '{{prod.dcount}}', { % endfor %
-                    }
-                ],
+                data: [{% for prod in categoriaProd %}'{{prod.dcount}}',{%endfor%}],
                 borderWidth: 1
             }]
         },
@@ -134,9 +124,7 @@
         }
     });
 </script>
-<!---------------------------------------------------------------------------------------------------------------->
-<!----------------------------------------Grafico de barra 2 datas ----------------------------------------------->
-<!---------------------------------------------------------------------------------------------------------------->
+
 <script>
     const $grafica = document.getElementById('myChart3');
 
@@ -176,9 +164,7 @@
         }
     });
 </script>
-<!---------------------------------------------------------------------------------------------------------------->
-<!----------------------------------------Grafico de barra 2 datas ----------------------------------------------->
-<!---------------------------------------------------------------------------------------------------------------->
+
 <script>
     // Obtener una referencia al elemento canvas del DOM
     const puntos = document.getElementById('myChart4');
@@ -215,9 +201,6 @@
     });
 </script>
 
-<!---------------------------------------------------------------------------------------------------------------->
-<!------------------------------------------------------ Script diseño----------------------------------------------->
-<!---------------------------------------------------------------------------------------------------------------->
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">

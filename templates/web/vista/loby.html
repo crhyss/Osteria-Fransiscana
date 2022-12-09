@@ -1,30 +1,25 @@
-
 {% block content %}
-
-  <main class="container col-sm-12 col-md-6 mx-auto mt-5" style="display: flex; margin: 0 !important; min-width: 100%; padding-top: 50px;">
-    <section id = "catalogoProductos" class="card-group col-sm-12 col-md-6 mx-auto mt-5" style="display: flex; min-width: 100%; margin: 0 !important; justify-content: center;">
-      {% for producto in productos %}
-      {% if producto.prod_recomendado %}
-      <div class="card " style="max-width: 250px; margin: 10px" id="{{producto.id_producto}}">
-        <img src="static/producto/{{producto.prod_imagen}}" style=" width: 300px; height: 200px;" class="img-thumbnail" alt="{{producto.prod_nombre}}">
-        <div class="card-body">
-
-            <h5 class="card-title"> {{producto.prod_nombre}}</h5>
-            <p class="">Precio: ${{producto.prod_precio_ba}}</p>
-          <p>{{producto.prod_recomendado}}</p>
-        </div>
-        
-        <footer class="card-footer" id = "card-footer-moda">
-          <div class="btn-group" role="group" aria-label="Basic example"></div>
-          <a href="/producto/{{producto.id}}" class="card-link btn btn-primary" style="margin: 5px;">Visualizar</a><br>
-          
-          </div>
-      </footer>
+<p class="text-center fs-3 fw-bold font-monospace m-5">Recomendacion de la casa</p>
+<hr class="border border-danger border-2 opacity-50">
+<main class="container col-sm-12 col-md-6 mx-auto mt-5"
+  style="display: flex; margin: 0 !important; min-width: 100%; padding-top: 50px;">
+  <section id="catalogoProductos" class="card-group col-sm-12 col-md-6 mx-auto mt-5"
+    style="display: flex; min-width: 100%; margin: 0 !important; justify-content: center;">
+    {% for producto in productos %}
+    {% if producto.prod_recomendado %}
+    <div class="card " style="max-width: 250px; margin: 10px" id="{{producto.id_producto}}">
+      <img src="static/producto/{{producto.prod_imagen}}" style=" width: 300px; height: 200px;" class="img-thumbnail"
+        alt="{{producto.prod_nombre}}">
+      <div class="card-body">
+        <h5 class="card-title"> {{producto.prod_nombre}}</h5>
+        <p class="">Precio: ${{producto.prod_precio_ba}}</p>
       </div>
-      {% endif %}
-      {% endfor %}
-    </section>
-  </main>
+    </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </section>
+</main>
 </body>
 
-  {% endblock content %}
+{% endblock content %}

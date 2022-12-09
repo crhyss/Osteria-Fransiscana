@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Producto, Categoria_prod, Pedido
-from .forms import ProductoForm, PedidoForm, PedidoForm_V
+from .models import Producto, Categoria_prod
+from web.models import Pedido
+from .forms import ProductoForm#, PedidoForm, PedidoForm_V
 from django.core.paginator import Paginator
 def agregarp(request):
     lista = Categoria_prod.objects.all()
@@ -98,6 +99,7 @@ def eliminarPedido(request, id_pedido):
     return redirect('/productos/pedidos/historial')
 
 def visualizarPedido(request, id_pedido):
+    """
     pedidoVisualizado = Pedido.objects.get(pk=id_pedido)
     formularioPedido = None
     if request.method == 'POST':
@@ -110,11 +112,10 @@ def visualizarPedido(request, id_pedido):
     context = {
         'titulo': 'Visualizar Pedido',
         'formulario': formularioPedido
-    }
+    }"""
     return render(
         request,
         'vista/visualizarPedido.html',
-        context
     )
 
 def terminarPedido(request, id_pedido):

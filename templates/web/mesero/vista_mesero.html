@@ -1,0 +1,112 @@
+{% extends 'vista/Principal.html' %} 
+{% load static %} 
+{% block content %}
+<div class="card">
+    <div class="card-head">
+        <a href="/web/vista_mesas" >Volver</a>
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title" id="nro_mesa">{{mesa.mesa_nro}}</h5>
+        <p class="card-text">Fecha {{venta.vta_fecha}}</p>
+        <p class="card-text">ID {{venta.id_venta}}</p>
+        <div id="message"></div>
+        <form class="row" id="agre_pedid">
+            {% csrf_token %}
+            <input type="hidden" name="id_venta" value="{{venta.id_venta}}">
+            <select class="form-select col-3" id="categoria" name="categoria">
+                <option value="0" id="0"> -- Seleccione una Categoría -- </option>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id_categoria }}">{{ categoria.categoria_prod }}</option>
+                {% endfor %}
+            </select>
+            <select class="form-select col-3" id="producto" name="producto">
+                <option value="0" id="0"> --- Seleccione un Producto --- </option>
+                {% for producto in productos %}
+                    <option id="{{producto.prod_categoria_id}}" value="{{ producto.id_producto }}">{{ producto.prod_nombre }}</option>
+                {% endfor %}   
+            </select>
+            <input class="col" type="text" name="modific" id="modific">
+            <button class="col-2" id="add_ped">Nuevo pedido</button>
+        </form>
+        <br>
+        <table class="table" id="lista_pedidos">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col-5">Producto</th>
+                    <th scope="col">Modificaciones</th>
+                    <th scope="col">Pedido Listo</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% if pedidos != None %}
+                    {% for pedido in pedidos %}
+                        <tr>
+                            <td>{{pedido.id_pedido}}</th>
+                            <td>{{pedido.pedido_producto}}</td>
+                            <td>{{pedido.pedido_modif}}</td>
+                            <td>{{pedido.pedido_estado}}</td>
+                            <td>
+                                {% if pedido.pedido_estado_id == 3 %}
+                                    Producto Entregado
+                                {% else %}
+                                    <form id="{{pedido.id_pedido}}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="id_pedido" value="{{pedido.id_pedido}}">
+                                        <button onclick="pedido_entregado('{{pedido.id_pedido}}')">Entregar</button>
+                                    </form>
+                                {% endif %}
+                                
+                            </dh>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                
+            </tbody>
+        </table>
+        <button data-bs-toggle="modal" data-bs-target="#ModalPago" onclick="calcular_total()">Finalizar compra</button>
+        <!-- Modal -->
+        <div class="modal fade" id="ModalPago" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="ModalData">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Finalizar Venta</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <p class="col-3">Bruto: {{venta.vta_bruto}}</p>
+                            <p class="col-3">IVA: {{venta.vta_iva}}</p>
+                        </div>
+                        <p id="totalVenta">Total Venta: {{venta.vta_final}}</p>
+                        <form id="enviar_pago">
+                            {% csrf_token %}
+                            <input type="hidden" name="venta_id" value="{{venta.id_venta}}">
+                            <label for="propina">Propina</label>
+                            <input type="number" onchange="calcular_total()" id="propina" name="propina" value="{{propina}}">
+                            <label id="propina" >Recomendado: {{propina}}</label>
+                            <p id="total"></p>
+                            <br>
+                            <label for="TipoPago">Tipo de pago</label>
+                            <select name="TipoPago">
+                                <option value="4">Efectivo</option>
+                                <option value="6">Crédito</option>
+                                <option value="5">Débido</option>
+                                <option value="7">No Pagado</option>
+                            </select>
+                        </form>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="pagar" class="btn btn-primary" onclick="pagar_pedido()">Pagado</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/js/Mesero.js"></script>
+{% endblock content %}

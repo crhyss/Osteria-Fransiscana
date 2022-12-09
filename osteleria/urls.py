@@ -22,6 +22,7 @@ urlpatterns = [
     path('', paginaprincipal,name="loby"),
     path('logeo/', include('cliente.urls'),name="login"),
     path('productos/', include('productos.urls'),name="producto"),
+    path('web/', include('web.urls'), name="mesero"),
     path('map/', include('map.urls'),name="mapa"),
     path('ordenes/', ordenes, name='ordenes'),
     path('accounts/', include('django.contrib.auth.urls'),name="login"),

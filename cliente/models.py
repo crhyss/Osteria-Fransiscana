@@ -34,6 +34,27 @@ class Direccion(models.Model):
     dir_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE, default=None)
     def __str__(self):
         return self.dir_calle
+    def agregar_dir(dir_calle, dir_nro, dir_depto_nro, comuna):
+        if dir_depto_nro == "":
+            dir_depto_nro = 0
+        try:
+            dir = Direccion.objects.get(
+                dir_calle = dir_calle,
+                dir_nro = dir_nro,
+                dir_depto_nro = dir_depto_nro,
+                dir_comuna = comuna
+            )
+            return dir
+        except:
+            dir = Direccion()
+            dir.dir_calle = dir_calle
+            dir.dir_nro = dir_nro
+            if dir_depto_nro != "":
+                dir.dir_depto = True
+                dir.dir_depto_nro = dir_depto_nro
+            dir.dir_comuna = Comuna.objects.get(id_comuna = comuna)
+            dir.save()
+            return dir
 
 
 class Local(models.Model):
@@ -42,7 +63,9 @@ class Local(models.Model):
     local_hora_cierr = models.TimeField(blank = False)
     local_fono = models.IntegerField(blank = False)
     local_activo = models.BooleanField(default=True)
-    locar_direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE, default=None)
+    local_direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE, default=None)
+    def __str__(self) -> str:
+        return self.locar_direccion
 
 class UserManager(BaseUserManager):
     def _create_user(self, user_correo, user_nombre, user_apellidos, user_tipo, is_superuser, is_staff, user_pass):
@@ -99,6 +122,9 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = "user_correo"
     REQUIRED_FIELDS = ['user_nombre', 'user_apellidos']
+    class Meta:
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'
 
 
 class Reclamo(models.Model):
@@ -114,9 +140,16 @@ class EstadoMesa(models.Model):
 
 class Mesa(models.Model):
     id_mesa = models.AutoField(primary_key=True)
-    mesa_nro = models.IntegerField(max_length=2, blank=False)
-    mesa_sillas = models.IntegerField(max_length=2, blank=False)
+    mesa_nro = models.IntegerField(blank=False)
+    mesa_sillas = models.IntegerField(blank=False)
     mesa_estado = models.ForeignKey(EstadoMesa, on_delete=models.CASCADE, default=None)
+    mesa_local = models.ForeignKey(Local, on_delete=models.CASCADE, default=1)
+
+    def mesa_limpia(self):
+        estado = EstadoMesa.objects.get(id_estado_mesa = 1)
+        self.mesa_estado = estado
+        self.save() 
+
     def __str__(self):
         return str(self.id_mesa)
 
