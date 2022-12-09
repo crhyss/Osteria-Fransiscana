@@ -99,6 +99,9 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = "user_correo"
     REQUIRED_FIELDS = ['user_nombre', 'user_apellidos']
+    class Meta:
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'
 
 
 class Reclamo(models.Model):

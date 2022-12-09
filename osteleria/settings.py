@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
     'web',
     'productos',
     'map',
@@ -208,17 +209,14 @@ JET_SIDE_MENU_COMPACT = True
 JET_SIDE_MENU_ITEMS = [
     {'app_label': 'auth', 'items': [
         {'name': 'group'},
-    ]},
-    {'app_label': 'social_django', 'items': [
-        {'name': 'association'},
-        {'name': 'nonce'},
-        {'name': 'usersocialauth'},
+        {'label': 'User',
+        'url':'/admin/cliente/user/'},
     ]},
     {'label': 'Gestion', 'app_label': 'Productos', 'items': [
         {'label': 'Visualizar Ordenes',
         'url': '/productos/pedidos/'},
         {'label': 'Reclamos',
-        'url': '/logeo/reclamo/lista/'},
+        'url': '/admin/cliente/reclamo/'},
         {'label': 'graficos',
         'url': '/graficos/'},
         
