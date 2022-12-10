@@ -169,11 +169,12 @@ class Reserva(models.Model):
     def __str__ (self):
         return self.reserva_mesa
 
-    def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario):
+    def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario, reserva_evento):
         reserva = Reserva()
         reserva.fecha_reserva = fecha_reserva
         reserva.hora_reserva = hora_reserva
         reserva.reserva_mesa = Mesa.objects.get(id_mesa = reserva_mesa)
         reserva.reserva_usuario = User.objects.get(id_user = reserva_usuario)
+        reserva.reserva_evento = Evento.objects.get(id_evento = reserva_evento)
         reserva.save()
     
