@@ -111,8 +111,6 @@ def pedido(request):
 def mesero(request):
     return render(request, 'test/vistamesero.html')
 
-
-
 def reclamos(request):
     if request.user.is_authenticated:
         carrito = Carrito.llamar_carrito(request.user.id_user)
@@ -206,8 +204,7 @@ def reserva(request, id_usuario):
     usuario = User.objects.get(pk=id_usuario)
     if request.user.is_authenticated:
         carrito = Carrito.llamar_carrito(request.user.id_user)
-        listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod')
-        .values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
+        listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod').values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
     else:
         carrito = None
         listar = None
@@ -218,7 +215,7 @@ def reserva(request, id_usuario):
                 fecha_reserva = request.POST["fecha_reserva"],
                 hora_reserva = request.POST["hora_reserva"],
                 reserva_mesa = request.POST["reserva_mesa"],
-                reserva_evento = request.POST["reserva_evento"],
+                reserva_evento = request.POST["reserva_evento_id"],
                 reserva_usuario = usuario.id_user,
             )
             print("fulario")

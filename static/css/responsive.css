@@ -66,9 +66,29 @@
     justify-content: center;
 }
 
+.container-perfil{
+    height: 80vh;
+}
+
+.container-modificar-perfil{
+    height: 80vh;
+}
+
+.container-contraseñas{
+    height: 80vh;
+}
+
+#inicio{
+    display: none;
+}
+
 @media (max-width: 1302px){
     #tabs{
         padding-left: 165px !important;
+    }
+
+    .carousel-caption p{
+        font-size: 4.5rem !important;
     }
 }
 
@@ -79,6 +99,10 @@
 
     .card.card-register{
         width: 70%;
+    }
+
+    #form-contraseña{
+        width: 80% !important;
     }
 }
 
@@ -129,6 +153,18 @@
     .container-perfil .card-footer .btn{
         margin-bottom: 10px;
     }
+
+    .carousel-caption p{
+        font-size: 2.5rem !important;
+    }
+
+    .carousel-caption h1{
+        font-size: 2.0rem !important;
+    }
+
+    #inicio{
+        display: flex;
+    }
 }
 
 @media (min-width: 992px){
@@ -152,11 +188,14 @@
 }
 
 @media (max-width: 770px){
-.collapse.navbar-collapse{
-    justify-content: space-around;
-    width: 80%;
+    .collapse.navbar-collapse{
+        justify-content: space-around;
+        width: 80%;
     }
 
+    .row.login{
+        height: auto !important;
+    }
 }
 
 @media (max-width: 768px){
@@ -164,6 +203,34 @@
     .navbar{
         padding: 1.5 !important;
         --bs-navbar-padding-y: 0.3rem;
+    }
+}
+
+@media (max-width: 500px){
+    .card-loby{
+        min-width: 380px !important; 
+        max-width: 390px !important;
+    }
+    
+    .imagen-loby{
+        width: 100% !important;
+        height: 100px !important;
+    }
+    
+
+}
+
+@media (max-width: 441px){
+    .container-perfil{
+        height: auto;
+    }
+
+    .container-modificar-perfil{
+        height: auto;
+    }
+
+    .container-contraseñas{
+        height: auto;
     }
 }
 

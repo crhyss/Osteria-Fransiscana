@@ -23,7 +23,7 @@ body {
 }
 
 .card-img-top {
-    height: 200px;
+    height: 250px;
 }
 
 .card-text {
@@ -55,6 +55,11 @@ body {
 
 .ordenes table {
     width: 80%;
+}
+
+.imagen-loby{
+    width: 500px;
+    height: 450px !important;
 }
 
 
@@ -191,15 +196,7 @@ body {
     align-items: center;
 }
 
-<<<<<<< HEAD
-/* .container-perfil{
-    width: 50%;
-} */
-
-.card-header{
-=======
 .card-header {
->>>>>>> e70c4914fff24de847da222f994d92a0de8dce09
     display: flex;
     justify-content: center;
 }
@@ -229,7 +226,6 @@ body {
     padding: 20px;
 }
 
-<<<<<<< HEAD
 #container-login-img{
  justify-content: end;   
 }
@@ -248,8 +244,3 @@ body {
     margin-top: 7px;
 }
 
-=======
-#reclamos form label {
-    text-align: left;
-}
->>>>>>> e70c4914fff24de847da222f994d92a0de8dce09

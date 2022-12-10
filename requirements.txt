@@ -11,3 +11,5 @@ psycopg
 django-environ
 psycopg2-binary
 django
+mysqlclient
+django-import-export

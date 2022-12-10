@@ -1,14 +1,12 @@
 {% extends 'vista/Principal.html' %} {% load static %} {% block content %}
-<div class="container" id="reclamos">
+<div class="container mb-5" id="reclamos">
     <div class="card col-sm-12 col-md-6 mx-auto mt-5" style="background-color: rgb(146, 245, 126, 0.3);">
-        <div class="text-center" style="margin-top: 2%">
+        <div class="text-center mb-2 mt-2">
             <h1 class="card-title">Reclamos</h1>
         </div>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="card-body">
-
-
                 <div class="mb-2 text text-left">Nombre</div>
                 {{formulario.nombre}}
                 <div class="mb-2 mt-3 text text-left">Apellido</div>
@@ -18,7 +16,7 @@
                 <div class="mb-2 mt-3 text text-left">Descripción del reclamo</div>
                 {{formulario.reclamo_descrip}}
             </div>
-            <div style="display: flex; justify-content: center;margin-bottom: 5%;">
+            <div class="d-flex justify-content-center mb-4">
                 <button class="btn btn-success my-2 my-sm-0" type="submit" style="width: 30%">Enviar</button>
             </div>
         </form>

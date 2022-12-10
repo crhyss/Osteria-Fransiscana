@@ -63,10 +63,13 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0" id="tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'carrito'%}">
-                            <strong>Carta</strong>
+                    <li class="nav-item" id="inicio">
+                        <a class="nav-link" href="/">
+                            <strong>Inicio</strong>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'carrito'%}">Carta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/map">Mapa</a>
@@ -140,7 +143,6 @@
     <a class="waves-effect waves-light btn text-primary " href="#">{{ user.username }}</a>
     <a class="waves-effect waves-light btn btn-flat text-primary" href="{% url 'salir'%}">Salir</a> {% else %}
     <a type="button" class="btn text-primary" data-toggle="modal" data-target="#exampleModal">Mi cuenta</a> {% endif %} {% endif %} {% endfor %}
-
     <main>
         {% block content %} {% include 'vista/header.html' %} {% include 'web/vista/loby.html' %} {% endblock content %} {% block content1 %} {% endblock content1 %}
     </main>

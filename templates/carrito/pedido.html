@@ -6,9 +6,6 @@
     <title>PEDIDO</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-
 </head>
 
 <body>
@@ -16,59 +13,60 @@
         <h1 class="text-center" style="margin-top: 50px;">MI PEDIDO</h1>
         <hr>
     </div>
-    <div class="row cent">
+    <div class="col d-flex flex-column justify-content-center align-items-center cent mb-5">
         <div class="col-sm-6">
-            <div class="card" style="width: 650px; margin-left: 120px; margin-top: 100px;">
-                <div class="card-body ">
-                    <h5 class="card-title">Elige un tipo de entrega</h5>
-                    <div class="input-group border">
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">Retiro<svg style="margin-left: 26px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-check" viewBox="0 0 16 16">
-                            <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708L7.293 1.5Z"/>
-                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514Z"/>
-                          </svg></button>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Elige un tipo de entrega</h5>
+                    <div class="input-group border justify-content-between">
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">Retiro
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ms-2 mb-1" width="16" height="16" fill="currentColor" class="bi bi-house-check" viewBox="0 0 16 16">
+                                <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708L7.293 1.5Z"/>
+                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514Z"/>
+                            </svg>
+                        </button>
                         <span class="input-group-addon"></span>
-                        <p class="text-start" style="margin-top: 15px; margin-left: 435px;">Gratis</p>
+                        <p class="text-start mt-2 me-2">Gratis</p>
                     </div>
-                    <div class="input-group border">
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2">Delivery<svg style="margin-left: 12px;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-bicycle"
-                            viewBox="0 0 16 16">
-                            <path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"/>
-                          </svg></button>
+                    <div class="input-group border mt-4 justify-content-between">
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2">Delivery
+                            <svg xmlns="http://www.w3.org/2000/svg"class="ms-2 mb-1" width="15" height="15" fill="currentColor" class="bi bi-bicycle"viewBox="0 0 16 16">
+                                <path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"/>
+                            </svg>
+                        </button>
                         <span class="input-group-addon"></span>
-                        <p class="text-start" style="margin-top: 15px; margin-left: 433px;">$3500</p>
+                        <p class="text-start mt-2 me-2">$3500</p>
                     </div>
                 </div>
+                <a class="cent mt-3 mb-3" style=" color:black;" href="">Volver al carro de compras</a>
             </div>
-            <a class="cent" style=" color:black;margin-left: 120px;" href="">Volver al carro de compras</a>
         </div>
-        <div class="col-sm-6">
-            <div class="card" style="width: 400px; margin-left: 120px; margin-top: 100px;">
+        <div class="col-sm-6 mt-3">
+            <div class="card">
                 <form  id="TotalForm" action="/webpay-plus/create/" method="POST">
                 <div class="card-body">
-                    <h5 class="card-title">Resumen de la compra</h5>
-                    <div class="input-group">
-                        
+                    <h5 class="card-title mb-3">Resumen de la compra</h5>
+                    <div class="input-group justify-content-between">
                         <p class="text-start">Total compra:</p>
                         <span class="input-group-addon"></span>
-                        <p class="text-start TotalProducto" style="margin-left: 187px;" id="TotalProducto" value="0">$0</p>
+                        <p class="text-start TotalProducto" id="TotalProducto" value="0">$0</p>
                         {% csrf_token %}
                     </div>
-                    <div class="input-group">
+                    <div class="input-group justify-content-between">
                         <p class="text-start">Costo de envío:</p>
                         <span class="input-group-addon"></span>
-                        <p class="text-end CostoEnvio" style="margin-left: 182px;"id="CostoEnvio" value="0">$0</p>
+                        <p class="text-end CostoEnvio" id="CostoEnvio" value="0">$0</p>
                     </div>
-                    <div class="input-group card-footer">
+                    <div class="input-group card-footer justify-content-between p-0">
                         <p class="text-start" >Total:</p>
                         <span class="input-group-addon"></span>
-                        <p class="text-start TotalVenta" style="margin-left: 200px;"id="TotalVenta" value="0">$0</p>
+                        <p class="text-start TotalVenta" id="TotalVenta" value="0">$0</p>
                     </div>
                     <div id="totalComp">
                         
                     </div>
                     <div class="text-center">
-                        <button type="submit" id="activador" disabled class="btn btn-success btn-sm totalComp">Ir a pagar</button>
-                    
+                        <button type="submit" id="activador" disabled class="btn btn-success btn-sm totalComp mt-3">Ir a pagar</button>     
                     </div>
                 </div>
             </form>
@@ -117,13 +115,13 @@
                     </div>
                     <br>
                     <input class="margenes form-control" type="text" placeholder="Indicaciones de entrega" name="tipo_de_dato">
-                    <span class="margenes">Ej: Número de Depto / Casa</span>
+                    <span class="margenes ms-1">Ej: Número de Depto / Casa</span>
                 </div>
 
                 <div class="modal-footer">
                     <span class="margenes">*Se le aplicara un costo de $3500 por envio.</span>
                     <div class="">
-                        <button type="button" class="btn btn-success" >Pagar</button>
+                        <button type="button" class="btn btn-success">Pagar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                     </div>
 

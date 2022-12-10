@@ -1,15 +1,12 @@
 {% block content %}
 <p class="text-center fs-3 fw-bold font-monospace m-5">Recomendacion de la casa</p>
 <hr class="border border-danger border-2 opacity-50">
-<main class="container col-sm-12 col-md-6 mx-auto mt-5"
-  style="display: flex; margin: 0 !important; min-width: 100%; padding-top: 50px;">
-  <section id="catalogoProductos" class="card-group col-sm-12 col-md-6 mx-auto mt-5"
-    style="display: flex; min-width: 100%; margin: 0 !important; justify-content: center;">
+<main class="container col-sm-12 col-md-6 mx-auto mt-5 mb-5" style="display: flex; margin: 0 !important; min-width: 100%; padding-top: 50px;">
+  <section id="catalogoProductos" class="d-flex card-group col-sm-12 col-md-6 mx-auto mt-5 mb-5 justify-content-center" style="min-width: 80%; flex-wrap: wrap;">
     {% for producto in productos %}
     {% if producto.prod_recomendado %}
-    <div class="card " style="max-width: 250px; margin: 10px" id="{{producto.id_producto}}">
-      <img src="static/producto/{{producto.prod_imagen}}" style=" width: 300px; height: 200px;" class="img-thumbnail"
-        alt="{{producto.prod_nombre}}">
+    <div class="card m-4 card-loby" style="min-width: 440px; max-width:500px" id="{{producto.id_producto}}">
+      <img src="static/producto/{{producto.prod_imagen}}"class="d-flex imagen-loby img-fluid p-3" alt="{{producto.prod_nombre}}">
       <div class="card-body">
         <h5 class="card-title"> {{producto.prod_nombre}}</h5>
         <p class="">Precio: ${{producto.prod_precio_ba}}</p>

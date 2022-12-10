@@ -4,6 +4,7 @@ from .models import Producto, Categoria_prod
 from web.models import Pedido
 from .forms import ProductoForm#, PedidoForm, PedidoForm_V
 from django.core.paginator import Paginator
+
 def agregarp(request):
     lista = Categoria_prod.objects.all()
     productos = Producto.objects.all()

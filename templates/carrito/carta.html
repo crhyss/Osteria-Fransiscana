@@ -2,10 +2,10 @@
 {% load static %}
 {% block content %}
 
-<body>
-    <div class="container">
+
+    <div class="container d-flex flex-column" style="width:100%;">
         <header>
-            <div class="container ">
+            <div class="container">
                 <h1 class="text-center" style="padding-top: 25px;">CARTA</h1>
                 <hr>
             </div>
@@ -13,18 +13,14 @@
         <main>
             <nav>
                 <a class="banner " data-pushbar-target="pushbar-productos"></a>
-
             </nav>
             <form method="GET" action="." class="d-flex" role="search">
                 <div class="container text-center">
                     <div class="row align-items-start">
                         <div class="col">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                                name='buscar'>
-
+                            <input class="form-control me-2" type="search" placeholder="¿Qué Buscas?" aria-label="Search" name='buscar'>
                         </div>
-
-                        <div class="col ">
+                        <div class="col">
                             <div class="form-group ">
                                 <select id="Categoria" class="form-select" name="categoria">
                                     <option selected>Categoria</option>
@@ -32,16 +28,14 @@
                                     <option value="{{ cat.id_categoria }}">{{ cat.categoria_prod }}</option>
                                     {% endfor %}
                                 </select>
-
                             </div>
                         </div>
                         <div class="col d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </div>
 
-
             </form>
-    </div>
+        </div>
     </div>
     <br>
     <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
@@ -49,8 +43,7 @@
     <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
     <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
     <section>
-        <div class="row row-cols-1 row-cols-md-3 g-4 border border-3 ">
-
+        <div class="row row-cols-1 row-cols-md-3 border border-3 ">
             {% for producto in productos %}
             <div class="col d-flex justify-content-around" id="productos">
                 <form action="/logeo/orders/" id="preci{{producto.id_producto}}" method="post" enctype="multipart/form-data">
@@ -64,7 +57,7 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item ">
                                     <h6 class="item-price fw-bold" id="prec{{producto.id_producto}}"
-                                        value="{{producto.prod_precio_ba}}">precio Normal${{producto.prod_precio_ba}}
+                                        value="{{producto.prod_precio_ba}}">Precio Normal: ${{producto.prod_precio_ba}}
                                     </h6>
                                     <h6 class="item-price fw-bold" id="precOf{{producto.id_producto}}"
                                         value="{{producto.prod_precio_of}}">Precio Oferta: ${{producto.prod_precio_of}}
@@ -76,8 +69,7 @@
                                 </li>
                                 <li class="list-group-item ">
                                     <button class="btn btn-outline-success" type="submit" data-bs-toggle="offcanvas"
-                                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" onclick="aniadirProd('{{producto.id_producto}}','{{producto.prod_precio_of}}',1)"
-                                        >AÑADIR AL CARRO</button>
+                                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" onclick="aniadirProd('{{producto.id_producto}}','{{producto.prod_precio_of}}',1)">AÑADIR AL CARRO</button>
                                 </li>
                             </ul>
                         </div>
@@ -129,7 +121,6 @@
             {% endif %}
         </ul>
     </nav>
-    </main>
-</body>
+</main>
 
 {% endblock content %}
