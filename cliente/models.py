@@ -136,7 +136,11 @@ class Reclamo(models.Model):
 
 class EstadoMesa(models.Model):
     id_estado_mesa = models.AutoField(primary_key=True)
-    estado_mesa = models.BooleanField(default=True)
+    estado_mesa = models.CharField(max_length=20)
+    def __str__(self):
+        return self.estado_mesa
+    
+
 
 class Mesa(models.Model):
     id_mesa = models.AutoField(primary_key=True)

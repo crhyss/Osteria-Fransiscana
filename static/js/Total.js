@@ -23,23 +23,44 @@ function DetalleCompra(){
     CostoEnvio.innerHTML = '$0'
     TotalVenta.innerHTML = '$'+ total;
     consulta.innerHTML +='<input id="amount" name="amount" hidden value="'+total+'"/>' 
+    consulta.innerHTML += '<input id="tipoventa" name="tipoventa" hidden value="3"/>'
+
     if ($('#exampleModal').modal('hide')) {
-        Button.disabled = false
+        if(total > 0){
+            Button.disabled = false
+        }
+        
     }
     $('#exampleModal').modal('hide');
-    localStorage.removeItem('total')
-    localStorage.removeItem('orders')
-    var orders = JSON.parse(localStorage.getItem('orders'));
-    var total = localStorage.getItem('total');
-    if (orders === null || orders === undefined) {
-        localStorage.setItem('orders',JSON.stringify([]));
-        orders = JSON.parse(localStorage.getItem('orders'))
-    }
-
-    if (total === null || total === undefined) {
-        localStorage.setItem('total',0);
-        total = localStorage.getItem('total');
-    }
 }
 DetalleCompra()
+function DetalleCompraDelivery(){
+    var consulta = document.querySelector('#totalComp');
+    const Button = document.getElementById('activador');
+    var total = localStorage.getItem('total');
+    var TotalProducto = document.querySelector('#TotalProducto');
+    var TotalVenta = document.querySelector('#TotalVenta');
+    var CostoEnvio = document.querySelector('#CostoEnvio');
+    var totalDelivery = Number(total) + 3500
+    TotalProducto.innerHTML = '$'+ total
+    CostoEnvio.innerHTML = '$3500'
+    TotalVenta.innerHTML = '$'+ totalDelivery
+    consulta.innerHTML +='<input id="amount" name="amount" hidden value="'+totalDelivery+'"/>' 
+    consulta.innerHTML += '<input id="tipoventa" name="tipoventa" hidden value="2"/>'
+
+    if ($('#exampleModal2').modal('hide')) {
+        if(total > 0){
+            Button.disabled = false
+        }
+        
+    }
+    $('#exampleModal2').modal('hide');    
+}
+DetalleCompraDelivery()
+// localStorage.removeItem('total')
+// var total = localStorage.getItem('total');
+// if (total === null || total === undefined) {
+//     localStorage.setItem('total',0);
+//     total = localStorage.getItem('total');
+// }
 

@@ -17,8 +17,12 @@ class Carrito(models.Model):
             select.id_prod = Producto.objects.get(id_producto = id_prod)
             select.id_carrito = Carrito.objects.get(id_carrito = carrito.id_carrito)
             select.save()
+
     def eliminar_prod(id_carrito, id_prod):
         Seleccion.objects.get(id_carrito = id_carrito, id_prod = id_prod).delete()
+
+    def eliminar_carrrito(id_carrito):
+        Seleccion.objects.filter(id_carrito_id=id_carrito).delete()
     def listar_prod(id_usuario):
         carrito = Carrito.llamar_carrito(id_usuario)
         select = Seleccion.objects.filter(id_carrito = carrito.id_carrito)
@@ -68,6 +72,34 @@ class Venta(models.Model):
         venta.save()
         mesa.save()
         return venta
+    def nueva_venta_online(id_mesa):
+        venta = Venta()
+        mesa = Mesa.objects.get(id_mesa = id_mesa)
+        venta.vta_estado = Estado_venta.objects.get(id_estado_venta = 1)
+        venta.vta_tipo = Tipo_venta.objects.get(id_tipo_venta = 1)
+        venta.vta_mesa = mesa
+        mesa.mesa_estado = EstadoMesa.objects.get(id_estado_mesa = 2)
+        venta.save()
+        mesa.save()
+        return venta
+    def venta_retiro(bruto,date,vta_tipo_id):
+        venta = Venta()
+        venta.vta_estado = Estado_venta.objects.get(id_estado_venta = 1)
+        venta.vta_tipo = Tipo_venta.objects.get(id_tipo_venta = vta_tipo_id)
+        a = round((bruto * 100)/119)
+        venta.vta_bruto = round((bruto * 100)/119)
+        venta.vta_fecha = date
+        venta.vta_iva = bruto - a
+        if vta_tipo_id == 2:
+            venta.vta_propina = 3500
+            venta.vta_final = bruto + 3500
+            venta.save()
+            return venta    
+        else:
+            venta.vta_propina = 0
+            venta.vta_final = bruto + 0
+            venta.save()
+            return venta    
     
     def calcular_venta(self):
         total = 0
