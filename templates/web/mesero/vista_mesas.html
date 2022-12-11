@@ -1,41 +1,40 @@
 {% extends 'vista/Principal.html' %} 
 {% load static %} 
-{% block title %}
-    Vista de mesas
+{% block title %}    
 {% endblock title %}
 {% block content %}
-<br>
-<form>
-    {% csrf_token %}
-    <select id="LocalSelect">
-        <option value="0">Todos los locales</option>
-        {% for local in locales %}
-            <option value="{{local.id_local}}">{{local.local_direccion}}</option>
-        {% endfor %}
-    </select>
-</form>
-<br>
-<div class="row" id="ListaMesas">
-    {% for mesa in mesas %}
-        <div class="col-4" id="{{mesa.mesa_local_id}}" name="mesa">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title"> Mesa {{mesa.mesa_nro}}</h5>
-                    <p class="card-text"> Estado {{mesa.mesa_estado}}</p>
-                    <p class="card-text"> ID mesa {{mesa.id_mesa}}</p>
-                    <br>
-                    {% if mesa.mesa_estado_id == 2 %}
-                        <a class="btn btn-primary"href="/web/vista_mesero/{{mesa.id_mesa}}">Ver Venta</a>
-                    {% elif mesa.mesa_estado_id  == 1 %}
-                        <a class="btn btn-primary"href="/web/vista_mesero/{{mesa.id_mesa}}">Comenzar Venta</a>
-                    {% elif mesa.mesa_estado_id == 3 %}
-                        <a class="btn btn-primary"href="/web/mesero/limpiar_mesa/{{mesa.id_mesa}}">Finalizar Limpieza</a>
-                    {% endif %}
+<div class="container-mesas d-flex p-4 flex-column justify-content-center" style="height: 80vh;">
+    <form>
+        {% csrf_token %}
+        <select id="LocalSelect">
+            <option value="0">Todos los locales</option>
+            {% for local in locales %}
+                <option value="{{local.id_local}}">{{local.local_direccion}}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <div class="row mt-4" id="ListaMesas">
+        {% for mesa in mesas %}
+            <div class="col" id="{{mesa.mesa_local_id}}" name="mesa">
+                <div class="card text-center mb-4" style="min-width: 350px !important;">
+                    <div class="card-body">
+                        <h5 class="card-title"> Mesa {{mesa.mesa_nro}}</h5>
+                        <p class="card-text"> Cantidad Asientos {{mesa.mesa_sillas}}</p>
+                        <p class="card-text"> Estado {{mesa.mesa_estado}}</p>
+                        <p class="card-text"> ID mesa {{mesa.id_mesa}}</p>
+                        <br>
+                        {% if mesa.mesa_estado_id == 2 %}
+                            <a class="btn btn-primary"href="/web/vista_mesero/{{mesa.id_mesa}}">Ver Venta</a>
+                        {% elif mesa.mesa_estado_id  == 1 %}
+                            <a class="btn btn-primary"href="/web/vista_mesero/{{mesa.id_mesa}}">Comenzar Venta</a>
+                        {% elif mesa.mesa_estado_id == 3 %}
+                            <a class="btn btn-primary"href="/web/mesero/limpiar_mesa/{{mesa.id_mesa}}">Finalizar Limpieza</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
-    <br>
+        {% endfor %}
+    </div>
 </div>
 <script src="/static/js/Mesas.js"></script>
 {% endblock content %}

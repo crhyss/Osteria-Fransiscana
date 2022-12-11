@@ -232,7 +232,8 @@ body {
 
 #container-login-img img{
     width: 430px;
-    height: 380px;
+    height: 354px;
+    margin-top: 2.5rem !important;
 }
  
 #article-perfil label{

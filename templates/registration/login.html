@@ -30,17 +30,17 @@
 						</input>
 					</div>
 						<div class="card-footer">
-							<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesion">
+							<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesión">
 						</div>
 						<div class="my-3 text-center">
-							<span>No poseo una cuenta. <a href="{% url 'registro'%}">Registrate</a></span> <br>
-							<span><a href="#">Recuperar Contraseña</a></span>
+							<span>¿No tienes una cuenta? <a href="{% url 'registro'%}">Registrate</a></span> <br>
+							{% comment %} <span><a href="#">Recuperar Contraseña</a></span> {% endcomment %}
 						</div>
 					</div>
 				</form>
 				<div class="container w-100 my-5">
 					<div class="row text-center">
-						<a href="{% url 'social:begin' 'facebook' %}">Login con facebook</a>
+						{% comment %} <a href="{% url 'social:begin' 'facebook' %}">Login con facebook</a> {% endcomment %}
 					</div>
 				</div>
 			</div>

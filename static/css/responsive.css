@@ -92,6 +92,12 @@
     }
 }
 
+@media (max-width: 1212px){
+    .container-mesas{
+        height: auto !important;
+    }
+}
+
 @media (max-width: 1182px){
     #tabs{
         padding-left: 110px !important;

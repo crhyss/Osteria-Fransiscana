@@ -49,7 +49,9 @@ def addDirec(request):
             if request.POST["dir_depto_nro"] != "":
                 datos.dir_depto = True
             datos.save()
-            
+        if request.user.is_authenticated:
+            usr = User.objects.get(pk = request.user.id_user)
+            usr.user_direccion = datos
     return render(request, 'registration/registroDir.html', data)
 
 def entrar(request):
@@ -65,8 +67,7 @@ def entrar(request):
             else:
                 return redirect(to= "loby")
         else:
-            messages.add_message(request, level=messages.WARNING , message="¡Usuario ingresado, no Existe!")
-            return redirect(to="registro")
+            messages.add_message(request, level=messages.WARNING , message="¡Correo o contraseña no son válidos!")
     return render(request, 'registration/login.html')
 
 def salir(request):
