@@ -2,7 +2,7 @@
 <div class="container mb-5" id="reclamos">
     <div class="card col-sm-12 col-md-6 mx-auto mt-5" style="background-color: rgb(146, 245, 126, 0.3);">
         <div class="text-center mb-2 mt-2">
-            <h1 class="card-title">Reclamos</h1>
+            <h1 class="card-title">Contacto</h1>
         </div>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -11,9 +11,9 @@
                 {{formulario.nombre}}
                 <div class="mb-2 mt-3 text text-left">Apellido</div>
                 {{formulario.apellido}}
-                <div class="mb-2 mt-3 text text-left">Fecha del reclamo</div>
+                <div class="mb-2 mt-3 text text-left">Fecha de la solicitud</div>
                 {{formulario.reclamo_fecha}}
-                <div class="mb-2 mt-3 text text-left">Descripción del reclamo</div>
+                <div class="mb-2 mt-3 text text-left">Ingrese sus dudas o consultas</div>
                 {{formulario.reclamo_descrip}}
             </div>
             <div class="d-flex justify-content-center mb-4">

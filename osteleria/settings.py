@@ -217,7 +217,7 @@ JET_SIDE_MENU_ITEMS = [
         'url': '/productos/pedidos/'},
         {'label': 'Reclamos',
         'url': '/admin/cliente/reclamo/'},
-        {'label': 'graficos',
+        {'label': 'Gráficos',
         'url': '/graficos/'},
         
     ]}
