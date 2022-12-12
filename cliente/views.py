@@ -211,19 +211,33 @@ def reserva(request, id_usuario):
     if request.method == 'POST':
         formulario = reservaForm(request.POST, instance=usuario)
         if formulario.is_valid():
-            Reserva.guardar_reserva(
-                fecha_reserva = request.POST["fecha_reserva"],
-                hora_reserva = request.POST["hora_reserva"],
-                reserva_mesa = request.POST["reserva_mesa"],
-                reserva_evento = request.POST["reserva_evento_id"],
-                reserva_usuario = usuario.id_user,
-            )
-            print("fulario")
-            messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")
-            return redirect('/')
-            # return redirect('/logeo/reserva/' + str(id_usuario))
-        else:
-            messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")
+            reserva = Reserva.buscar_reserva(
+                    request.POST["fecha_reserva"],
+                    request.POST["hora_reserva"],
+                    request.POST["reserva_mesa"]
+                )
+            hr_valida = Reserva.validar_hora(
+                    request.POST["fecha_reserva"],
+                    request.POST["hora_reserva"],
+                    request.POST["reserva_mesa"]
+                )
+            if not reserva:
+                if hr_valida:
+                    Reserva.guardar_reserva(
+                    fecha = request.POST["fecha_reserva"],
+                    hora = request.POST["hora_reserva"],
+                    mesa = request.POST["reserva_mesa"],
+                    evento = request.POST["reserva_evento"],
+                    usuario = usuario.id_user,
+                )
+                    messages.add_message(request, level=messages.SUCCESS, message="¡Reserva ingresada correctamente!")
+                    return redirect('/')
+                else:
+                    messages.add_message(request, level=messages.ERROR, message="La mesa seleccionada ya está reservada")
+                    return redirect('/logeo/reserva/' + str(usuario.id_user))
+            else:
+                messages.add_message(request, level=messages.ERROR, message="La mesa ya está reserveda en ese horario")
+                return redirect('/logeo/reserva/' + str(usuario.id_user))
     else:
         formulario = reservaForm()
     

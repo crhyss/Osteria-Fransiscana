@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from unittest.util import _MAX_LENGTH
 from django.db import models
 import datetime
+import time
 
 class Region(models.Model):
     id_region = models.AutoField(primary_key = True)
@@ -55,6 +56,7 @@ class Direccion(models.Model):
             dir.dir_comuna = Comuna.objects.get(id_comuna = comuna)
             dir.save()
             return dir
+
 
 
 class Local(models.Model):
@@ -136,7 +138,10 @@ class Reclamo(models.Model):
 
 class EstadoMesa(models.Model):
     id_estado_mesa = models.AutoField(primary_key=True)
-    estado_mesa = models.BooleanField(default=True)
+    estado_mesa = models.CharField(max_length=40)
+    
+    def __str__(self) -> str:
+        return self.estado_mesa
 
 class Mesa(models.Model):
     id_mesa = models.AutoField(primary_key=True)
@@ -149,6 +154,23 @@ class Mesa(models.Model):
         estado = EstadoMesa.objects.get(id_estado_mesa = 1)
         self.mesa_estado = estado
         self.save() 
+
+    def visualizar_reserva(mesas):
+        estado_reservado = EstadoMesa.objects.get(id_estado_mesa = 4)
+        estado_libre = EstadoMesa.objects.get(id_estado_mesa = 1)
+        fecha_actual = datetime.datetime.now().date()
+        hora_actual = datetime.datetime.now().time()
+        hora_actual = ("{0}:{1}".format(hora_actual.hour, hora_actual.minute))
+        for mesa in mesas:
+            print(mesa)
+            if not Reserva.validar_hora(fecha_actual, hora_actual, mesa.id_mesa):
+                mesa.mesa_estado = estado_reservado
+                mesa.save()
+        mesas_reserv = Mesa.objects.filter(mesa_estado = 4)
+        for mesa in mesas_reserv:
+            if Reserva.validar_hora(fecha_actual, hora_actual, mesa.id_mesa):
+                mesa.mesa_estado = estado_libre
+                mesa.save()
 
     def __str__(self):
         return str(self.id_mesa)
@@ -167,14 +189,38 @@ class Reserva(models.Model):
     reserva_usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     reserva_evento = models.ForeignKey(Evento, on_delete=models.CASCADE, default=None)
     def __str__ (self):
-        return self.reserva_mesa
+        return str(self.reserva_mesa)
 
-    def guardar_reserva(fecha_reserva, hora_reserva, reserva_mesa, reserva_usuario, reserva_evento):
+    def guardar_reserva(fecha, hora, mesa, usuario, evento):    
         reserva = Reserva()
-        reserva.fecha_reserva = fecha_reserva
-        reserva.hora_reserva = hora_reserva
-        reserva.reserva_mesa = Mesa.objects.get(id_mesa = reserva_mesa)
-        reserva.reserva_usuario = User.objects.get(id_user = reserva_usuario)
-        reserva.reserva_evento = Evento.objects.get(id_evento = reserva_evento)
+        reserva.fecha_reserva = fecha
+        reserva.hora_reserva = hora
+        reserva.reserva_mesa = Mesa.objects.get(id_mesa = mesa)
+        reserva.reserva_usuario = User.objects.get(id_user = usuario)
+        reserva.reserva_evento = Evento.objects.get(id_evento = evento)
         reserva.save()
     
+    def buscar_reserva(fecha, hora, mesa):
+        try:
+            reserva = Reserva.objects.get(fecha_reserva = fecha,
+                        hora_reserva = hora,
+                        reserva_mesa = Mesa.objects.get(id_mesa = mesa)
+                    )
+            return True
+        except:
+            return False
+    def validar_hora(fecha, hora, mesa):
+        try:
+            lista = Reserva.objects.filter(fecha_reserva = fecha, reserva_mesa = Mesa.objects.get(id_mesa = mesa))
+            for res in lista:
+                reserva = datetime.timedelta(hours = res.hora_reserva.hour, minutes= res.hora_reserva.minute)
+                nueva_res = time.strptime(hora, "%H:%M")
+                nueva_res = datetime.timedelta(hours = nueva_res.tm_hour, minutes= nueva_res.tm_min)
+                hr_inicio = reserva - datetime.timedelta(minutes=45)
+                hr_final = reserva + datetime.timedelta(minutes=45)
+                if nueva_res > hr_inicio and nueva_res < hr_final:
+                    return False
+            return True
+        except:
+            print("oh no fallé")
+            return True           

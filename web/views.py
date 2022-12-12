@@ -11,6 +11,7 @@ def vista_mesas(request):
     mesas = Mesa.objects.all()
     estados = EstadoMesa.objects.all()
     locales = Local.objects.all()
+    Mesa.visualizar_reserva(mesas)
     data = {
         "mesas":mesas,
         "estados": estados,

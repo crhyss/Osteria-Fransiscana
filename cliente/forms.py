@@ -8,7 +8,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.widgets import NumberInput
 from web.models import Carrito,Seleccion 
-import datetime
+
 
 def agregarClaseFormControl(elementos):
     for campo in elementos:
@@ -81,6 +81,7 @@ class reservaForm(ModelForm):
         # self.fields['reserva_usuario'].widget.attrs['disabled'] = 'disabled' 
     class Meta:
         model = Reserva
+        fecha_min = datetime.now().date()
         fields = ['fecha_reserva', 'hora_reserva','reserva_mesa', 'reserva_evento']
         labels = {
             'fecha_reserva' : 'Fecha',
@@ -89,8 +90,8 @@ class reservaForm(ModelForm):
             'reserva_evento' : 'Evento'
         }
         widgets = {
-            'fecha_reserva' : forms.DateInput(attrs={'type': 'date'}),
-            'hora_reserva' : forms.TimeInput(attrs={'type': 'time'})
+            'fecha_reserva' : forms.DateInput(attrs={'type': 'date', 'min': fecha_min}),
+            'hora_reserva' : forms.TimeInput(attrs={'type': 'time', 'min': '12:30', 'max': '20:00', 'step' : '1800'})
         }
 
 class contraseñaForm(ModelForm):
