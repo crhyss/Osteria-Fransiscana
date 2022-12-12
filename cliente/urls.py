@@ -19,6 +19,5 @@ urlpatterns = [
     path('reserva/<int:id_usuario>', reserva, name='reserva'),
     path('cambiarContraseña/<int:id_usuario>', cambiarContraseña, name='cambiar contraseña'),
     path('historialReservas/<int:id_usuario>', historialReservas, name='historial reservas'),
-    path('login/', entrar, name='entrar'),
     path('menu/', menu, name='menu')
 ]

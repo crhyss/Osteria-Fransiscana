@@ -9,7 +9,7 @@
         <div class="col-md-4  p-1 ">
             <div class="card">
                 <div>
-                    <canvas class="card" id="myChart"></canvas>
+                    <canvas class="card" id="producto"></canvas>
                 </div>
             </div>
         </div>
@@ -35,6 +35,34 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4  p-1 ">
+            <div class="card" hidden>
+                <div>
+                    <canvas id="myChart5" hidden></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4  p-1 ">
+            <div class="card" hidden>
+                <div>
+                    <canvas id="myChart5" hidden></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4  p-1 ">
+            <div class="card" hidden>
+                <div>
+                    <canvas id="myChart5" hidden></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4  p-1 ">
+            <div class="card" hidden>
+                <div>
+                    <canvas id="myChart5" hidden></canvas>
+                </div>
+            </div>
+        </div>
         <br>
         <div class="p-1 col-md-4 ">
             <div>
@@ -42,7 +70,7 @@
                     <h1 class=" text-center ">Usuarios Registrados</h1>
                     <h1 class="border-bottom">{{cu}}</h1>
                     <h1 class=" text-center">Total Ventas</h1>
-                    <h1>1497</h1>
+                    <h1>{{tv}}</h1>
                 </div>
             </div>
         </div>
@@ -80,30 +108,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!--   -->
 <script>
-    const ctx = document.getElementById('myChart2');
-
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Delivery', 'Retiro'],
-            datasets: [{
-                label: 'Usuarios Registrado',
-                data: [932, 545, ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    const bar = document.getElementById('myChart');
+    var bar = document.getElementById('producto');
 
     new Chart(bar, {
         type: 'bar',
@@ -124,6 +129,31 @@
         }
     });
 </script>
+
+<script>
+    const bar1 = document.getElementById('myChart2');
+
+    new Chart(bar1, {
+        type: 'pie',
+        data: {
+            labels: [{% for vent in ventasxti %}'{{vent.vta_tipo__tipo_venta}}',{%endfor%}],
+            datasets: [{
+                label: 'Ventas Por Tipo de Venta',
+                data: [{% for vent in ventasxti %}'{{vent.dcount}}',{%endfor%}],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+
 
 <script>
     const $grafica = document.getElementById('myChart3');

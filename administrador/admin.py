@@ -7,7 +7,8 @@ from django.utils.html import format_html
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from django.urls import path
-from cliente.models import User,Reclamo,Tipo_usuario
+from cliente.models import User,Reclamo,Tipo_usuario,Mesa
+from web.models import Venta
 class MyModelAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super().get_urls()
@@ -70,6 +71,21 @@ class reclamoAdmin(ImportExportModelAdmin):
 @admin.register(Tipo_usuario)       
 class Tipo_usuarioAdmin(admin.ModelAdmin):
     list_display=('id_tipo_usr','tipo_usr')
+@admin.register(Mesa)
+class mesaAdmin(admin.ModelAdmin):
+    list_display=('id_mesa','mesa_nro','mesa_sillas','mesa_estado',)
+    list_editable = ('mesa_estado',)
+
+class ventaResourse(resources.ModelResource):
+    Fields = ('id_venta','vta_fecha','vta_bruto','vta_iva','vta_propina','vta_final','vta_estado','vta_tipo','vta_mesa')
+    class Meta:
+        model = Venta
+@admin.register(Venta)
+class ventaAdmin(ImportExportModelAdmin):
+    resource_class = ventaResourse
+    list_display=('id_venta','vta_fecha','vta_bruto','vta_iva','vta_propina','vta_final','vta_estado','vta_tipo','vta_mesa')
+    def get_model_perms(self, request):
+        return {}
 admin.site.register(Reclamo, reclamoAdmin)
 admin.site.register(User, userAdmin)
 

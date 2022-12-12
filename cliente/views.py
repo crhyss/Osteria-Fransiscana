@@ -10,9 +10,19 @@ from django.core.paginator import Paginator
 from web.models import Estado_venta,Carrito,Seleccion 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 def registro(request):
+    if request.user.is_authenticated:
+        carrito = Carrito.llamar_carrito(request.user.id_user)
+        listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod')
+        .values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
+    else:
+        carrito = None
+        listar = None
     data = {
-        'formulario': userForm()
+        'formulario': userForm(),
+        'carrito':carrito,
+        'listar':listar
     }
     if request.method == 'POST':
         formulario = userForm(data=request.POST)
@@ -33,6 +43,7 @@ def registro(request):
             messages.add_message(request, level=messages.ERROR , message="¡Usuario ingresado no existe!")
             return redirect(to= "registro")
     return render(request, 'registration/registro.html', data)
+
 
 def addDirec(request):
     data = {
@@ -157,7 +168,7 @@ def listarReclamos(request):
         'web/vista/lista_reclamos.html',
         context
     )
-
+@login_required(login_url='/accounts/login/')
 def perfil(request, id_usuario):
     perfilUsuario = profileForm.objects.get(pk=id_usuario) 
     formularioPerfil = None
@@ -177,7 +188,7 @@ def perfil(request, id_usuario):
         'registration/perfilCliente.html', 
         context
     )
-
+@login_required(login_url='/accounts/login/')
 def perfilCliente(request):
     usuario = User.objects.all()
     context = {
@@ -187,7 +198,7 @@ def perfilCliente(request):
     return render (request,
     'registration/perfilCliente.html',
     context)
-
+@login_required(login_url='/accounts/login/')
 def modificarPerfil(request, id_usuario):
     perfilModificado = User.objects.get(pk=id_usuario)
     formularioPerfil = None
@@ -276,7 +287,7 @@ def historialReservas(request, id_usuario):
         'vista/historialReservas.html',
         data
 )
-
+@login_required(login_url='/accounts/login/')
 def cambiarContraseña(request, id_usuario):
     usuario = User.objects.get(pk=id_usuario)
     if request.method == 'POST': 

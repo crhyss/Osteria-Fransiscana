@@ -100,20 +100,6 @@ def eliminarPedido(request, id_pedido):
     return redirect('/productos/pedidos/historial')
 
 def visualizarPedido(request, id_pedido):
-    """
-    pedidoVisualizado = Pedido.objects.get(pk=id_pedido)
-    formularioPedido = None
-    if request.method == 'POST':
-        formularioPedido = PedidoForm_V(request.POST, instance=pedidoVisualizado)
-        if formularioPedido.is_valid():
-            formularioPedido.save()
-            return redirect('/productos/pedidos/')
-    else:
-        formularioPedido = PedidoForm_V(instance=pedidoVisualizado)
-    context = {
-        'titulo': 'Visualizar Pedido',
-        'formulario': formularioPedido
-    }"""
     return render(
         request,
         'vista/visualizarPedido.html',

@@ -59,10 +59,17 @@
                             <input id="cant{{producto.id_producto}}" name="cantidad" hidden value="1" />
                         </li>
                         <li class="list-group-item ">
+                            {% if user.is_authenticated %}
                             <button class="btn btn-outline-success" type="submit" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                            onclick="aniadirProd('{{producto.id_producto}}','{{producto.prod_precio_of}}',1)">AÑADIR
+                            AL CARRO</button>
+                            {% else %}
+                            <button class="btn btn-outline-success" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                                onclick="aniadirProd('{{producto.id_producto}}','{{producto.prod_precio_of}}',1)">AÑADIR
+                                >AÑADIR
                                 AL CARRO</button>
+                                {% endif %}
                         </li>
                     </ul>
                 </div>

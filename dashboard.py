@@ -2,6 +2,9 @@ from jet.dashboard import modules
 from django.utils.translation import gettext_lazy as _
 from jet.dashboard.dashboard import Dashboard, AppIndexDashboard
 
+class CustomIndexDashboard(Dashboard):
+    columns = 3
+
 class DefaultAppIndexDashboard(AppIndexDashboard):
     def init_with_context(self, context):
         self.available_children.append(modules.LinkList)
@@ -22,11 +25,6 @@ class CustomIndexDashboard(Dashboard):
             _('Gestion'),
             children=[
                 {
-                    'title': _('Visualizar Ordenes'),
-                    'url': '/productos/pedidos/',
-                    'external': False,
-                },
-                {
                     'title': _('Reclamos'),
                     'url': '/admin/cliente/reclamo/',
                     'external': False,
@@ -34,6 +32,16 @@ class CustomIndexDashboard(Dashboard):
                 {
                     'title': _('Graficos'),
                     'url': '/graficos/',
+                    'external': False,
+                },
+                {
+                    'title': _('Modelo Predictivo'),
+                    'url': '/prediccion/',
+                    'external': False,
+                },
+                {
+                    'title': _('Ventas'),
+                    'url': '/admin/web/venta/',
                     'external': False,
                 },
             ],
@@ -46,4 +54,3 @@ class CustomIndexDashboard(Dashboard):
             column=0,
             order=0
         ))
-

@@ -3,10 +3,12 @@ from cliente.models import Mesa, EstadoMesa, Local
 from productos.models import Producto, Categoria_prod
 from .models import Venta, Pedido
 from django.views.decorators.csrf import csrf_exempt
-
+from django.contrib.auth.decorators import user_passes_test
+def usuarioMesero(user):
+    return user.is_authenticated and user.user_tipo_id == 4
 
 # Create your views here.
-
+@user_passes_test(usuarioMesero)
 def vista_mesas(request):
     mesas = Mesa.objects.all()
     estados = EstadoMesa.objects.all()
@@ -17,7 +19,7 @@ def vista_mesas(request):
         "locales": locales
     }
     return render(request, "web/mesero/vista_mesas.html", data)
-
+@user_passes_test(usuarioMesero)
 def vista_mesero(request, id_mesa):
     categorias = Categoria_prod.objects.all()
     productos = Producto.objects.filter(prod_disponible = True)

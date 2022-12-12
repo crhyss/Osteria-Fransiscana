@@ -46,11 +46,13 @@ class Seleccion(models.Model):
 class Estado_venta(models.Model):
     id_estado_venta = models.AutoField(primary_key=True)
     estado_venta = models.CharField(max_length=20)
-
+    def __str__(self) -> str:
+        return self.estado_venta
 class Tipo_venta(models.Model):
     id_tipo_venta = models.AutoField(primary_key=True)
     tipo_venta = models.CharField(max_length=20)
-
+    def __str__(self) -> str:
+        return self.tipo_venta
 
 class Venta(models.Model):
     id_venta = models.AutoField(primary_key=True)
@@ -62,6 +64,7 @@ class Venta(models.Model):
     vta_estado = models.ForeignKey(Estado_venta, on_delete= models.CASCADE)
     vta_tipo = models.ForeignKey(Tipo_venta, on_delete= models.CASCADE, blank=True)
     vta_mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, blank=True, null=True)
+
     def nueva_venta_local(id_mesa):
         venta = Venta()
         mesa = Mesa.objects.get(id_mesa = id_mesa)

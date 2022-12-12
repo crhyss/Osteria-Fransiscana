@@ -5,6 +5,7 @@ from webpay_plus.routes import webpay_plus_create,commitpay
 from administrador.views import grafico
 from django.conf.urls.static import static
 from django.conf import settings
+from cliente.views import entrar
 urlpatterns = [
     path('', paginaprincipal,name="loby"),
     path('logeo/', include('cliente.urls'),name="login"),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('delivery/<int:id>',confirmacionDelivery,name="delivery" ),
     path('retiro/<int:id>',confirmacionRetiro,name="retiro" ),
     path('graficos/',grafico,name="grafico"),
+    path('accounts/login/', entrar,name="entrar"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = 'osteleria.views.offline'
