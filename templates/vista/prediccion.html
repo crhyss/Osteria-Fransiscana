@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %} {% block content %} {% load static %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+        <label for="Cantidad" class="form-control">Cantidad</label>
+        <input class="form-control" name="Cantidad" type="number" min="1" placeholder="Cantidad" aria-label=".form-control-lg example" required>
+    </div>
+    <div class="input-group mb-3">
+        <label for="Mes" class="form-control">Mes</label>
+        <input class="form-control" name="Mes" type="number" min="0" max="12" placeholder="Rango: 0 - 12" aria-label=".form-control-lg example" required>
+    </div>
+    <div class="input-group mb-3">
+        <label for="Dia" class="form-control">Dia</label>
+        <input class="form-control" name="Dia" type="number" min="0" max="31" placeholder="Rango: 0 - 31" aria-label=".form-control-lg example" required>
+    </div>
+    <a href="/prediccion/"><button type="submit" class="btn btn-primary" id=".submit"> Predecir </button></a>
+    <div class="card-footer">
+        <form action="" method="post">
+            {% if predict == 0 %}
+            <p>Buen Día</p>
+            {% elif predict == 1 %}
+            <p>Día Promedio</p>
+            {% elif predict == 2 %}
+            <p>Mal Día</p>
+            {% endif %}
+        </form>
+    </div>
+</form>
+
+{% endblock content %} {% block nav-global %} {% endblock %}

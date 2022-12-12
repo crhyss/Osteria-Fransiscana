@@ -24,13 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'mi9ak)xv-261@r&al*&xv=m*-k-g#17ci3hr%le5#hu^r2#t-5'
+SECRET_KEY = 'mi9ak)xv-261@r&al*&xv=m*-k-g#17ci3hr%le5#hu^r2#t-5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['127.0.0.1','127.0.0.1:8000','52.1.165.86','ec2-52-1-165-86.compute-1.amazonaws.com']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['127.0.0.1','127.0.0.1:8000','52.1.165.86','ec2-52-1-165-86.compute-1.amazonaws.com']
 
 # Application definition
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'social_django',
     'cliente',
     'administrador',
+    'sklearn',
 ]
 
 MIDDLEWARE = [
@@ -95,7 +96,7 @@ WSGI_APPLICATION = 'osteleria.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
       'default': {
           'ENGINE': 'django.db.backends.mysql',
           'NAME': env('DATABASE_NAME'),
@@ -104,15 +105,15 @@ DATABASES = {
           'HOST': env('HOSTNAME'),
           'PORT': env('PORT'),
       	}
- }
+ }"""
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -151,9 +152,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = join(BASE_DIR,'static/')
-#STATIC_ROOT = join(BASE_DIR,'static','static_root')
-#STATICFILES_DIRS = [join(BASE_DIR,"static")]
+#STATIC_ROOT = join(BASE_DIR,'static/')
+STATIC_ROOT = join(BASE_DIR,'static','static_root')
+STATICFILES_DIRS = [join(BASE_DIR,"static")]
 
 MEDIA_URL = 'static\producto/'
 MEDIA_ROOT = join(BASE_DIR,'static/producto')

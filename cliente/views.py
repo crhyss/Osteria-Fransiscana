@@ -349,3 +349,9 @@ def addcart(request):
         request, 
         'carrito/cart.html',context
     )
+
+def menu(request):
+    return render(
+        request, 
+        'vista/menu.html'
+    )
