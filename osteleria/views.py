@@ -92,4 +92,17 @@ def sobrenosotros(request):
     return render(
         request, 
         'vista/sobrenosotros.html',context
-    )    
+    )  
+
+def offline(request,exception):
+
+    return render(
+        request,
+        '404.html',
+    )
+def serve(request):
+
+    return render(
+        request,
+        '500.html',
+    )

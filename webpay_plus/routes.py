@@ -88,6 +88,14 @@ def commitpay(request):
             #crear una venta, tranformar carrito pedido asociado a la venta
             return render(request, 'carrito/confirmacion-retiro.html',transaction_detail)
         else:
-            return HttpResponse('ERROR EN LA TRANSACCIÓN, SE RECHAZA LA TRANSACCIÓN')
-    else:                             
-        return HttpResponse('ERROR EN LA TRANSACCIÓN, SE CANCELO EL PAGO')
+            transaction_detail = {
+                'carrito':carrito,
+                'listar':listar  ,          
+            }
+            return render(request,'carrito/pago-rechazado.html',transaction_detail)
+    else:
+        transaction_detail = {
+            'carrito':carrito,
+            'listar':listar  ,            
+        }                             
+        return render(request,'carrito/pagofallido.html',transaction_detail)

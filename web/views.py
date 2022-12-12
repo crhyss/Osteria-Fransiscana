@@ -11,7 +11,6 @@ def vista_mesas(request):
     mesas = Mesa.objects.all()
     estados = EstadoMesa.objects.all()
     locales = Local.objects.all()
-    Mesa.visualizar_reserva(mesas)
     data = {
         "mesas":mesas,
         "estados": estados,
@@ -68,3 +67,4 @@ def limpiar_mesa(request, id_mesa):
     print(mesa)
     mesa.mesa_limpia()
     return redirect('/web/vista_mesas/')
+
