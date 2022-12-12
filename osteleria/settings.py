@@ -95,23 +95,16 @@ WSGI_APPLICATION = 'osteleria.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#      'default': {
-#          'ENGINE': 'django.db.backends.mysql',
-#          'NAME': env('DATABASE_NAME'),
-#          'USER': env('DATABASE_USER'),
-#          'PASSWORD': env('DATABASE_PASS'),
-#          'HOST': env('HOSTNAME'),
-#          'PORT': env('PORT')
-#      	}
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+      'default': {
+          'ENGINE': 'django.db.backends.mysql',
+          'NAME': env('DATABASE_NAME'),
+          'USER': env('DATABASE_USER'),
+          'PASSWORD': env('DATABASE_PASS'),
+          'HOST': env('HOSTNAME'),
+          'PORT': env('PORT'),
+      	}
+ }
 
 
 DATABASES = {
@@ -226,7 +219,9 @@ JET_SIDE_MENU_ITEMS = [
         {'label': 'Visualizar Ordenes',
         'url': '/productos/pedidos/'},
         {'label': 'Reclamos',
-        'url': '/logeo/reclamo/lista/'},
+        'url': '/admin/cliente/reclamo/'},
+        {'label': 'Gráficos',
+        'url': '/graficos/'},
         
     ]}
 ]

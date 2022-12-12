@@ -29,9 +29,9 @@ class Tipo_usuario(models.Model):
 class Direccion(models.Model):
     id_direccion = models.AutoField(primary_key = True)
     dir_calle = models.CharField(max_length = 50, blank = False)
-    dir_nro = models.IntegerField(blank = False)
+    dir_nro = models.PositiveIntegerField(blank = False)
     dir_depto = models.BooleanField(default = False)
-    dir_depto_nro = models.IntegerField(blank =True, null = True)
+    dir_depto_nro = models.PositiveIntegerField(blank =True, null = True)
     dir_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE, default=None)
     def __str__(self):
         return self.dir_calle
@@ -138,10 +138,11 @@ class Reclamo(models.Model):
 
 class EstadoMesa(models.Model):
     id_estado_mesa = models.AutoField(primary_key=True)
-    estado_mesa = models.CharField(max_length=40)
-    
-    def __str__(self) -> str:
+    estado_mesa = models.CharField(max_length=20)
+    def __str__(self):
         return self.estado_mesa
+    
+
 
 class Mesa(models.Model):
     id_mesa = models.AutoField(primary_key=True)

@@ -49,7 +49,9 @@ def addDirec(request):
             if request.POST["dir_depto_nro"] != "":
                 datos.dir_depto = True
             datos.save()
-            
+        if request.user.is_authenticated:
+            usr = User.objects.get(pk = request.user.id_user)
+            usr.user_direccion = datos
     return render(request, 'registration/registroDir.html', data)
 
 def entrar(request):
@@ -65,8 +67,7 @@ def entrar(request):
             else:
                 return redirect(to= "loby")
         else:
-            messages.add_message(request, level=messages.WARNING , message="¡Usuario ingresado, no Existe!")
-            return redirect(to="registro")
+            messages.add_message(request, level=messages.WARNING , message="¡Correo o contraseña no son válidos!")
     return render(request, 'registration/login.html')
 
 def salir(request):
@@ -106,7 +107,18 @@ def carrito(request):
     return render(request, 'carrito/carta.html',context)
 
 def pedido(request):
-    return render(request, 'carrito/pedido.html')
+    if request.user.is_authenticated:
+        carrito = Carrito.llamar_carrito(request.user.id_user)
+        listar= (Seleccion.objects.filter(id_carrito = carrito.id_carrito).select_related('id_prod')
+        .values('id_seleccion','cantidad','id_prod__id_producto','id_prod__prod_nombre','id_prod__prod_imagen','id_prod__prod_precio_of','id_prod__id_producto')) 
+    else:
+        carrito = None
+        listar = None
+    context = {
+        'carrito':carrito,
+        'listar':listar
+    }
+    return render(request, 'carrito/pedido.html',context)
 
 def mesero(request):
     return render(request, 'test/vistamesero.html')

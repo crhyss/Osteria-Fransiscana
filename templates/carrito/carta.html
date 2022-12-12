@@ -1,126 +1,112 @@
 {% extends 'vista/Principal.html' %}
 {% load static %}
 {% block content %}
-
-
-    <div class="container d-flex flex-column" style="width:100%;">
-        <header>
-            <div class="container">
-                <h1 class="text-center" style="padding-top: 25px;">CARTA</h1>
-                <hr>
-            </div>
-        </header>
-        <main>
-            <nav>
-                <a class="banner " data-pushbar-target="pushbar-productos"></a>
-            </nav>
-            <form method="GET" action="." class="d-flex" role="search">
-                <div class="container text-center">
-                    <div class="row align-items-start">
-                        <div class="col">
-                            <input class="form-control me-2" type="search" placeholder="¿Qué Buscas?" aria-label="Search" name='buscar'>
-                        </div>
-                        <div class="col">
-                            <div class="form-group ">
-                                <select id="Categoria" class="form-select" name="categoria">
-                                    <option selected>Categoria</option>
-                                    {% for cat in lista %}
-                                    <option value="{{ cat.id_categoria }}">{{ cat.categoria_prod }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Buscar</button>
-                        </div>
-
-            </form>
-        </div>
-    </div>
-    <br>
-    <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-    <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-    <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-    <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-    <section>
-        <div class="row row-cols-1 row-cols-md-3 border border-3 ">
-            {% for producto in productos %}
-            <div class="col d-flex justify-content-around" id="productos">
-                <form action="/logeo/orders/" id="preci{{producto.id_producto}}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{formulario}}
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="/static/producto/{{producto.prod_imagen}}" class="card-img-top rounded-circle"
-                            alt="..." id="img{{producto.id_producto}}">
-                        <div class="card-body">
-                            <h5 class="card-title" id="prod{{producto.id_producto}}">{{producto.prod_nombre|upper}}</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item ">
-                                    <h6 class="item-price fw-bold" id="prec{{producto.id_producto}}"
-                                        value="{{producto.prod_precio_ba}}">Precio Normal: ${{producto.prod_precio_ba}}
-                                    </h6>
-                                    <h6 class="item-price fw-bold" id="precOf{{producto.id_producto}}"
-                                        value="{{producto.prod_precio_of}}">Precio Oferta: ${{producto.prod_precio_of}}
-                                    </h6>
-                                    <input type="number" id="prd{{producto.id_producto}}" name="idProd" hidden
-                                        value="{{producto.id_producto}}">
-                                    <input id="user{{user.id_user}}" name="id_usuario" hidden value="{{user.id_user}}">
-                                    <input id="cant{{producto.id_producto}}" name="cantidad" hidden value="1" />
-                                </li>
-                                <li class="list-group-item ">
-                                    <button class="btn btn-outline-success" type="submit" data-bs-toggle="offcanvas"
-                                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" onclick="aniadirProd('{{producto.id_producto}}','{{producto.prod_precio_of}}',1)">AÑADIR AL CARRO</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            {% endfor %}
-
-            <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-            <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-            <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-            <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-            <!-- -----------------------------------------------------------------------------------------------------------------------------------------  -->
-        </div>
-    </section>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-start mt-3">
-            {% if not productos.has_previous%}
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            {% endif %}
-            {% if productos.has_previous%}
-            <li class="page-item">
-                <a class="page-link" href="?{{ request.GET.urlencode }}page={{productos.previous_page_number}}"
-                    tabindex="-1">Previous</a>
-            </li>
-            {% endif %}
-            {% if productos.has_previous%}
-            <li class="page-item"><a class="page-link"
-                    href="?{{ request.GET.urlencode }}page={{productos.previous_page_number}}">{{productos.previous_page_number}}</a>
-            </li>
-            {% endif %}
-            <li class="page-item"><a class="page-link" href="#">{{productos.number}}</a></li>
-            {% if productos.has_next%}
-            <li class="page-item"><a class="page-link"
-                    href="?{{ request.GET.urlencode }}&page={{productos.next_page_number}}">{{productos.next_page_number}}</a>
-            </li>
-            {% endif %}
-            {% if productos.has_next%}
-            <li class="page-item">
-                <a class="page-link" href="?{{ request.GET.urlencode }}&page={{productos.next_page_number}}">Next</a>
-            </li>
-            {% endif %}
-            {% if not productos.has_next%}
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Next</a>
-            </li>
-            {% endif %}
-        </ul>
+<div class="container">
+    <header>
+        <h1 class="text-center" style="padding-top: 25px;">CARTA</h1>
+        <hr>
+    </header>
+    <nav>
+        <a class="banner " data-pushbar-target="pushbar-productos"></a>
     </nav>
-</main>
+    <form method="GET" action="." class="d-flex" role="search">
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <div class="col">
+                    <input class="form-control me-2" type="search" placeholder="¿Qué Buscas?" aria-label="Search"
+                        name='buscar'>
+                </div>
+                <div class="col">
+                    <div class="form-group ">
+                        <select id="Categoria" class="form-select" name="categoria">
+                            <option selected>Categoria</option>
+                            {% for cat in lista %}
+                            <option value="{{ cat.id_categoria }}">{{ cat.categoria_prod }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+
+    </form>
+</div>
+</div>
+<br>
+<div class="row row-cols-md-3 px-4 py-4 border border-5 ">
+    {% for producto in productos %}
+    <div class="justify-content-around px-2 py-2"  id="productos">
+        <form action="/logeo/orders/" id="preci{{producto.id_producto}}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{formulario}}
+            <div class="card text-center d-grid align-baseline" style="height: 550px; align-content: space-evenly;">
+                <img src="/static/producto/{{producto.prod_imagen}}" class="card-img-top rounded-circle"
+                    id="img{{producto.id_producto}}">
+                <div class="card-body " >
+                    <h5 class="card-title " id="prod{{producto.id_producto}}">{{producto.prod_nombre|upper}}</h5>
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item ">
+                            <h6 class="item-price fw-bold " id="prec{{producto.id_producto}}"
+                                value="{{producto.prod_precio_ba}}">Precio Normal: ${{producto.prod_precio_ba}}
+                            </h6>
+                            <h6 class="item-price fw-bold" id="precOf{{producto.id_producto}}"
+                                value="{{producto.prod_precio_of}}">Precio Oferta: ${{producto.prod_precio_of}}
+                            </h6>
+                            <input type="number" id="prd{{producto.id_producto}}" name="idProd" hidden
+                                value="{{producto.id_producto}}">
+                            <input id="user{{user.id_user}}" name="id_usuario" hidden value="{{user.id_user}}">
+                            <input id="cant{{producto.id_producto}}" name="cantidad" hidden value="1" />
+                        </li>
+                        <li class="list-group-item ">
+                            <button class="btn btn-outline-success" type="submit" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                                onclick="aniadirProd('{{producto.id_producto}}','{{producto.prod_precio_of}}',1)">AÑADIR
+                                AL CARRO</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-start mt-3">
+        {% if not productos.has_previous%}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        {% endif %}
+        {% if productos.has_previous%}
+        <li class="page-item">
+            <a class="page-link" href="?{{ request.GET.urlencode }}page={{productos.previous_page_number}}"
+                tabindex="-1">Previous</a>
+        </li>
+        {% endif %}
+        {% if productos.has_previous%}
+        <li class="page-item"><a class="page-link"
+                href="?{{ request.GET.urlencode }}page={{productos.previous_page_number}}">{{productos.previous_page_number}}</a>
+        </li>
+        {% endif %}
+        <li class="page-item"><a class="page-link" href="#">{{productos.number}}</a></li>
+        {% if productos.has_next%}
+        <li class="page-item"><a class="page-link"
+                href="?{{ request.GET.urlencode }}&page={{productos.next_page_number}}">{{productos.next_page_number}}</a>
+        </li>
+        {% endif %}
+        {% if productos.has_next%}
+        <li class="page-item">
+            <a class="page-link" href="?{{ request.GET.urlencode }}&page={{productos.next_page_number}}">Next</a>
+        </li>
+        {% endif %}
+        {% if not productos.has_next%}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Next</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
 
 {% endblock content %}
