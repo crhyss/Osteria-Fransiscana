@@ -7,6 +7,9 @@ class Categoria_prod(models.Model):
     categoria_prod = models.CharField(max_length=40, blank=False)
     def __str__(self):
         return self.categoria_prod
+    class Meta:
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
 
 class Producto(models.Model):
     id_producto = models.AutoField(primary_key=True)
@@ -23,11 +26,5 @@ class Producto(models.Model):
             self.prod_imagen.delete()
         super().delete(*args, **kwargs)
     def __str__(self):
-        texto = "{0} {1}"
-        return texto.format(self.prod_nombre,self.prod_descri)
-
-class Pedido(models.Model):
-    id_pedido = models.AutoField(primary_key=True)
-    pedido_modif = models.CharField(max_length=200, blank=False)
-    pedido_listo = models.BooleanField(default=False)
-    pedido_producto = models.ForeignKey(Producto, on_delete=models.CASCADE, default=None)
+        texto = "{0}"
+        return texto.format(self.prod_nombre)

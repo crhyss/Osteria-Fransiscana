@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block content %}
-<div class="container-register">
-    <div class="card card-register">
+<div class="container-register mt-4">
+    <div class="card card-register mb-5">
         <div class="card-header">
             <i class='bx bxs-home-circle' style="font-size: 150px"></i>
         </div>
@@ -13,10 +13,8 @@
                     <div class="d-grid">
                         {% csrf_token %}
                         {{formulario}}
-                        <label for="confPass">Confirmar Contraseña</label>
-                        <input type="password" name="confPass">      
                             <br>
-                        <input class="btn btn-success" type="submit" value="registrar">
+                        <input class="btn btn-success" type="submit" value="Registrar">
                     </div>
                     <div class="my-3">
                     </div>

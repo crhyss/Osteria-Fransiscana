@@ -1,58 +1,42 @@
 {% extends 'vista/Principal.html' %}
 {% load static %}
 {% block content %}
-<div class="container-perfil">
-    <div class="card">
+<div class="container-perfil mt-4 d-flex justify-content-center align-items-center">
+    <div class="card mt-4 mb-4" id="container-perfil">
         <div class="card-header">
-            <h1>Perfil de {{usuario.usr_nombre}} {{usuario.usr_apellido_pat}}</h1> 
+            <h1 class="card-title mt-2">Perfil de {{user.user_nombre}}</h1> 
         </div>
-        <div class="card-body">
-            <!-- <form action="" method = "POST">
-                {% csrf_token %}
-                <article class="card-body">
-                    {{ formularioPerfil }}
-                </article>
-                <article class="card-footer" style="display: flex; justify-content: center;">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="width: 50%">Guardar
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4z"/>
-                      </svg>
+        <div class="card-body px-4">  
+            <div class="mb-3 d-flex flex-column">
+                <label for="username" class="form-label">Nombre</label>
+                <p class="text-capitalize form-control" disabled="disabled">{{user.user_nombre}}</p>
+            </div>
+            <div class="mb-3 d-flex flex-column">
+                <label for="username" class="form-label">Apellidos</label>
+                <p class="text-capitalize form-control" disabled="disabled">{{user.user_apellidos}}</p>
+            </div>
+            <div class="mb-3 d-flex flex-column">
+                <label for="username" class="form-label">Correo</label>
+                <p class="text-capitalize form-control" disabled="disabled">{{user.user_correo}}</p>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a href="/logeo/registro/direccion">
+                <button class="btn btn-info">Agregar Dirección</button>
+            </a>
+            <a href="/logeo/modificarPerfil/{{user.id_user}}">
+                <button class="btn btn-warning">Editar Datos
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="m2.344 15.271 2 3.46a1 1 0 0 0 1.366.365l1.396-.806c.58.457 1.221.832 1.895 1.112V21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1.598a8.094 8.094 0 0 0 1.895-1.112l1.396.806c.477.275 1.091.11 1.366-.365l2-3.46a1.004 1.004 0 0 0-.365-1.366l-1.372-.793a7.683 7.683 0 0 0-.002-2.224l1.372-.793c.476-.275.641-.89.365-1.366l-2-3.46a1 1 0 0 0-1.366-.365l-1.396.806A8.034 8.034 0 0 0 15 4.598V3a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v1.598A8.094 8.094 0 0 0 7.105 5.71L5.71 4.904a.999.999 0 0 0-1.366.365l-2 3.46a1.004 1.004 0 0 0 .365 1.366l1.372.793a7.683 7.683 0 0 0 0 2.224l-1.372.793c-.476.275-.641.89-.365 1.366zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4z">
+                        </path>
+                    </svg> -->
                 </button>
-                </article>
-            </form> -->
-            {% if usuarios %}
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                    <!-- <th scope="col">ID</th> -->
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido Paterno</th>
-                    <th scope="col">Apellido Materno</th>
-                    <th scope="col">Contraseña</th>
-                    <th scope="col">Correo</th>
-                    <!-- <th scope="col">Tipo</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for usuario in usuarios %}
-                        <tr id="{{usuario.id_usuario}}">
-                            <!-- <td>{{usuario.id_usuario}}</td> -->
-                            <td>{{usuario.usr_nombre}}</td>
-                            <td>{{usuario.usr_apellido_pat}}</td>
-                            <td>{{usuario.usr_apellido_mat}}</td>
-                            <td>{{usuario.usr_pass}}</td>
-                            <td>{{usuario.usr_correo}}</td>
-                            <!-- <td>{{usuario.usr_tipo_id}}</td> -->
-                            <td>
-                                <a href="/logeo/modificarPerfil/{{usuario.id_usuario}}">
-                                    <button>E</button>
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% endif %}
+            </a>
+            <a href="/logeo/cambiarContraseña/{{user.id_user}}">
+                <button class="btn btn-success">Cambiar Contraseña</button>
+            </a>
+            <a href="/logeo/historialReservas/{{user.id_user}}">
+                <button class="btn btn-primary">Reservas</button>
+            </a>
         </div>
     </div>
 </div>

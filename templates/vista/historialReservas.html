@@ -1,0 +1,50 @@
+{% extends 'vista/Principal.html' %} {% block content %}
+<div class="ordenes">
+    {% if reservas %}
+    <div class="card col-sm-12 col-md-6 mx-auto mt-5" style="background-color: rgb(146, 245, 126, 0.3);">
+        <div class="text-center" style="margin-top: 2%">
+            <h1 class="card-title">Historial</h1>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Fecha Reserva</th>
+                        <th scope="col">Mesa</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Evento</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reserva in reservas %}
+                    <tr id="{{reserva.id_reserva}}" style="max-height: 63px;">
+                        <td>{{reserva.id_reserva}}</td>
+                        <td>{{reserva.fecha_reserva}}</td>
+                        <td>{{reserva.reserva_mesa_id}}</td>
+                        <td>{{reserva.hora_reserva}}</td>
+                        <td>{{reserva.reserva_evento}}</td>
+
+                        <td>
+                            <a href="">
+                                <button class="btn btn btn-danger me-md-2" type="submit">Cancelar</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="volver">
+    <a href="/logeo/perfil/">
+        <button class="btn btn-primary">Volver</button>
+    </a>
+</div>
+{% else %}
+<p>Sin reservas</p>
+{% endif %}
+</div>
+{% endblock content %}

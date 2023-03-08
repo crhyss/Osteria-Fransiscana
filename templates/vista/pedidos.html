@@ -1,5 +1,5 @@
 {% extends "admin/base_site.html" %}
-{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} {{ site_title|default:_('Agregar Producto') }}{% endblock %}
+{% block title %}Pedidos{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} {{ site_title|default:_('Agregar Producto') }}{% endblock %}
 
 {% load static %}
 {% block nav-global %}
@@ -17,6 +17,13 @@
             <button class="btn btn-success">Historial</button>
         </a>
     </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
     {% if pedidos %}
     <table class="table table-striped">
         <thead>
@@ -60,7 +67,7 @@
           </tbody>
       </table>
     {% else %}
-        <p>Sin ordenes disponibles</p>
+        <p class="mt-2">Sin ordenes disponibles</p>
     {% endif %}
 </div>
 {% endblock content %}

@@ -1,3 +1,5 @@
 osteleria/.env
 __pycache__
 bd.sqlite3
+app.shock
+settings.py

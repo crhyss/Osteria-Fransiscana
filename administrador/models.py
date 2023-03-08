@@ -1,6 +1,7 @@
 from django.db import models
+import datetime
+from cliente.models import User
 
-# Create your models here.
 class Rol(models.Model):
     id_rol = models.AutoField(primary_key = True)
     rol = models.CharField( max_length=50)

@@ -2,27 +2,33 @@
 {% load static %}
 
 {% block content %}
-<div class="container-register">
-    <div class="card card-register">
+<div class="container-register mt-4">
+    <div class="card card-register mb-5">
         <div class="card-header">
-            <i class='bx bxs-home-circle' style="font-size: 150px"></i>
+            <!-- <i class='bx bxs-home-circle' style="font-size: 150px"></i> -->
+            <i class='bx bxs-map'style="font-size: 150px"></i>
         </div>
         <div class="card-body">
             <div class="row">
                 <form method="POST">
-                    <div class="d-grid">
+                    <div class="d-grid p-2">
                         {% csrf_token %}
-                        <label for="region">Región</label>
-                        <select name="region">
-                        <option disabled selected value> --- Seleccione una Región --- </option>
-                        {% for region in regiones %}
-                            <option value="{{ region.id_region }}">{{ region.region_nombre }}</option>
-                        {% endfor %}
-                        
+                        <label for="region">Ingrese la Región</label>
+                        <select name="region" id="region" required>
+                            <option value="0"> --- Seleccione una Región --- </option>
+                            {% for region in regiones %}
+                                <option value="{{ region.id_region }}">{{ region.region_nombre }}</option>
+                            {% endfor %}               
+                        </select>
+                        <label for="comuna">Ingrese la Comuna</label>
+                        <select name="comuna" id="comuna">
+                            <option value="0" id="0"> --- Seleccione una Comuna --- </option>
+                            {% for comuna in comunas %}
+                                <option id="{{comuna.comuna_region_id}}" value="{{ comuna.id_comuna }}">{{ comuna.comuna_nombre }}</option>
+                            {% endfor %}               
                         </select>
                         {{formulario}}  
-                            <br>
-                        <input class="btn btn-success" type="submit" value="registrar">
+                        <input class="btn btn-success mt-4" type="submit" value="Registrar Dirección">
                     </div>
                     <div class="my-3">
                     </div>
@@ -31,4 +37,5 @@
         </div>
     </div>
 </div>
+<script src="/static/js/Dropdown.js"></script>
 {% endblock content %}

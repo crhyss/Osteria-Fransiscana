@@ -55,7 +55,6 @@ input#pass {
     background: #f1f1f1;
     padding: 6px 5px;
     margin-bottom: 10px;
-    width: 240px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -468,30 +467,6 @@ main .productos figure figcaption a {
 
 /* ? SHOPPING CART */
 
-.shopping-cart-items {
-    padding: 20px 0px;
-}
-
-.shopping-cart-header {
-    border-bottom: 1px solid #ccc;
-}
-
-.shopping-cart-image {
-    max-width: 80px;
-    border-radius: 20px;
-}
-
-.shopping-cart-quantity-input {
-    max-width: 45px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #eee;
-    padding: 5px;
-}
-
-.shopping-cart-total {
-    min-height: 96px;
-}
 
 .cent {
     text-align: center;
@@ -529,14 +504,7 @@ main .productos figure figcaption a {
     background: rgb(218, 97, 76);
 }
 
-.row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}
+
 
 div.paddl {
     padding-left: 10px;

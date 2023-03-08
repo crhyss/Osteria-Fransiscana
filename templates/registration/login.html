@@ -2,44 +2,50 @@
 {% load static %}
 {% block content %}
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>ingreso</title>
-</head>
-
-<body>
-	<div class="container">
-		<div class="row login">
-			<div class="col imagen">
-				<img src={% static 'producto/margherita_wikipedia.jpg' %} width="330px" height="250px">
+<div class="container">
+	<div class="row login">
+		<div class="col d-flex flex-row mb-5 mt-5" style="flex-wrap: wrap;" id="container-login">
+			<div class="col imagen align-items-center px-0" id="container-login-img">
+				<img src={% static 'producto/margherita_wikipedia.jpg' %} class="mt-4 rounded">
 			</div>
-			<div class="col">
+			<div class="col px-0">
 				<h2 class="fw-bold text-center py-5">Bienvenido</h2>
 				<form method="POST">
-					<div class="d-grid">
+					<div class="card">
 						{% csrf_token %}
-						{{form}}
-						 <br>
-						<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesion">
+						<div class="card-body">
+							<div class="correo d-flex justify-content-start flex-column">
+								<label for="correo" class="form-label mb-2">Ingrese su Correo</label>
+								<input name="correo" class="form-control" type="text" placeholder="Ingrese su Correo">
+							</div>
+							<div class="password d-flex justify-content-start flex-column">
+								<label for="pass" class="form-label mt-2 mb-2">Ingrese su Contraseña</label>
+								<input id="pass" class="form-control" name="pass" type="password" placeholder="Ingrese su Contraseña" value="">
+								<i style="cursor:pointer;" id="visibilityBtn">
+									<span class="material-symbols-outlined">
+										visibility
+									</span>
+								</i>
+							</div>
+						</input>
 					</div>
-					<div class="my-3 text-center">
-						<span>No tienes una cuenta? <a href="{% url 'registro'%}">Registrate</a></span> <br>
-						<span><a href="#">Recuperar Contraseña</a></span>
+						<div class="card-footer">
+							<input class="btn btn-primary" type="submit" href="/" value="Iniciar Sesión">
+						</div>
+						<div class="my-3 text-center">
+							<span>¿No tienes una cuenta? <a href="{% url 'registro'%}">Registrate</a></span> <br>
+							{% comment %} <span><a href="#">Recuperar Contraseña</a></span> {% endcomment %}
+						</div>
 					</div>
 				</form>
 				<div class="container w-100 my-5">
 					<div class="row text-center">
-						<a href="{% url 'social:begin' 'facebook' %}">Login con facebook</a>
+						{% comment %} <a href="{% url 'social:begin' 'facebook' %}">Login con facebook</a> {% endcomment %}
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-</body>
-
-</html>
+</div>
 
 {% endblock content %}

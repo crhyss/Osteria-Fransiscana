@@ -1,0 +1,50 @@
+{% extends 'vista/Principal.html' %}
+{% load static %}
+{% block content %}
+<div class="container-contraseñas mt-4 mb-4 d-flex align-items-center">
+    <div class="col d-flex justify-content-center">
+        <form method="POST" style="width:50%" id="form-contraseña">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Cambio de Contraseña</h1>
+                </div>
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class="old-password d-flex flex-column">
+                        <label for="pass1 form-label">Ingrese su Contraseña Actual</label>
+                        <input id="pass" class="mb-2 form-control" name="oldpass" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i class="" style="cursor:pointer;" id="visibilityBtn">
+                            <span class="material-symbols-outlined">
+                                visibility
+                            </span>
+                        </i>
+                    </div>
+                    <div class="new-password d-flex flex-column">
+                        <label for="pass form-label">Ingrese su Contraseña Nueva</label>
+                        <input id="pass2" class="mb-2 form-control" name="password1" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i class="" style="cursor:pointer;" id="visibilityBtn">
+                            <span class="material-symbols-outlined">
+                                visibility
+                            </span>
+                        </i>
+                    </div>
+                    <div class="conf-password d-flex flex-column">
+                        <label for="pass form-label">Confirme su Contraseña Nueva</label>
+                        <input id="pass3" class="mb-2 form-control" name="password2" type="password" placeholder="Ingrese su Contraseña" value="">
+                        <i class="" style="cursor:pointer;" id="visibilityBtn">
+                            <span class="material-symbols-outlined">
+                                visibility
+                            </span>
+                        </i>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="">
+                        <button class="btn btn-warning">Cambiar</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
